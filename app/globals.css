@@ -1,0 +1,93 @@
+﻿@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* === Classic NYC menu theme === */
+:root{
+  --paper:#F6F1E7;         /* warmer cream */
+  --ink:#141210;           /* soft ink */
+  --accent:#7B2E2E;        /* burgundy, sparingly */
+  --rule:rgba(40,30,20,.18);  /* warm hairline rules */
+}
+
+html,body{ background:var(--paper); color:var(--ink); }
+
+/* Subtle paper texture without an image */
+/* Subtle paper texture using layered gradients (no image) */
+body{
+  background-image:
+    radial-gradient(circle at 20% 10%, rgba(0,0,0,.018) 0.5px, transparent 0.6px),
+    radial-gradient(circle at 70% 40%, rgba(0,0,0,.012) 0.45px, transparent 0.55px),
+    radial-gradient(circle at 40% 80%, rgba(0,0,0,.015) 0.5px, transparent 0.6px);
+  background-size: 7px 7px, 9px 9px, 11px 11px;
+  background-blend-mode: multiply;
+}
+
+.menu-container{ max-width:800px; margin:0 auto; padding:2rem 1rem; }
+
+/* Make the main area feel like a printed card */
+.menu-card{
+  background: var(--paper);
+  border:1px solid rgba(0,0,0,.08);
+  border-radius:8px;
+  /* soft outer shadow + subtle inner vignette */
+  box-shadow:
+    0 10px 30px rgba(0,0,0,.06),
+    inset 0 0 0 1px rgba(255,255,255,.3),
+    inset 0 12px 24px rgba(0,0,0,.03),
+    inset 0 -12px 24px rgba(0,0,0,.02);
+  padding:1.25rem 2rem 2rem;
+}
+.hairline{ border:0; border-top:1px solid var(--rule); }
+.smallcaps{ font-variant-caps: all-small-caps; letter-spacing:.06em; }
+.centered{ text-align:center; }
+.rule-spaced{ margin:1.25rem 0; }
+
+a{ text-decoration:underline; text-underline-offset:2px; color:inherit; }
+a:hover{ opacity:.8; }
+
+@media print{
+  .menu-container{ max-width:none; padding:0; }
+  a{ text-decoration:none; }
+  .menu-card{ box-shadow:none; border:0; border-radius:0; }
+}
+
+/* ===== Menu rhythm (tight, print-like) ===== */
+.menu { --vr: .7rem; }                 /* base vertical rhythm */
+.menu p, .menu h2, .menu ul { margin:0; }
+.menu .meta { margin-top:.25rem; }     /* where/date line */
+.menu .hair { margin:.55rem 0; }       /* hairline between blocks */
+
+/* Add a bullet between location and date automatically */
+.menu .meta time:first-of-type::before{
+  content: " \2022 "; /* • */
+  opacity:.85;
+}
+
+.menu h2 { 
+  margin-top:.35rem;
+  font-variant-caps: all-small-caps;
+  letter-spacing:.08em; 
+  font-weight:600;
+}
+
+.menu ul { list-style:none; padding:0; margin-top:.2rem; }
+.menu li { margin:.25rem 0; }
+
+/* space between courses: small when stacked */
+.menu .course + .course .hair { margin-top:.6rem; }
+
+/* reduce default margins from Tailwind's preflight in this area */
+.menu *:where(h1,h2,h3,p) { margin-top:0; margin-bottom:0; }
+
+/* Tighten header rule spacing so there’s no big gap above the menu */
+header .rule-spaced{ margin: .5rem 0 .35rem; }
+
+/* Override: ensure extra space after the dot on meta line */
+.menu .meta time:first-of-type::before{
+  content: "\2022"; /* • */
+  display:inline-block;
+  margin-left:.25em;
+  margin-right:.45em;
+  opacity:.85;
+}

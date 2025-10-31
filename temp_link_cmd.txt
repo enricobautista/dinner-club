@@ -1,0 +1,2 @@
+cmd /c "cd C:\Users\enric\iCloudDrive\Programs\dinner-club && npm run dev"
+ssh -R 80:localhost:3000 nokey@localhost.run
