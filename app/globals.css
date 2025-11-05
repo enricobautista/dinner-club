@@ -43,8 +43,9 @@ body{
 .centered{ text-align:center; }
 .rule-spaced{ margin:1.25rem 0; }
 
-a{ text-decoration:underline; text-underline-offset:2px; color:inherit; }
-a:hover{ opacity:.8; }
+a{ text-decoration:none; color:inherit; }
+a:hover{ text-decoration:underline; text-underline-offset:2px; }
+.link-no-underline:hover{ text-decoration:none !important; }
 
 @media print{
   .menu-container{ max-width:none; padding:0; }
@@ -91,3 +92,45 @@ header .rule-spaced{ margin: .5rem 0 .35rem; }
   margin-right:.45em;
   opacity:.85;
 }
+
+/* ===== Guest list modal + inputs ===== */
+.guest-modal-overlay{
+  position: fixed; inset:0; background: rgba(0,0,0,.35);
+  display:flex; align-items:center; justify-content:center;
+  z-index: 1000; padding: 1rem;
+}
+.guest-modal-card{
+  background: #fff; color:#111; max-width:720px; width:100%;
+  border-radius: 10px; padding: 1rem 1rem 1.25rem; box-shadow: 0 10px 30px rgba(0,0,0,.18);
+}
+
+/* Inputs: underline, inherit font */
+.guest-input{ font: inherit; background: transparent; color: inherit; outline: none; text-decoration:none; }
+.guest-input.underline{ border:0; border-bottom:1px solid #111; padding:.35rem .1rem .25rem; }
+.guest-input.underline:focus{ border-bottom-color:#000; }
+.guest-input.grow{ flex: 1 1 220px; min-width: 220px; }
+
+/* Sleek primary button */
+.guest-btn{ font: inherit; cursor: pointer; transition: transform .06s ease, box-shadow .2s ease, background .2s ease, color .2s ease; }
+.guest-btn.primary{
+  background: transparent; color:#111; border:2px solid #111; padding:.6rem 1rem; border-radius:0;
+  box-shadow: 0 4px 10px rgba(0,0,0,.10);
+}
+.guest-btn.primary:hover{ transform: translateY(-1px); box-shadow: 0 6px 14px rgba(0,0,0,.16); }
+.guest-btn.primary:active{ transform: translateY(0); box-shadow: 0 3px 8px rgba(0,0,0,.12); }
+.guest-btn.ghost{ border:0; background: transparent; color: inherit; padding:.3rem .4rem; }
+.guest-btn.ghost:hover{ opacity:.75; }
+
+/* Sleek checkbox */
+.guest-checkbox{ appearance: none; -webkit-appearance: none; width: 18px; height: 18px; border:1px solid #111; border-radius:0; display:inline-block; cursor:pointer; background:transparent; }
+.guest-checkbox:checked{ background:#000; border-color:#000; }
+
+/* Two-column layout for menu + guests */
+.menu-two-col{ display:grid; grid-template-columns: 1fr minmax(260px, 320px); gap: 1.25rem; align-items:start; }
+@media (max-width: 860px){ .menu-two-col{ grid-template-columns: 1fr; } }
+
+/* Guest list container border when opened */
+.guest-list-box{ border:1px solid #111; padding: .75rem .9rem; border-radius:0; background: transparent; max-width: var(--guest-box-max, 520px); margin-left:auto; margin-right:auto; }
+
+/* Fraction style next to guest list title */
+.guest-fraction{ font-size:.85em; opacity:.9; margin-left:.25em; }

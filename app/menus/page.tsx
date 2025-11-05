@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getSortedMenus } from "@/data/menus";
+import { getSortedMenus, parseMenuDate } from "@/data/menus";
 
 export default function MenusIndex() {
   const menus = getSortedMenus();
@@ -11,8 +11,8 @@ export default function MenusIndex() {
       <ul>
         {menus.map(m => (
           <li key={m.slug}>
-            <Link href={`/menus/${m.slug}`} style={{ textDecoration: "none", color: "inherit" }}>
-              {new Date(m.dateISO).toLocaleDateString(undefined, { month: "long", day: "numeric", year: "numeric" })}
+            <Link href={`/menus/${m.slug}`} style={{ color: "inherit" }}>
+              {parseMenuDate(m.dateISO).toLocaleDateString(undefined, { month: "long", day: "numeric", year: "numeric" })}
             </Link>
             <span style={{ opacity:.8 }}> – {m.location} – Hosts: {m.hosts.join(" & ")}</span>
           </li>

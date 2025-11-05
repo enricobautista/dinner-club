@@ -11,10 +11,11 @@ function groupBy<T extends Record<string, any>>(arr: T[], key: keyof T) {
 
 export default function RecipesIndex() {
   const byCourse = groupBy(recipes, "course");
-  const courseOrder = ["Aperitivo", "Antipasti", "Primo", "Secondo", "Dolce"];
+  const courseOrder = ["Aperitivo", "Antipasti", "Primo", "Primi", "Contorni", "Secondo", "Secondi", "Dolce"];
+  const norm = (s: string) => String(s || "").trim();
   const orderedCourses = Object.keys(byCourse).sort((a, b) => {
-    const ia = courseOrder.indexOf(a);
-    const ib = courseOrder.indexOf(b);
+    const ia = courseOrder.indexOf(norm(a));
+    const ib = courseOrder.indexOf(norm(b));
     return (ia === -1 ? 999 : ia) - (ib === -1 ? 999 : ib);
   });
 
@@ -40,7 +41,7 @@ export default function RecipesIndex() {
                     .sort((a,b)=>a.title.localeCompare(b.title))
                     .map(r => (
                       <li key={r.slug}>
-                        <Link href={`/recipes/${r.slug}`} style={{ textDecoration: "none", color: "inherit"}}>
+                        <Link href={`/recipes/${r.slug}`} style={{ color: "inherit"}}>
                           {r.title}
                         </Link>
                         {r.blurb ? <span style={{ opacity:.8 }}> – {r.blurb}</span> : null}

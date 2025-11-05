@@ -2,6 +2,15 @@ import type { Recipe } from "./recipes";
 
 type Item = { name: string; recipeSlug?: string; blurb?: string };
 export type Course = { heading: string; items: Item[] };
+export type GuestEdit = { ts: number; field: "name"|"dietary"|"plusOne"; from: any; to: any };
+export type Guest = {
+  id?: string;
+  name: string;
+  plusOne?: boolean;
+  dietary?: string;
+  history?: GuestEdit[];
+};
+
 export type Menu = {
   slug: string;
   location: string;
@@ -10,49 +19,36 @@ export type Menu = {
   hosts: string[];
   note?: string;
   courses: Course[];
+  guestLimit?: number; // optional per-menu override (default 12)
+  guests?: Guest[];    // optional archived/seed guest list
+  cost?: number;       // optional prezzo fisso in USD
 };
 
 export const menus: Menu[] = [
   {
-    slug: "holiday-2025",
-    location: "Park Slope, Brooklyn",
-    dateISO: "2025-12-06",
-    time: "7:00 PM",
-    hosts: ["Enrico", "Alice"],
-    note: "Barolo; Amari digestivi",
+    slug: "dc-dinner-2025-11-08",
+    location: "2217 38th St NW, Washington, DC",
+    dateISO: "2025-11-08",
+    time: "5:30 PM",
+    hosts: ["Enrico Bautista", "Yumin Gao"],
+    note: "First iteration—additional courses to be added.",
+    guests: [],
+    cost: 16,
     courses: [
-      { heading: "Aperitivo", items: [
-        { name: "Aperol Spritz", blurb: "bitter, bubbly, bright", recipeSlug: "aperol-spritz" },
-      ]},
-      { heading: "Antipasti", items: [
-        { name: "Crostini Ricotta e Miele", blurb: "ricotta, honey, thyme", recipeSlug: "ricotta-honey-crostini" },
-      ]},
-      { heading: "Primo", items: [
-        { name: "Tagliatelle ai Funghi Porcini", recipeSlug: "tagliatelle-ai-porcini" },
-      ]},
-      { heading: "Secondi", items: [
-        { name: "Pollo al Limone e Capperi", recipeSlug: "pollo-limone-capperi" },
-        { name: "Branzino al Forno", recipeSlug: "branzino-al-forno" },
-      ]},
-      { heading: "Dolce", items: [
-        { name: "Panna Cotta alla Vaniglia", recipeSlug: "vanilla-panna-cotta" },
-      ]},
-    ],
-  },
-  {
-    slug: "test",
-    location: "West Village, NYC",
-    dateISO: "2025-10-18",
-    time: "7:30 PM",
-    hosts: ["Enrico", "Friend"],
-    note: "Nebbiolo; Amaro Nonino",
-    courses: [
-      { heading: "Aperitivo", items: [{ name: "Negroni Sbagliato", blurb: "Campari, prosecco, orange", recipeSlug: "negroni-sbagliato" }] },
-      { heading: "Antipasti", items: [{ name: "Insalata di Finocchi e Parmigiano", blurb: "limone, olio", recipeSlug: "shaved-fennel-parm" }] },
-      { heading: "Primo", items: [{ name: "Gnocchi al Burro e Salvia", recipeSlug: "brown-butter-sage-gnocchi" }] },
-      { heading: "Secondo", items: [{ name: "Bistecca al Porcini", recipeSlug: "porcini-hanger-steak" }] },
-      { heading: "Dolce", items: [{ name: "Torta all'Olio d'Oliva", recipeSlug: "olive-oil-cake" }] },
-    ],
+      {
+        heading: "Aperitivo",
+        items: [
+          { name: "Negroni Sbagliato", recipeSlug: "negroni-sbagliato", blurb: "Bittersweet, citrusy, and lightly effervescent" }
+        ]
+      },
+      {
+        heading: "Secondi",
+        items: [
+          { name: "Samgyeopsal", recipeSlug: "samgyeopsal", blurb: "Korean grilled pork belly with lettuce wraps." },
+          { name: "Grilled Octopus", recipeSlug: "grilled-octopus", blurb: "Mediterranean-style with lemon, parsley, olive oil." }
+        ]
+      }
+    ]
   },
 ];
 
@@ -82,4 +78,21 @@ export function getMenu(slug?: string) {
 
 export function getSortedMenus() {
   return [...menus].sort((a, b) => new Date(b.dateISO).getTime() - new Date(a.dateISO).getTime());
+}
+
+export function getGuestLimit(menu?: Partial<Menu>) {
+  const limit = Number(menu?.guestLimit);
+  return Number.isFinite(limit) && limit > 0 ? limit : 12;
+}
+
+// Parse a menu date string. If it's a bare YYYY-MM-DD, treat as local date (not UTC)
+// so that 2025-11-08 renders as Nov 8 in local timezones.
+export function parseMenuDate(input: string) {
+  if (!input) return new Date(NaN);
+  if (/T\d{2}:?\d{2}/.test(input)) return new Date(input);
+  const parts = String(input).split("-");
+  const y = Number(parts[0]);
+  const m = Number(parts[1] || 1);
+  const d = Number(parts[2] || 1);
+  return new Date(y, m - 1, d);
 }

@@ -247,6 +247,57 @@ export const recipes: Recipe[] = [
       "Pour into 6 small cups; chill until set, at least 4 hours. Unmold or serve in cups.",
     ],
   },
+  {
+    slug: "grilled-octopus",
+    title: "Grilled Octopus",
+    course: "Secondo",
+    type: "seafood",
+    blurb: "Mediterranean-style grilled octopus with lemon, parsley, and olive oil.",
+    ingredients: [
+      "octopus, cleaned",
+      "lemon",
+      "one small onion",
+      "one whole garlic",
+      "bay leaves",
+      "whole peppercorns",
+      "salt",
+      "extra-virgin olive oil",
+      "parsley",
+      "lemon wedges, for serving"
+    ],
+    steps: [
+      "Boil the octopus with one lemon, one onion, a few cloves of garlic, bay leaves, and whole peppercorns.",
+      "Cook 45-60 minutes, until the thickest part of a tentacle is tender when pierced.",
+      "Cut the octopus into tentacles and large head pieces.",
+      "Marinade the octopus in olive oil, lemon juice, chopped parsley, minced garlic, and salt for 30 minutes or overnight.",
+      "Grill the octopus until lightly charred and crisp at the edges, a few minutes per side.",
+      "Transfer to a platter and serve with lemon wedges."
+    ]
+  },
+  {
+    slug: "samgyeopsal",
+    title: "Samgyeopsal",
+    course: "Secondo",
+    type: "meat",
+    blurb: "Korean grilled pork belly with lettuce wraps, sesame oil and salt dip, gochjang, and ssamjang.",
+    ingredients: [
+      "pork belly slices (skinless)",
+      "salt",
+      "black pepper (optional)",
+      "sesame oil",
+      "ssamjang",
+      "gochujang",
+      "lettuce leaves",
+      "steamed rice"
+    ],
+    steps: [
+      "Set out lettuce, ssamjang, gochujang, and steamed rice. In a small dish, mix sesame oil with a pinch of coarse salt for dipping.",
+      "Place pork belly slices on the hot surface and season lightly with salt (and pepper if you like).",
+      "Grill until the fat renders and both sides are golden and crisp.",
+      "Cut pork into bite-size pieces with kitchen scissors.",
+      "Eat immediately: dip pork in the sesame oil and salt, ssamjang, or gochujang, then wrap in lettuce with a little rice."
+    ]
+  },
 ];
 
 export function getRecipe(slug?: string) {

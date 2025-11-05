@@ -2,14 +2,14 @@
 import Flourish from "./Flourish";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { getSortedMenus } from "@/data/menus";
+import { getSortedMenus, parseMenuDate } from "@/data/menus";
 
 export default function Header() {
   const pathname = usePathname();
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   const hasUpcoming = getSortedMenus().some(m => {
-    const d = new Date(m.dateISO);
+    const d = parseMenuDate(m.dateISO);
     d.setHours(0, 0, 0, 0);
     return d.getTime() >= today.getTime();
   });
@@ -20,7 +20,7 @@ export default function Header() {
   return (
     <header className="centered">
       <h1 className="smallcaps" style={{ fontWeight: 600 }}>
-        <Link href="/" style={{ textDecoration: "none", color: "inherit" }}>Break Bread Dinner Club</Link>
+        <Link href="/" className="link-no-underline" style={{ color: "inherit" }}>Break Bread Dinner Club</Link>
       </h1>
       {isHome && hasUpcoming ? (
         <p className="smallcaps" style={{ margin: ".35rem 0 0", opacity: .9 }}>Upcoming Dinner Menu</p>

@@ -2,14 +2,14 @@
 import Flourish from "./Flourish";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { getSortedMenus } from "@/data/menus";
+import { getSortedMenus, parseMenuDate } from "@/data/menus";
 
 export default function Footer() {
   const pathname = usePathname();
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   const hasUpcoming = getSortedMenus().some(m => {
-    const d = new Date(m.dateISO);
+    const d = parseMenuDate(m.dateISO);
     d.setHours(0, 0, 0, 0);
     return d.getTime() >= today.getTime();
   });
@@ -23,9 +23,9 @@ export default function Footer() {
         {new Date().getFullYear()} Break Bread Dinner Club
       </p>
       <nav className="smallcaps" style={{ fontSize: 13, opacity:.8, marginTop: 8, display:"flex", gap:12, justifyContent:"center", flexWrap:"wrap" }}>
-        <Link href="/menus" style={{ textDecoration:"none", color:"inherit" }}>All Menus</Link>
+        <Link href="/menus" style={{ color:"inherit" }}>All Menus</Link>
         <span aria-hidden>•</span>
-        <Link href="/recipes" style={{ textDecoration:"none", color:"inherit" }}>Recipe Repository</Link>
+        <Link href="/recipes" style={{ color:"inherit" }}>Recipe Repository</Link>
       </nav>
     </footer>
   );

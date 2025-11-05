@@ -1,5 +1,6 @@
 import Flourish from "./Flourish";
 import Link from "next/link";
+import { parseMenuDate } from "@/data/menus";
 
 type Item = { name: string; recipeSlug?: string; blurb?: string };
 type Course = { heading: string; items: Item[] };
@@ -13,11 +14,31 @@ export type DinnerMenuProps = {
 };
 
 export default function DinnerMenu({ location, dateISO, time, hosts, courses, note }: DinnerMenuProps) {
-  const dateObj = new Date(dateISO);
+  const dateObj = parseMenuDate(dateISO);
   const date = dateObj.toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
   const timeFromISO = /T\d{2}:?\d{2}/.test(dateISO) ? dateObj.toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" }) : undefined;
   const timeText = time && time.trim() ? time : timeFromISO;
-  const visibleCourses = (courses || []).filter(c => Array.isArray(c.items) && c.items.length > 0);
+  const visibleCourses = (courses || [])
+    .filter(c => Array.isArray(c.items) && c.items.length > 0)
+    .slice()
+    .sort((a, b) => {
+      const rank = (h: string) => {
+        const key = String(h || "").trim().toLowerCase();
+        const map: Record<string, number> = {
+          "aperitivo": 1,
+          "antipasti": 2,
+          "primo": 3,
+          "primi": 3,
+          "contorno": 4,
+          "contorni": 4,
+          "secondo": 5,
+          "secondi": 5,
+          "dolce": 6,
+        };
+        return map[key] ?? 99;
+      };
+      return rank(a.heading) - rank(b.heading);
+    });
 
   return (
     <article aria-label="Dinner menu" className="menu centered">
@@ -35,7 +56,7 @@ export default function DinnerMenu({ location, dateISO, time, hosts, courses, no
             {c.items.map(item => (
               <li key={item.name}>
                 {item.recipeSlug ? (
-                  <Link href={`/recipes/${item.recipeSlug}`} style={{ textDecoration:"none", color:"inherit" }}>
+                  <Link href={`/recipes/${item.recipeSlug}`} style={{ color:"inherit" }}>
                     {item.name}
                   </Link>
                 ) : item.name}
