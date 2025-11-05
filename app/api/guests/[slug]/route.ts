@@ -21,7 +21,8 @@ export async function GET(_: NextRequest, ctx: { params: Promise<{ slug: string 
     const menu = getMenu(s);
     const limit = getGuestLimit(menu || {});
     // Try to find a blob for this slug
-    const items = await list({ prefix: keyFor(s) });
+    const token = process.env.BLOB_READ_WRITE_TOKEN;
+    const items = token ? await list({ prefix: keyFor(s), token }) : { blobs: [] as any[] } as any;
     let guests: Guest[] = (menu?.guests as Guest[] | undefined) || [];
     if (items.blobs?.length) {
       const sorted = items.blobs
@@ -47,11 +48,15 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ slug: stri
     const menu = getMenu(s);
     const limit = getGuestLimit(menu || {});
     const key = keyFor(s);
+    const token = process.env.BLOB_READ_WRITE_TOKEN;
+    if (!token) {
+      return NextResponse.json({ error: "Missing BLOB_READ_WRITE_TOKEN env var" }, { status: 500 });
+    }
     const body = await req.json().catch(() => ({}));
     const action = String(body?.action || "");
     // Load current from blob (or fallback to menu guests)
     let current: Guest[] = [];
-    const items = await list({ prefix: key });
+    const items = await list({ prefix: key, token });
     if (items.blobs?.length) {
       const res = await fetch(items.blobs[0].url, { cache: "no-store" });
       current = (await res.json().catch(() => [])) || [];
@@ -69,7 +74,7 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ slug: stri
       if (used + willUse > limit) return NextResponse.json({ error: "Guest list full" }, { status: 409 });
       const entry: Guest = { id: uuid(), name, plusOne, dietary, history: [] };
       const next = [...current, entry];
-      await put(key, JSON.stringify(next), { access: "public", contentType: "application/json", addRandomSuffix: false });
+      await put(key, JSON.stringify(next), { access: "public", contentType: "application/json", addRandomSuffix: false, token });
       return NextResponse.json({ ok: true, guests: next }, { status: 200, headers: { "Cache-Control": "no-store" } });
     }
 
@@ -104,7 +109,7 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ slug: stri
       // Optional: enforce capacity on edit when toggling plusOne
       const used = updated.reduce((acc, g) => acc + 1 + (g.plusOne ? 1 : 0), 0);
       if (used > limit) return NextResponse.json({ error: "Guest list full" }, { status: 409 });
-      await put(key, JSON.stringify(updated), { access: "public", contentType: "application/json", addRandomSuffix: false });
+      await put(key, JSON.stringify(updated), { access: "public", contentType: "application/json", addRandomSuffix: false, token });
       return NextResponse.json({ ok: true, guests: updated }, { status: 200, headers: { "Cache-Control": "no-store" } });
     }
 

@@ -47,7 +47,11 @@ async function apiAddGuest(slug: string, g: { name: string; plusOne?: boolean; d
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ action: "add", ...g }),
   });
-  if (!res.ok) throw new Error("Add failed");
+  if (!res.ok) {
+    let msg = "Add failed";
+    try { const j = await res.json(); if (j?.error) msg = j.error; } catch {}
+    throw new Error(msg);
+  }
   return res.json();
 }
 
@@ -57,7 +61,11 @@ async function apiEditGuest(slug: string, g: { id: string; name?: string; plusOn
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ action: "edit", ...g }),
   });
-  if (!res.ok) throw new Error("Edit failed");
+  if (!res.ok) {
+    let msg = "Edit failed";
+    try { const j = await res.json(); if (j?.error) msg = j.error; } catch {}
+    throw new Error(msg);
+  }
   return res.json();
 }
 
@@ -97,7 +105,8 @@ export default function GuestListModal({ slug, limit, seedGuests = [], open, onC
       await apiAddGuest(slug, { name: name.trim(), plusOne, dietary: dietary.trim() || undefined });
       const latest = await apiFetchGuests(slug, seedGuests);
       setGuests(latest);
-    } catch {
+    } catch (err: any) {
+      if (typeof window !== "undefined") alert(err?.message || "Could not save guest.");
       const entry: Guest = { id: uuid(), name: name.trim(), plusOne, dietary: dietary.trim() || undefined, history: [] };
       setGuests(prev => [...prev, entry]);
     }
@@ -125,7 +134,8 @@ export default function GuestListModal({ slug, limit, seedGuests = [], open, onC
       await apiEditGuest(slug, { id: editingId, name: editName.trim(), plusOne: !!editPlusOne, dietary: editDietary.trim() || "" });
       const latest = await apiFetchGuests(slug, seedGuests);
       setGuests(latest);
-    } catch {
+    } catch (err: any) {
+      if (typeof window !== "undefined") alert(err?.message || "Could not edit guest.");
       setGuests(prev => prev.map(g => {
         if (g.id !== editingId) return g;
         const history = g.history ? [...g.history] : [];
