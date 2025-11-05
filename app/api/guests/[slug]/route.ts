@@ -34,7 +34,7 @@ export async function GET(_: NextRequest, ctx: { params: Promise<{ slug: string 
         if (Array.isArray(data)) guests = data as Guest[];
       }
     }
-    return NextResponse.json({ guests, limit }, { status: 200 });
+    return NextResponse.json({ guests, limit }, { status: 200, headers: { "Cache-Control": "no-store, no-cache, must-revalidate" } });
   } catch (e) {
     return NextResponse.json({ error: "Failed to load guest list" }, { status: 500 });
   }
@@ -70,7 +70,7 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ slug: stri
       const entry: Guest = { id: uuid(), name, plusOne, dietary, history: [] };
       const next = [...current, entry];
       await put(key, JSON.stringify(next), { access: "public", contentType: "application/json", addRandomSuffix: false });
-      return NextResponse.json({ ok: true, guests: next }, { status: 200 });
+      return NextResponse.json({ ok: true, guests: next }, { status: 200, headers: { "Cache-Control": "no-store" } });
     }
 
     if (action === "edit") {
@@ -105,7 +105,7 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ slug: stri
       const used = updated.reduce((acc, g) => acc + 1 + (g.plusOne ? 1 : 0), 0);
       if (used > limit) return NextResponse.json({ error: "Guest list full" }, { status: 409 });
       await put(key, JSON.stringify(updated), { access: "public", contentType: "application/json", addRandomSuffix: false });
-      return NextResponse.json({ ok: true, guests: updated }, { status: 200 });
+      return NextResponse.json({ ok: true, guests: updated }, { status: 200, headers: { "Cache-Control": "no-store" } });
     }
 
     return NextResponse.json({ error: "Unsupported action" }, { status: 400 });
@@ -113,3 +113,4 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ slug: stri
     return NextResponse.json({ error: "Failed to update guest list" }, { status: 500 });
   }
 }
+export const dynamic = "force-dynamic";

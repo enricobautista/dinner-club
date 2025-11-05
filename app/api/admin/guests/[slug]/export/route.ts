@@ -53,3 +53,4 @@ export async function GET(req: NextRequest, ctx: { params: Promise<{ slug: strin
     instructions: "In data/menus.ts, locate the menu with this slug and replace its guests: [] with the tsArray value.",
   }, { status: 200 });
 }
+export const dynamic = "force-dynamic";
