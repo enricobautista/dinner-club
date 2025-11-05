@@ -24,7 +24,10 @@ export async function GET(_: NextRequest, ctx: { params: Promise<{ slug: string 
     const items = await list({ prefix: keyFor(s) });
     let guests: Guest[] = (menu?.guests as Guest[] | undefined) || [];
     if (items.blobs?.length) {
-      const url = items.blobs[0].url;
+      const sorted = items.blobs
+        .slice()
+        .sort((a: any, b: any) => new Date(a.uploadedAt).getTime() - new Date(b.uploadedAt).getTime());
+      const url = sorted[sorted.length - 1].url;
       const res = await fetch(url, { cache: "no-store" });
       if (res.ok) {
         const data = await res.json().catch(() => null);
@@ -66,7 +69,7 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ slug: stri
       if (used + willUse > limit) return NextResponse.json({ error: "Guest list full" }, { status: 409 });
       const entry: Guest = { id: uuid(), name, plusOne, dietary, history: [] };
       const next = [...current, entry];
-      await put(key, JSON.stringify(next), { access: "public", contentType: "application/json" });
+      await put(key, JSON.stringify(next), { access: "public", contentType: "application/json", addRandomSuffix: false });
       return NextResponse.json({ ok: true, guests: next }, { status: 200 });
     }
 
@@ -101,7 +104,7 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ slug: stri
       // Optional: enforce capacity on edit when toggling plusOne
       const used = updated.reduce((acc, g) => acc + 1 + (g.plusOne ? 1 : 0), 0);
       if (used > limit) return NextResponse.json({ error: "Guest list full" }, { status: 409 });
-      await put(key, JSON.stringify(updated), { access: "public", contentType: "application/json" });
+      await put(key, JSON.stringify(updated), { access: "public", contentType: "application/json", addRandomSuffix: false });
       return NextResponse.json({ ok: true, guests: updated }, { status: 200 });
     }
 

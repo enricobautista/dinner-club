@@ -33,7 +33,10 @@ export async function GET(req: NextRequest, ctx: { params: Promise<{ slug: strin
   let guests: Guest[] = [];
   const items = await list({ prefix: keyFor(s) });
   if (items.blobs?.length) {
-    const res = await fetch(items.blobs[0].url, { cache: "no-store" });
+    const sorted = items.blobs
+      .slice()
+      .sort((a: any, b: any) => new Date(a.uploadedAt).getTime() - new Date(b.uploadedAt).getTime());
+    const res = await fetch(sorted[sorted.length - 1].url, { cache: "no-store" });
     if (res.ok) {
       guests = (await res.json().catch(() => [])) || [];
     }
