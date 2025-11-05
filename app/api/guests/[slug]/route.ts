@@ -74,7 +74,11 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ slug: stri
       if (used + willUse > limit) return NextResponse.json({ error: "Guest list full" }, { status: 409 });
       const entry: Guest = { id: uuid(), name, plusOne, dietary, history: [] };
       const next = [...current, entry];
-      await put(key, JSON.stringify(next), { access: "public", contentType: "application/json", addRandomSuffix: false, token });
+      try {
+        await put(key, JSON.stringify(next), { access: "public", contentType: "application/json", addRandomSuffix: false, token });
+      } catch (err: any) {
+        return NextResponse.json({ error: "Blob write failed", detail: err?.message || String(err) }, { status: 500 });
+      }
       return NextResponse.json({ ok: true, guests: next }, { status: 200, headers: { "Cache-Control": "no-store" } });
     }
 
@@ -109,13 +113,17 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ slug: stri
       // Optional: enforce capacity on edit when toggling plusOne
       const used = updated.reduce((acc, g) => acc + 1 + (g.plusOne ? 1 : 0), 0);
       if (used > limit) return NextResponse.json({ error: "Guest list full" }, { status: 409 });
-      await put(key, JSON.stringify(updated), { access: "public", contentType: "application/json", addRandomSuffix: false, token });
+      try {
+        await put(key, JSON.stringify(updated), { access: "public", contentType: "application/json", addRandomSuffix: false, token });
+      } catch (err: any) {
+        return NextResponse.json({ error: "Blob write failed", detail: err?.message || String(err) }, { status: 500 });
+      }
       return NextResponse.json({ ok: true, guests: updated }, { status: 200, headers: { "Cache-Control": "no-store" } });
     }
 
     return NextResponse.json({ error: "Unsupported action" }, { status: 400 });
   } catch (e) {
-    return NextResponse.json({ error: "Failed to update guest list" }, { status: 500 });
+    return NextResponse.json({ error: "Failed to update guest list", detail: (e as any)?.message || String(e) }, { status: 500 });
   }
 }
 export const dynamic = "force-dynamic";
