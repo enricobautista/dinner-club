@@ -36,3 +36,38 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Guest List Persistence (Vercel Blob)
+
+The guest list is stored in Vercel Blob as JSON per slug (e.g., `guestlists/<slug>.json`) so it persists across refreshes and deploys.
+
+Setup on Vercel:
+
+- Add the Vercel Blob Integration to your project.
+- Ensure the build has access to a read-write token (Vercel adds it automatically). For local dev, add to `.env.local`:
+  - `BLOB_READ_WRITE_TOKEN=...`
+- Optionally set `ADMIN_TOKEN` (random string) for admin export endpoints.
+
+API routes:
+
+- `GET /api/guests/[slug]` → `{ guests, limit }` (reads blob or falls back to seeded guests)
+- `POST /api/guests/[slug]` → add/edit guests (writes blob)
+- `GET /api/admin/guests/[slug]/export` (requires header `x-admin-token: ADMIN_TOKEN`) → returns a `tsArray` snippet to paste into `data/menus.ts`.
+
+### Export guests for archiving
+
+After a dinner, export the final guest list and archive it into source control:
+
+1) Ensure `ADMIN_TOKEN` is set in your environment (Vercel → Project Settings → Environment Variables).
+
+2) Call the export endpoint for a slug:
+
+```
+curl -s -H "x-admin-token: $ADMIN_TOKEN" \
+  https://<your-domain>/api/admin/guests/<slug>/export
+```
+
+3) Copy the `tsArray` value from the response and replace the `guests: []` for that menu inside `data/menus.ts`. Commit the change to preserve the archive.
+
+Notes:
+- The export includes only `name`, `plusOne`, and `dietary` for a clean archive (no volatile IDs/history).

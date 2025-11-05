@@ -29,24 +29,36 @@ function normalizeGuests(arr: Guest[]): Guest[] {
   return (arr || []).map(g => ({ ...g, id: g.id || uuid(), history: g.history || [] }));
 }
 
-function loadGuests(slug: string, seed: Guest[] = []): Guest[] {
+async function apiFetchGuests(slug: string, seed: Guest[] = []): Promise<Guest[]> {
   try {
-    const raw = localStorage.getItem(`guestlist:${slug}`);
-    if (!raw) return normalizeGuests(seed);
-    const parsed = JSON.parse(raw);
-    if (Array.isArray(parsed)) return normalizeGuests(parsed as Guest[]);
-    return normalizeGuests(seed);
+    const res = await fetch(`/api/guests/${encodeURIComponent(slug)}`, { cache: "no-store" });
+    if (!res.ok) return normalizeGuests(seed);
+    const data = await res.json();
+    const guests = Array.isArray(data?.guests) ? (data.guests as Guest[]) : seed;
+    return normalizeGuests(guests);
   } catch {
     return normalizeGuests(seed);
   }
 }
 
-function saveGuests(slug: string, guests: Guest[]) {
-  try {
-    localStorage.setItem(`guestlist:${slug}`, JSON.stringify(guests));
-  } catch {
-    // ignore
-  }
+async function apiAddGuest(slug: string, g: { name: string; plusOne?: boolean; dietary?: string }) {
+  const res = await fetch(`/api/guests/${encodeURIComponent(slug)}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ action: "add", ...g }),
+  });
+  if (!res.ok) throw new Error("Add failed");
+  return res.json();
+}
+
+async function apiEditGuest(slug: string, g: { id: string; name?: string; plusOne?: boolean; dietary?: string }) {
+  const res = await fetch(`/api/guests/${encodeURIComponent(slug)}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ action: "edit", ...g }),
+  });
+  if (!res.ok) throw new Error("Edit failed");
+  return res.json();
 }
 
 export default function GuestListModal({ slug, limit, seedGuests = [], open, onClose, cost }: Props) {
@@ -61,24 +73,34 @@ export default function GuestListModal({ slug, limit, seedGuests = [], open, onC
 
   useEffect(() => {
     if (!open) return;
-    setGuests(loadGuests(slug, seedGuests));
+    apiFetchGuests(slug, seedGuests).then(setGuests);
   }, [open, slug]);
 
+  // Broadcast updates to other components/tabs when local state changes due to API success
   useEffect(() => {
-    saveGuests(slug, guests);
-  }, [slug, guests]);
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new CustomEvent("guestlist:updated", { detail: { slug } }));
+    }
+  }, [guests, slug]);
 
   const usedSpots = useMemo(() => guests.reduce((acc, g) => acc + 1 + (g.plusOne ? 1 : 0), 0), [guests]);
   const remaining = Math.max(0, limit - usedSpots);
   const isFull = remaining <= 0;
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!name.trim()) return;
     const willUse = 1 + (plusOne ? 1 : 0);
     if (willUse > remaining) return; // over limit
-    const entry: Guest = { id: uuid(), name: name.trim(), plusOne, dietary: dietary.trim() || undefined, history: [] };
-    setGuests(prev => [...prev, entry]);
+    // Attempt server add first; fall back to optimistic update on failure
+    try {
+      await apiAddGuest(slug, { name: name.trim(), plusOne, dietary: dietary.trim() || undefined });
+      const latest = await apiFetchGuests(slug, seedGuests);
+      setGuests(latest);
+    } catch {
+      const entry: Guest = { id: uuid(), name: name.trim(), plusOne, dietary: dietary.trim() || undefined, history: [] };
+      setGuests(prev => [...prev, entry]);
+    }
     setName("");
     setPlusOne(false);
     setDietary("");
@@ -97,17 +119,23 @@ export default function GuestListModal({ slug, limit, seedGuests = [], open, onC
     setEditingId(null);
   }
 
-  function saveEdit() {
+  async function saveEdit() {
     if (!editingId) return;
-    setGuests(prev => prev.map(g => {
-      if (g.id !== editingId) return g;
-      const history = g.history ? [...g.history] : [];
-      const now = Date.now();
-      if (g.name !== editName.trim()) history.push({ ts: now, field: "name", from: g.name, to: editName.trim() });
-      if (!!g.plusOne !== !!editPlusOne) history.push({ ts: now, field: "plusOne", from: !!g.plusOne, to: !!editPlusOne });
-      if ((g.dietary || "") !== (editDietary.trim() || "")) history.push({ ts: now, field: "dietary", from: g.dietary || "", to: editDietary.trim() || "" });
-      return { ...g, name: editName.trim(), plusOne: !!editPlusOne, dietary: editDietary.trim() || undefined, history };
-    }));
+    try {
+      await apiEditGuest(slug, { id: editingId, name: editName.trim(), plusOne: !!editPlusOne, dietary: editDietary.trim() || "" });
+      const latest = await apiFetchGuests(slug, seedGuests);
+      setGuests(latest);
+    } catch {
+      setGuests(prev => prev.map(g => {
+        if (g.id !== editingId) return g;
+        const history = g.history ? [...g.history] : [];
+        const now = Date.now();
+        if (g.name !== editName.trim()) history.push({ ts: now, field: "name", from: g.name, to: editName.trim() });
+        if (!!g.plusOne !== !!editPlusOne) history.push({ ts: now, field: "plusOne", from: !!g.plusOne, to: !!editPlusOne });
+        if ((g.dietary || "") !== (editDietary.trim() || "")) history.push({ ts: now, field: "dietary", from: g.dietary || "", to: editDietary.trim() || "" });
+        return { ...g, name: editName.trim(), plusOne: !!editPlusOne, dietary: editDietary.trim() || undefined, history };
+      }));
+    }
     setEditingId(null);
   }
 

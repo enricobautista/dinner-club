@@ -19,14 +19,12 @@ type Props = {
   heading?: string;
 };
 
-function loadGuests(slug: string, seed: Guest[] = []): Guest[] {
-  if (typeof window === "undefined") return seed;
+async function fetchGuests(slug: string, seed: Guest[] = []): Promise<Guest[]> {
   try {
-    const raw = localStorage.getItem(`guestlist:${slug}`);
-    if (!raw) return seed;
-    const parsed = JSON.parse(raw);
-    if (Array.isArray(parsed)) return parsed as Guest[];
-    return seed;
+    const res = await fetch(`/api/guests/${encodeURIComponent(slug)}`, { cache: "no-store" });
+    if (!res.ok) return seed;
+    const data = await res.json();
+    return Array.isArray(data?.guests) ? (data.guests as Guest[]) : seed;
   } catch {
     return seed;
   }
@@ -36,7 +34,15 @@ export default function GuestListDisplay({ slug, limit, seedGuests = [], showJoi
   const [guests, setGuests] = useState<Guest[]>(seedGuests);
 
   useEffect(() => {
-    setGuests(loadGuests(slug, seedGuests));
+    fetchGuests(slug, seedGuests).then(setGuests);
+    const onUpdated = (e: Event) => {
+      const anyE = e as CustomEvent<{ slug: string }>;
+      if (anyE?.detail?.slug === slug) fetchGuests(slug, seedGuests).then(setGuests);
+    };
+    if (typeof window !== "undefined") window.addEventListener("guestlist:updated", onUpdated as EventListener);
+    return () => {
+      if (typeof window !== "undefined") window.removeEventListener("guestlist:updated", onUpdated as EventListener);
+    };
   }, [slug]);
 
   const usedSpots = useMemo(() => guests.reduce((acc, g) => acc + 1 + (g.plusOne ? 1 : 0), 0), [guests]);
