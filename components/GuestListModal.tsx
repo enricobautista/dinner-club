@@ -49,7 +49,14 @@ async function apiAddGuest(slug: string, g: { name: string; plusOne?: boolean; d
   });
   if (!res.ok) {
     let msg = "Add failed";
-    try { const j = await res.json(); if (j?.error) msg = j.error; } catch {}
+    try {
+      const j = await res.json();
+      if (j?.error) {
+        msg = j.detail ? `${j.error}: ${j.detail}` : j.error;
+      } else if (j?.detail) {
+        msg = `Add failed: ${j.detail}`;
+      }
+    } catch {}
     throw new Error(msg);
   }
   return res.json();
@@ -63,7 +70,14 @@ async function apiEditGuest(slug: string, g: { id: string; name?: string; plusOn
   });
   if (!res.ok) {
     let msg = "Edit failed";
-    try { const j = await res.json(); if (j?.error) msg = j.error; } catch {}
+    try {
+      const j = await res.json();
+      if (j?.error) {
+        msg = j.detail ? `${j.error}: ${j.detail}` : j.error;
+      } else if (j?.detail) {
+        msg = `Edit failed: ${j.detail}`;
+      }
+    } catch {}
     throw new Error(msg);
   }
   return res.json();
@@ -78,6 +92,8 @@ export default function GuestListModal({ slug, limit, seedGuests = [], open, onC
   const [editName, setEditName] = useState("");
   const [editPlusOne, setEditPlusOne] = useState(false);
   const [editDietary, setEditDietary] = useState("");
+  const [toast, setToast] = useState<string | null>(null);
+  const [toastTs, setToastTs] = useState<number>(0);
 
   useEffect(() => {
     if (!open) return;
@@ -95,6 +111,16 @@ export default function GuestListModal({ slug, limit, seedGuests = [], open, onC
   const remaining = Math.max(0, limit - usedSpots);
   const isFull = remaining <= 0;
 
+  useEffect(() => {
+    if (!toast) return;
+    const created = toastTs;
+    const handle = setTimeout(() => {
+      // Only clear if nothing newer replaced it
+      setToast(prev => (prev && toastTs === created ? null : prev));
+    }, 3000);
+    return () => clearTimeout(handle);
+  }, [toast, toastTs]);
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!name.trim()) return;
@@ -105,6 +131,8 @@ export default function GuestListModal({ slug, limit, seedGuests = [], open, onC
       await apiAddGuest(slug, { name: name.trim(), plusOne, dietary: dietary.trim() || undefined });
       const latest = await apiFetchGuests(slug, seedGuests);
       setGuests(latest);
+      setToast("Saved! You're on the list.");
+      setToastTs(Date.now());
     } catch (err: any) {
       if (typeof window !== "undefined") alert(err?.message || "Could not save guest.");
       const entry: Guest = { id: uuid(), name: name.trim(), plusOne, dietary: dietary.trim() || undefined, history: [] };
@@ -134,6 +162,8 @@ export default function GuestListModal({ slug, limit, seedGuests = [], open, onC
       await apiEditGuest(slug, { id: editingId, name: editName.trim(), plusOne: !!editPlusOne, dietary: editDietary.trim() || "" });
       const latest = await apiFetchGuests(slug, seedGuests);
       setGuests(latest);
+      setToast("Guest updated.");
+      setToastTs(Date.now());
     } catch (err: any) {
       if (typeof window !== "undefined") alert(err?.message || "Could not edit guest.");
       setGuests(prev => prev.map(g => {
@@ -157,6 +187,24 @@ export default function GuestListModal({ slug, limit, seedGuests = [], open, onC
         <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center" }}>
           <button onClick={onClose} aria-label="Close guest list" className="guest-btn ghost">✕</button>
         </div>
+        {toast ? (
+          <div
+            role="status"
+            aria-live="polite"
+            style={{
+              marginTop: 8,
+              background: "rgba(48, 204, 140, 0.12)",
+              border: "1px solid rgba(48, 204, 140, 0.35)",
+              color: "#075E3D",
+              padding: "0.5rem 0.75rem",
+              borderRadius: 8,
+              textAlign: "center",
+              fontWeight: 600,
+            }}
+          >
+            {toast}
+          </div>
+        ) : null}
         <h2 className="smallcaps centered" style={{ margin: 0 }}>
           GUEST LIST
         </h2>
@@ -199,7 +247,10 @@ export default function GuestListModal({ slug, limit, seedGuests = [], open, onC
         <div className="hair" aria-hidden />
 
         <form onSubmit={handleSubmit} style={{ marginTop: 8 }}>
-          <div style={{ display:"flex", gap: 8, flexWrap: "wrap", alignItems: "center" }}>
+          <fieldset
+            style={{ display:"flex", gap: 8, flexWrap: "wrap", alignItems: "center", border: "none", padding: 0, margin: 0 }}
+            disabled={isFull}
+          >
             <input
               aria-label="Your name"
               placeholder="Your name"
@@ -219,8 +270,8 @@ export default function GuestListModal({ slug, limit, seedGuests = [], open, onC
               onChange={e => setDietary(e.target.value)}
               className="guest-input underline grow"
             />
-            <button type="submit" className="guest-btn primary" disabled={!name.trim() || isFull}>Join</button>
-          </div>
+            <button type="submit" className="guest-btn primary" disabled={!name.trim()}>Join</button>
+          </fieldset>
           {isFull ? <p style={{ color: "#b00", marginTop: 6 }}>Guest list is full.</p> : null}
         </form>
 

@@ -58,7 +58,11 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ slug: stri
     let current: Guest[] = [];
     const items = await list({ prefix: key, token });
     if (items.blobs?.length) {
-      const res = await fetch(items.blobs[0].url, { cache: "no-store" });
+      const latest = items.blobs
+        .slice()
+        .sort((a: any, b: any) => new Date(a.uploadedAt).getTime() - new Date(b.uploadedAt).getTime())
+        .slice(-1)[0];
+      const res = await fetch(latest.url, { cache: "no-store" });
       current = (await res.json().catch(() => [])) || [];
     } else if (Array.isArray(menu?.guests)) {
       current = (menu!.guests as Guest[]) || [];
@@ -75,8 +79,15 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ slug: stri
       const entry: Guest = { id: uuid(), name, plusOne, dietary, history: [] };
       const next = [...current, entry];
       try {
-        await put(key, JSON.stringify(next), { access: "public", contentType: "application/json", addRandomSuffix: false, token });
+        await put(key, JSON.stringify(next), {
+          access: "public",
+          contentType: "application/json",
+          addRandomSuffix: false,
+          allowOverwrite: true,
+          token,
+        });
       } catch (err: any) {
+        console.error("[blob] add guest write failed", { key, message: err?.message, status: err?.status });
         return NextResponse.json({ error: "Blob write failed", detail: err?.message || String(err) }, { status: 500 });
       }
       return NextResponse.json({ ok: true, guests: next }, { status: 200, headers: { "Cache-Control": "no-store" } });
@@ -114,8 +125,15 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ slug: stri
       const used = updated.reduce((acc, g) => acc + 1 + (g.plusOne ? 1 : 0), 0);
       if (used > limit) return NextResponse.json({ error: "Guest list full" }, { status: 409 });
       try {
-        await put(key, JSON.stringify(updated), { access: "public", contentType: "application/json", addRandomSuffix: false, token });
+        await put(key, JSON.stringify(updated), {
+          access: "public",
+          contentType: "application/json",
+          addRandomSuffix: false,
+          allowOverwrite: true,
+          token,
+        });
       } catch (err: any) {
+        console.error("[blob] edit guest write failed", { key, message: err?.message, status: err?.status });
         return NextResponse.json({ error: "Blob write failed", detail: err?.message || String(err) }, { status: 500 });
       }
       return NextResponse.json({ ok: true, guests: updated }, { status: 200, headers: { "Cache-Control": "no-store" } });
