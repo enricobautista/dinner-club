@@ -36,28 +36,41 @@ export const menus: Menu[] = [
     cost: 18,
     courses: [
       {
-        heading: "Aperitivo",
+        heading: "Aperitivi",
         items: [
-          { name: "Negroni Sbagliato", recipeSlug: "negroni-sbagliato", blurb: "Bittersweet, citrusy, and lightly effervescent" }
+          { name: "Negroni Sbagliato", recipeSlug: "negroni-sbagliato", blurb: "Bittersweet, citrusy, and lightly effervescent" },
+          { name: "Apricot Blossom", recipeSlug: "apricot-blossom", blurb: "gin, apricot, Lillet/Cocchi, orange blossom" },
+        ]
+      },
+      {
+        heading: "Antipasto",
+        items: [
+          { name: "Oi-Muchim (Korean Cucumber Salad)", recipeSlug: "oi-muchim", blurb: "crisp cucumbers with gochugaru, sesame, vinegar" },
         ]
       },
       {
         heading: "Primo",
         items: [
-          { name: "Red Oil Wontons", recipeSlug: "red-oil-wontons", blurb: "Sichuan-style wontons with chili oil and pea shoots" }
+          { name: "Red Oil Wontons", recipeSlug: "red-oil-wontons", blurb: "Sichuan-style wontons with chili oil and pea shoots" },
+        ]
+      },
+      {
+        heading: "Contorno",
+        items: [
+          { name: "Roasted Butternut Squash", recipeSlug: "roasted-butternut-squash", blurb: "garlic & herb roasted squash" },
         ]
       },
       {
         heading: "Secondi",
         items: [
           { name: "Samgyeopsal", recipeSlug: "samgyeopsal", blurb: "Korean grilled pork belly with lettuce wraps." },
-          { name: "Grilled Octopus", recipeSlug: "grilled-octopus", blurb: "Mediterranean-style with lemon, parsley, olive oil." }
+          { name: "Grilled Octopus", recipeSlug: "grilled-octopus", blurb: "Mediterranean-style with lemon, parsley, olive oil." },
         ]
       },
       {
         heading: "Dolce",
         items: [
-          { name: "Cheesecake", blurb: "Simple, classic slice" } // no recipeSlug on purpose
+          { name: "Cheesecake", blurb: "Simple, classic slice" },
         ]
       }
     ]

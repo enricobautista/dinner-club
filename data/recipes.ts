@@ -334,6 +334,73 @@ export const recipes: Recipe[] = [
       "Serve: transfer wontons and pea shoots to the sauce bowl, toss gently to coat, and serve hot."
     ]
   },
+  {
+    slug: "apricot-blossom",
+    title: "Apricot Blossom",
+    course: "Aperitivo",
+    type: "drink",
+    blurb: "A bright gin cocktail with apricot liqueur, Lillet/Cocchi, and a touch of orange blossom.",
+    ingredients: [
+      "2 oz London Dry Gin (or Hendrick's for a softer floral base)",
+      "3/4 oz apricot liqueur (e.g., Giffard Abricot or Bols Apricot Brandy)",
+      "1/2 oz Lillet Blanc or Cocchi Americano",
+      "2 drops orange blossom water (optional)",
+      "ice"
+    ],
+    steps: [
+      "Chill a glass.",
+      "Add gin, apricot liqueur, Lillet/Cocchi, and orange blossom water to a mixing glass with ice.",
+      "Stir until well chilled and silky, then strain into the chilled glass.",
+      "Serve straight up."
+    ]
+  },
+  {
+    slug: "oi-muchim",
+    title: "Oi-Muchim",
+    course: "Antipasti",
+    type: "salad",
+    blurb: "Crisp salted cucumbers tossed with gochugaru, garlic, vinegar, and sesame-a classic Korean banchan.",
+    ingredients: [
+      "cucumbers, thinly sliced",
+      "coarse salt (for salting)",
+      "gochugaru (Korean red pepper flakes)",
+      "rice vinegar",
+      "sugar",
+      "sesame oil",
+      "toasted sesame seeds"
+    ],
+    steps: [
+      "Toss sliced cucumbers with a light sprinkle of coarse salt and let sit 10-15 minutes until they release some liquid.",
+      "Drain and gently squeeze; pat dry.",
+      "In a bowl, mix gochugaru, rice vinegar, a little sugar, and a splash of sesame oil.",
+      "Add cucumbers and toss to coat. Adjust seasoning to taste.",
+      "Finish with toasted sesame seeds and serve right away or chill briefly."
+    ]
+  },
+  {
+    slug: "roasted-butternut-squash",
+    title: "Roasted Butternut Squash with Garlic & Herbs",
+    course: "Contorno",
+    type: "vegetable",
+    blurb: "Roasted butternut squash with garlic, rosemary, thyme, and sage finished with parsley.",
+    ingredients: [
+      "1 butternut squash (~3 lb), peeled, seeded, cut into 1-inch cubes",
+      "olive oil (about 3 Tbsp)",
+      "fresh rosemary, minced (about 1 Tbsp)",
+      "fresh thyme, minced (about 1 Tbsp)",
+      "fresh sage, minced (about 1 Tbsp)",
+      "salt and black pepper",
+      "garlic, minced (about 1 Tbsp)",
+      "fresh parsley, minced (about 2½ Tbsp)"
+    ],
+    steps: [
+      "Heat oven to 400°F and lightly oil a rimmed baking sheet.",
+      "Toss squash with olive oil, rosemary, thyme, sage, salt, and pepper; spread in an even layer.",
+      "Roast 20 minutes, then add garlic and toss.",
+      "Roast 10-20 minutes more until tender; broil 1-3 minutes for extra browning if desired.",
+      "Finish with parsley and serve warm."
+    ]
+  },
 ];
 
 export function getRecipe(slug?: string) {
