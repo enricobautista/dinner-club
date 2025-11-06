@@ -29,7 +29,7 @@ export const menus: Menu[] = [
     slug: "dc-dinner-2025-11-08",
     location: "2217 38th St NW, Washington, DC",
     dateISO: "2025-11-08",
-    time: "5:30 PM",
+    time: "7:00 PM",
     hosts: ["Enrico Bautista", "Yumin Gao"],
     note: "First iteration—additional courses to be added.",
     guests: [],

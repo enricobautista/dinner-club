@@ -298,6 +298,42 @@ export const recipes: Recipe[] = [
       "Eat immediately: dip pork in the sesame oil and salt, ssamjang, or gochujang, then wrap in lettuce with a little rice."
     ]
   },
+  {
+    slug: "red-oil-wontons",
+    title: "Red Oil Wontons (Sichuan-Style Spicy Wontons)",
+    course: "Primo",
+    type: "dumpling",
+    blurb: "Pork wontons tossed in a bright, spicy red oil sauce served with blanched pea shoots.",
+    ingredients: [
+      // Filling
+      "200 g ground pork",
+      "1 scallion, finely chopped",
+      "1 tsp grated ginger",
+      "1 tsp soy sauce",
+      "1 tsp sesame oil",
+      "salt and white pepper, to taste",
+      "wonton wrappers",
+      // Sauce (per serving)
+      "2 Tbsp chili oil",
+      "1½ Tbsp light soy sauce",
+      "1 tsp Chinese black vinegar",
+      "¼ tsp sugar",
+      "1 tsp minced garlic",
+      "1 tsp toasted sesame seeds",
+      "1 tsp warm water",
+      "pinch chopped scallions (optional)",
+      "2–3 drops Sichuan peppercorn oil (optional)",
+      // For serving
+      "fresh pea shoots"
+    ],
+    steps: [
+      "Mix the filling: combine pork, scallion, ginger, soy sauce, sesame oil, salt, and white pepper until sticky.",
+      "Assemble: place a small spoon of filling in each wrapper, moisten edges, fold, and seal.",
+      "Boil: cook wontons in plenty of boiling water 4-5 minutes until they float and are cooked through; add pea shoots for the last 30 seconds to blanch.",
+      "Make sauce (per bowl): stir together chili oil, light soy sauce, black vinegar, sugar, garlic, sesame seeds, and warm water; add scallions and Sichuan peppercorn oil if using.",
+      "Serve: transfer wontons and pea shoots to the sauce bowl, toss gently to coat, and serve hot."
+    ]
+  },
 ];
 
 export function getRecipe(slug?: string) {
