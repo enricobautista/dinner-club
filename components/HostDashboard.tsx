@@ -66,6 +66,7 @@ export default function HostDashboard({ menus }: Props) {
       setData(null);
       return;
     }
+    const authToken = token;
     let cancelled = false;
     async function load() {
       setLoading(true);
@@ -73,7 +74,7 @@ export default function HostDashboard({ menus }: Props) {
       try {
         const res = await fetch(`/api/admin/guests/${encodeURIComponent(selectedSlug)}/export`, {
           headers: {
-            "x-admin-token": token,
+            "x-admin-token": authToken,
             "Cache-Control": "no-store",
           },
         });
@@ -112,10 +113,11 @@ export default function HostDashboard({ menus }: Props) {
 
   async function handleDownloadCsv() {
     if (!token || !selectedSlug) return;
+    const authToken = token;
     try {
       const res = await fetch(`/api/admin/guests/${encodeURIComponent(selectedSlug)}/export?format=csv`, {
         headers: {
-          "x-admin-token": token,
+          "x-admin-token": authToken,
           "Cache-Control": "no-store",
         },
       });
