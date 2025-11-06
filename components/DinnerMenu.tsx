@@ -13,6 +13,20 @@ export type DinnerMenuProps = {
   note?: string;
 };
 
+const COURSE_HEADING_RANK: Record<string, number> = [
+  ["aperitivo", "aperitivi"],
+  ["antipasto", "antipasti"],
+  ["primo", "primi"],
+  ["contorno", "contorni"],
+  ["secondo", "secondi"],
+  ["dolce", "dolci"],
+].reduce<Record<string, number>>((acc, group, index) => {
+  group.forEach(label => {
+    acc[label] = index + 1;
+  });
+  return acc;
+}, {});
+
 export default function DinnerMenu({ location, dateISO, time, hosts, courses, note }: DinnerMenuProps) {
   const dateObj = parseMenuDate(dateISO);
   const date = dateObj.toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
@@ -24,18 +38,7 @@ export default function DinnerMenu({ location, dateISO, time, hosts, courses, no
     .sort((a, b) => {
       const rank = (h: string) => {
         const key = String(h || "").trim().toLowerCase();
-        const map: Record<string, number> = {
-          "aperitivo": 1,
-          "antipasti": 2,
-          "primo": 3,
-          "primi": 3,
-          "contorno": 4,
-          "contorni": 4,
-          "secondo": 5,
-          "secondi": 5,
-          "dolce": 6,
-        };
-        return map[key] ?? 99;
+        return COURSE_HEADING_RANK[key] ?? 99;
       };
       return rank(a.heading) - rank(b.heading);
     });
