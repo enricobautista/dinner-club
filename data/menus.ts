@@ -30,7 +30,7 @@ export const menus: Menu[] = [
     location: "2217 38th St NW, Washington, DC",
     dateISO: "2025-11-08",
     time: "7:00 PM",
-    hosts: ["Enrico Bautista", "Yumin Gao"],
+    hosts: ["Enrico Bautista", "Yumin Gao", "Francis Arellano"],
     note: "First iteration—additional courses to be added.",
     guests: [],
     cost: 18,
