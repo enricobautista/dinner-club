@@ -42,10 +42,22 @@ export const menus: Menu[] = [
         ]
       },
       {
+        heading: "Primo",
+        items: [
+          { name: "Red Oil Wontons", recipeSlug: "red-oil-wontons", blurb: "Sichuan-style wontons with chili oil and pea shoots" }
+        ]
+      },
+      {
         heading: "Secondi",
         items: [
           { name: "Samgyeopsal", recipeSlug: "samgyeopsal", blurb: "Korean grilled pork belly with lettuce wraps." },
           { name: "Grilled Octopus", recipeSlug: "grilled-octopus", blurb: "Mediterranean-style with lemon, parsley, olive oil." }
+        ]
+      }
+      {
+        heading: "Dolce",
+        items: [
+          { name: "Cheesecake", blurb: "Simple, classic slice" } // no recipeSlug on purpose
         ]
       }
     ]
