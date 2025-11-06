@@ -33,7 +33,7 @@ export const menus: Menu[] = [
     hosts: ["Enrico Bautista", "Yumin Gao"],
     note: "First iteration—additional courses to be added.",
     guests: [],
-    cost: 16,
+    cost: 18,
     courses: [
       {
         heading: "Aperitivo",
@@ -53,7 +53,7 @@ export const menus: Menu[] = [
           { name: "Samgyeopsal", recipeSlug: "samgyeopsal", blurb: "Korean grilled pork belly with lettuce wraps." },
           { name: "Grilled Octopus", recipeSlug: "grilled-octopus", blurb: "Mediterranean-style with lemon, parsley, olive oil." }
         ]
-      }
+      },
       {
         heading: "Dolce",
         items: [
