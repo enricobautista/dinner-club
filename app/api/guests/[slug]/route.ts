@@ -54,6 +54,7 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ slug: stri
     }
     const body = await req.json().catch(() => ({}));
     const action = String(body?.action || "");
+    const adminToken = req.headers.get("x-admin-token") || req.headers.get("x-api-key") || "";
     // Load current from blob (or fallback to menu guests)
     let current: Guest[] = [];
     const items = await list({ prefix: key, token });
@@ -134,6 +135,35 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ slug: stri
         });
       } catch (err: any) {
         console.error("[blob] edit guest write failed", { key, message: err?.message, status: err?.status });
+        return NextResponse.json({ error: "Blob write failed", detail: err?.message || String(err) }, { status: 500 });
+      }
+      return NextResponse.json({ ok: true, guests: updated }, { status: 200, headers: { "Cache-Control": "no-store" } });
+    }
+
+    if (action === "delete") {
+      const expected = process.env.ADMIN_TOKEN || "";
+      if (!expected || adminToken !== expected) {
+        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+      }
+      const id = typeof body?.id === "string" ? String(body.id).trim() : "";
+      const name = typeof body?.name === "string" ? String(body.name).trim().toLowerCase() : "";
+      let removeIndex = -1;
+      if (id) removeIndex = current.findIndex((g) => g.id === id);
+      if (removeIndex === -1 && name) {
+        removeIndex = current.findIndex((g) => g.name.trim().toLowerCase() === name);
+      }
+      if (removeIndex === -1) return NextResponse.json({ error: "Guest not found" }, { status: 404 });
+      const updated = current.slice(0, removeIndex).concat(current.slice(removeIndex + 1));
+      try {
+        await put(key, JSON.stringify(updated), {
+          access: "public",
+          contentType: "application/json",
+          addRandomSuffix: false,
+          allowOverwrite: true,
+          token,
+        });
+      } catch (err: any) {
+        console.error("[blob] delete guest write failed", { key, message: err?.message, status: err?.status });
         return NextResponse.json({ error: "Blob write failed", detail: err?.message || String(err) }, { status: 500 });
       }
       return NextResponse.json({ ok: true, guests: updated }, { status: 200, headers: { "Cache-Control": "no-store" } });

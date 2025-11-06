@@ -29,6 +29,20 @@ type Props = {
 
 const STORAGE_KEY = "dinnerclub_admin_token";
 
+async function fetchDashboard(token: string, slug: string): Promise<DashboardData> {
+  const res = await fetch(`/api/admin/guests/${encodeURIComponent(slug)}/export`, {
+    headers: {
+      "x-admin-token": token,
+      "Cache-Control": "no-store",
+    },
+  });
+  if (!res.ok) {
+    if (res.status === 401) throw new Error("Unauthorized. Check your admin token.");
+    throw new Error(`Failed to load data (status ${res.status}).`);
+  }
+  return (await res.json()) as DashboardData;
+}
+
 function formatDate(iso: string) {
   if (!iso) return "";
   const date = new Date(iso);
@@ -50,6 +64,8 @@ export default function HostDashboard({ menus }: Props) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isReady, setIsReady] = useState(false);
+  const [toast, setToast] = useState<string | null>(null);
+  const [toastTs, setToastTs] = useState(0);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -62,6 +78,15 @@ export default function HostDashboard({ menus }: Props) {
   }, []);
 
   useEffect(() => {
+    if (!toast) return;
+    const created = toastTs;
+    const timer = setTimeout(() => {
+      setToast((prev) => (prev && created === toastTs ? null : prev));
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, [toast, toastTs]);
+
+  useEffect(() => {
     if (!token || !selectedSlug) {
       setData(null);
       return;
@@ -72,17 +97,7 @@ export default function HostDashboard({ menus }: Props) {
       setLoading(true);
       setError(null);
       try {
-        const res = await fetch(`/api/admin/guests/${encodeURIComponent(selectedSlug)}/export`, {
-          headers: {
-            "x-admin-token": authToken,
-            "Cache-Control": "no-store",
-          },
-        });
-        if (!res.ok) {
-          if (res.status === 401) throw new Error("Unauthorized. Check your admin token.");
-          throw new Error(`Failed to load data (status ${res.status}).`);
-        }
-        const json = (await res.json()) as DashboardData;
+        const json = await fetchDashboard(authToken, selectedSlug);
         if (!cancelled) setData(json);
       } catch (err: any) {
         if (!cancelled) setError(err?.message || "Unable to load dashboard.");
@@ -136,6 +151,44 @@ export default function HostDashboard({ menus }: Props) {
       URL.revokeObjectURL(url);
     } catch (err: any) {
       setError(err?.message || "Could not download CSV.");
+    }
+  }
+
+  async function handleDeleteGuest(id?: string, name?: string) {
+    if (!token || !selectedSlug) return;
+    if (typeof window !== "undefined") {
+      const confirmed = window.confirm(`Remove ${name || "this guest"} from the list?`);
+      if (!confirmed) return;
+    }
+    const authToken = token;
+    setLoading(true);
+    setError(null);
+    try {
+      const payload: Record<string, string> = { action: "delete" };
+      if (id) payload.id = id;
+      if (name) payload.name = name;
+      const res = await fetch(`/api/guests/${encodeURIComponent(selectedSlug)}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-admin-token": authToken,
+          "Cache-Control": "no-store",
+        },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) {
+        const json = await res.json().catch(() => ({}));
+        const message = json?.error ? (json.detail ? `${json.error}: ${json.detail}` : json.error) : `Delete failed (${res.status})`;
+        throw new Error(message);
+      }
+      const refreshed = await fetchDashboard(authToken, selectedSlug);
+      setData(refreshed);
+      setToast("Guest removed.");
+      setToastTs(Date.now());
+    } catch (err: any) {
+      setError(err?.message || "Could not remove guest.");
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -195,6 +248,25 @@ export default function HostDashboard({ menus }: Props) {
         <button className="guest-btn ghost" onClick={handleResetToken}>Change token</button>
       </header>
 
+      {toast ? (
+        <div
+          role="status"
+          aria-live="polite"
+          style={{
+            marginTop: 16,
+            background: "rgba(48, 204, 140, 0.12)",
+            border: "1px solid rgba(48, 204, 140, 0.35)",
+            color: "#075E3D",
+            padding: "0.65rem 1rem",
+            borderRadius: 10,
+            textAlign: "center",
+            fontWeight: 600,
+          }}
+        >
+          {toast}
+        </div>
+      ) : null}
+
       <section style={{ marginTop: 24, display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center" }}>
         <label className="smallcaps" style={{ display: "flex", flexDirection: "column", gap: 6 }}>
           Dinner
@@ -249,6 +321,15 @@ export default function HostDashboard({ menus }: Props) {
                     <li key={g.id || g.name}>
                       <strong>{g.name}</strong>
                       {g.dietary ? <span style={{ opacity: 0.7 }}> · {g.dietary}</span> : null}
+                      <button
+                        type="button"
+                        className="guest-btn ghost"
+                        style={{ marginLeft: 8 }}
+                        onClick={() => handleDeleteGuest(g.id, g.name)}
+                        aria-label={`Remove ${g.name}`}
+                      >
+                        Remove
+                      </button>
                     </li>
                   ))}
                 </ul>
@@ -261,6 +342,15 @@ export default function HostDashboard({ menus }: Props) {
                     <li key={g.id || g.name}>
                       <strong>{g.name}</strong>
                       {g.dietary ? <span style={{ opacity: 0.7 }}> · {g.dietary}</span> : null}
+                      <button
+                        type="button"
+                        className="guest-btn ghost"
+                        style={{ marginLeft: 8 }}
+                        onClick={() => handleDeleteGuest(g.id, g.name)}
+                        aria-label={`Remove ${g.name}`}
+                      >
+                        Remove
+                      </button>
                     </li>
                   ))}
                 </ul>
