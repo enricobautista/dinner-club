@@ -31,14 +31,13 @@ export const menus: Menu[] = [
     dateISO: "2025-11-08",
     time: "7:00 PM",
     hosts: ["Enrico Bautista", "Yumin Gao", "Francis Arellano"],
-    note: "First iteration—additional courses to be added.",
     guests: [],
     cost: 18,
     courses: [
       {
         heading: "Aperitivi",
         items: [
-          { name: "Negroni Sbagliato", recipeSlug: "negroni-sbagliato", blurb: "Bittersweet, citrusy, and lightly effervescent" },
+          { name: "Negroni Sbagliato", recipeSlug: "negroni-sbagliato", blurb: "bittersweet, citrusy, and lightly effervescent" },
           { name: "Apricot Blossom", recipeSlug: "apricot-blossom", blurb: "gin, apricot, Lillet/Cocchi, orange blossom" },
         ]
       },
@@ -70,7 +69,7 @@ export const menus: Menu[] = [
       {
         heading: "Dolce",
         items: [
-          { name: "Cheesecake", blurb: "Simple, classic slice" },
+          { name: "Cheesecake", blurb: "simple, classic slice" },
         ]
       }
     ]
