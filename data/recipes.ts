@@ -47,7 +47,7 @@ export const recipes: Recipe[] = [
     ],
     steps: [
       "Bring a large pot of salted water to a boil.",
-      "In a wide skillet over medium heat, melt butter; add sage and cook until butter turns nutty brown and sage crisps (3–5 minutes). Remove from heat.",
+      "In a wide skillet over medium heat, melt butter; add sage and cook until butter turns nutty brown and sage crisps (3-5 minutes). Remove from heat.",
       "Cook gnocchi until they float; transfer directly to the brown butter with a splash of pasta water.",
       "Toss over medium heat to glaze; season with salt and pepper. Serve with grated parmigiano.",
     ],
@@ -68,8 +68,8 @@ export const recipes: Recipe[] = [
     ],
     steps: [
       "Pat steak dry; rub with olive oil and coat evenly with porcini powder. Season generously with salt and pepper.",
-      "Sear in a hot cast-iron skillet 2–3 minutes per side; lower heat and baste with butter and thyme if desired until medium-rare.",
-      "Rest 8–10 minutes; slice against the grain and serve.",
+      "Sear in a hot cast-iron skillet 2-3 minutes per side; lower heat and baste with butter and thyme if desired until medium-rare.",
+      "Rest 8-10 minutes; slice against the grain and serve.",
     ],
   },
   {
@@ -92,7 +92,7 @@ export const recipes: Recipe[] = [
     steps: [
       "Heat oven to 350°F/175°C. Grease and line a 9-inch pan.",
       "Whisk dry ingredients; in another bowl whisk eggs, oil, milk, and zest.",
-      "Combine wet and dry just until smooth. Pour into pan and bake 30–40 minutes until a tester comes out clean.",
+      "Combine wet and dry just until smooth. Pour into pan and bake 30-40 minutes until a tester comes out clean.",
       "Cool 10 minutes; unmold and cool completely.",
     ],
   },
@@ -143,9 +143,9 @@ export const recipes: Recipe[] = [
     ingredients: [
       "1 baguette, sliced 1/2-inch on a bias",
       "1 1/2 cups whole-milk ricotta",
-      "2–3 tbsp honey, plus more to finish",
+      "2-3 tbsp honey, plus more to finish",
       "2 tbsp extra-virgin olive oil",
-      "Leaves from 3–4 sprigs fresh thyme",
+      "Leaves from 3-4 sprigs fresh thyme",
       "Kosher salt",
       "Freshly ground black pepper",
     ],
@@ -174,7 +174,7 @@ export const recipes: Recipe[] = [
     steps: [
       "Bring a large pot of salted water to a boil.",
       "Sauté mushrooms in olive oil over medium-high heat with a pinch of salt until browned and their liquid evaporates.",
-      "Add butter and garlic; cook 1–2 minutes until fragrant, then lower heat.",
+      "Add butter and garlic; cook 1-2 minutes until fragrant, then lower heat.",
       "Cook pasta until al dente; transfer to pan with a splash of pasta water and toss to gloss.",
       "Off heat, stir in parsley and black pepper. Serve with grated parmigiano.",
     ],
@@ -199,7 +199,7 @@ export const recipes: Recipe[] = [
     ],
     steps: [
       "Season chicken with salt and pepper; lightly dredge in flour if using.",
-      "Sear in olive oil over medium-high heat 2–3 minutes per side until just cooked; transfer to a warm plate.",
+      "Sear in olive oil over medium-high heat 2-3 minutes per side until just cooked; transfer to a warm plate.",
       "Deglaze pan with wine; reduce by half. Add stock, lemon juice, zest, and capers; simmer 2 minutes.",
       "Off heat, whisk in cold butter to emulsify. Return chicken to coat, sprinkle with parsley, and serve.",
     ],
@@ -219,9 +219,9 @@ export const recipes: Recipe[] = [
       "Fresh parsley and thyme",
     ],
     steps: [
-      "Heat oven to 425 F. Pat fish dry and score each side 2–3 times.",
+      "Heat oven to 425 F. Pat fish dry and score each side 2-3 times.",
       "Season cavity and exterior with salt and pepper; stuff with garlic, a few lemon slices, and herbs.",
-      "Rub with olive oil, place on a lined sheet, and roast 14–18 minutes until flesh flakes easily.",
+      "Rub with olive oil, place on a lined sheet, and roast 14-18 minutes until flesh flakes easily.",
       "Finish with a squeeze of lemon and extra olive oil to serve.",
     ],
   },
@@ -322,7 +322,7 @@ export const recipes: Recipe[] = [
       "1 tsp toasted sesame seeds",
       "1 tsp warm water",
       "pinch chopped scallions (optional)",
-      "2–3 drops Sichuan peppercorn oil (optional)",
+      "2-3 drops Sichuan peppercorn oil (optional)",
       // For serving
       "fresh pea shoots"
     ],
@@ -399,6 +399,145 @@ export const recipes: Recipe[] = [
       "Roast 20 minutes, then add garlic and toss.",
       "Roast 10-20 minutes more until tender; broil 1-3 minutes for extra browning if desired.",
       "Finish with parsley and serve warm."
+    ]
+  },
+  {
+    slug: "smoked-pork-okra",
+    title: "Smoked Pork Okra",
+    course: "Contorno",
+    type: "vegetable",
+    blurb: "Steam-fried okra with cured pork, garlic, onions, and shiitake.",
+    ingredients: [
+      "4 oz Hunan-style cured pork (or thick-cut smoked bacon), sliced",
+      "1 lb okra, trimmed and halved",
+      "4 cloves garlic, minced",
+      "1 medium onion, sliced",
+      "3 fresh shiitake mushrooms, sliced",
+      "1 red chili or Fresno pepper, sliced",
+      "2 tbsp soy sauce",
+      "1 tbsp rice vinegar",
+      "1 tsp sugar",
+      "1/4 tsp white pepper",
+      "1 tsp sesame oil",
+      "Small handful cilantro, chopped"
+    ],
+    steps: [
+      "Heat a pan over medium with a little oil and add garlic, cooking until fragrant.",
+      "Add the cured pork and sauté until the fat renders and the edges become lightly crisp.",
+      "Add the onions and shiitake; cook until softened.",
+      "Add the okra and toss over medium heat until tender but not mushy.",
+      "Season with soy sauce, rice vinegar, sugar, and white pepper; stir to coat evenly.",
+      "Turn off the heat, drizzle with sesame oil, and garnish with sliced chili and cilantro."
+    ]
+  },
+  {
+    slug: "hummus-with-vegetables",
+    title: "Hummus with Vegetables",
+    course: "Antipasti",
+    type: "dip",
+    blurb: "Classic hummus served with fresh seasonal vegetables.",
+    ingredients: [
+      "1 can (15 oz) chickpeas, drained",
+      "2 tbsp reserved chickpea liquid (or cold water)",
+      "3 tbsp tahini",
+      "2 tbsp lemon juice",
+      "1 small garlic clove, crushed",
+      "2 tbsp extra-virgin olive oil",
+      "1/2 tsp kosher salt",
+      "Paprika or Aleppo pepper, for garnish",
+      "Extra olive oil, for drizzling",
+      "Assorted vegetables: cucumber, carrots, radishes, cherry tomatoes"
+    ],
+    steps: [
+      "In a food processor, blend the chickpeas, tahini, lemon juice, garlic, salt, and chickpea liquid until smooth.",
+      "With the motor running, drizzle in the olive oil and blend until creamy.",
+      "Taste and adjust salt or lemon.",
+      "Serve swirled in a bowl, topped with olive oil and paprika or Aleppo pepper.",
+      "Arrange fresh vegetables around the hummus for dipping."
+    ]
+  },
+  {
+    slug: "marinara",
+    title: "Rigatoni alla Marinara",
+    course: "Primo",
+    type: "pasta-sauce",
+    blurb: "A light, bright marinara made from cherry tomatoes, onion, and garlic.",
+    ingredients: [
+      "2 tbsp extra virgin olive oil",
+      "1/2 white onion, diced",
+      "2 cloves garlic, crushed",
+      "16 oz cherry tomatoes, halved",
+      "Pinch crushed red pepper",
+      "Salt, to taste"
+    ],
+    steps: [
+      "Heat olive oil in a pan over medium and sauté the diced onion until translucent.",
+      "Add the crushed garlic and cook gently until fragrant but not browned.",
+      "Stir in the crushed red pepper, salt, and cherry tomatoes.",
+      "Simmer uncovered for 15-20 minutes, stirring occasionally, until the tomatoes break down into a sauce.",
+      "Taste and adjust seasoning. Serve with pasta."
+    ]
+  },
+  {
+    slug: "pan-seared-lamb-chops",
+    title: "Pan-Seared Lamb Chops",
+    course: "Secondi",
+    type: "meat",
+    blurb: "Classic butter-basted lamb chops with rosemary, garlic, and optional wine finish.",
+    ingredients: [
+      "6-8 lamb chops (frenched if possible)",
+      "2 tbsp extra-virgin olive oil",
+      "2 garlic cloves, crushed",
+      "2 sprigs rosemary",
+      "1 sprig thyme (optional)",
+      "Salt",
+      "Black pepper",
+      "20 g (1 tbsp) butter",
+      "Optional: splash of white wine or brandy"
+    ],
+    steps: [
+      "Bring the lamb chops to room temperature for 15-20 minutes.",
+      "Heat a stainless or cast-iron pan over medium-high and add olive oil.",
+      "Add the crushed garlic and rosemary to flavor the oil.",
+      "Place the lamb chops in the pan without overlapping.",
+      "Cook 2 minutes per side for medium-rare, 2.5-3 minutes for more done. Flip only once.",
+      "Add the butter and baste the chops for 20-30 seconds as it foams.",
+      "Optional: add a splash of white wine or brandy and let it evaporate for a few seconds.",
+      "Remove from the heat and rest for 2 minutes.",
+      "Season generously with salt and a little black pepper before serving."
+    ]
+  },
+  {
+    slug: "zaatar-chicken",
+    title: "Za'atar Chicken",
+    course: "Secondi",
+    type: "poultry",
+    blurb: "Roasted chicken marinated with olive oil, lemon, garlic, and aromatic za'atar.",
+    ingredients: [
+      "2 lbs chicken thighs (bone-in or boneless)",
+      "2 tbsp za'atar (or homemade, see below)",
+      "2 tbsp extra-virgin olive oil",
+      "2 cloves garlic, minced",
+      "1 tbsp lemon juice",
+      "1 tsp lemon zest",
+      "1/2 tsp kosher salt",
+      "Black pepper, to taste",
+      "Optional: sliced red onion or cherry tomatoes for roasting",
+      "",
+      "Homemade Za'atar (optional)",
+      "2 tbsp dried thyme or oregano",
+      "1 tbsp toasted sesame seeds",
+      "1 tbsp ground sumac",
+      "1/2 tsp kosher salt"
+    ],
+    steps: [
+      "To make homemade za'atar: Mix dried thyme or oregano, toasted sesame seeds, ground sumac, and kosher salt. Store airtight.",
+      "In a bowl, mix olive oil, garlic, lemon juice, lemon zest, za'atar, salt, and pepper.",
+      "Rub the marinade over the chicken thoroughly. Rest at least 20 minutes (or refrigerate overnight).",
+      "Preheat the oven to 425°F (220°C).",
+      "Arrange the chicken on a baking sheet; add sliced red onions or tomatoes if using.",
+      "Roast 25-35 minutes until the skin is crisp and internal temp reaches 165°F.",
+      "Rest for 5 minutes before serving."
     ]
   },
 ];

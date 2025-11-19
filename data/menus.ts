@@ -74,6 +74,62 @@ export const menus: Menu[] = [
       }
     ]
   },
+  {
+    slug: "divorce-party-2025",
+    location: "Washington, DC",
+    dateISO: "2025-11-23",
+    time: "6:00 PM",
+    hosts: ["Enrico Bautista", "Yumin Gao", "Francis Arellano"],
+    guests: [],
+    cost: 15,
+    courses: [
+      {
+        heading: "Antipasto",
+        items: [
+          {
+            name: "Hummus with Vegetables",
+            recipeSlug: "hummus-with-vegetables",
+            blurb: "Classic hummus with crisp seasonal vegetables."
+          }
+        ]
+      },
+      {
+        heading: "Contorno",
+        items: [
+          {
+            name: "Pork Okra",
+            recipeSlug: "smoked-pork-okra",
+            blurb: "Steam-fried okra with smoky cured pork, garlic, and shiitake."
+          }
+        ]
+      },
+      {
+        heading: "Primo",
+        items: [
+          {
+            name: "Rigatoni alla Marinara",
+            recipeSlug: "marinara",
+            blurb: "Light marinara with rigatoni made from cherry tomatoes."
+          }
+        ]
+      },
+      {
+        heading: "Secondi",
+        items: [
+          {
+            name: "Pan-Seared Lamb Chops",
+            recipeSlug: "pan-seared-lamb-chops",
+            blurb: "Italian lamb chops with rosemary and garlic."
+          },
+          {
+            name: "Za'atar Chicken",
+            recipeSlug: "zaatar-chicken",
+            blurb: "Lemon and garlic grilled chicken with aromatic za'atar."
+          }
+        ]
+      }
+    ]
+  },
 ];
 
 function normalizeSlug(input: string) {
