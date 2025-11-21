@@ -76,13 +76,24 @@ export const menus: Menu[] = [
   },
   {
     slug: "divorce-party-2025",
-    location: "Washington, DC",
+    location: "2217 38th St NW, Washington, DC",
     dateISO: "2025-11-23",
     time: "6:00 PM",
-    hosts: ["Enrico Bautista", "Yumin Gao", "Francis Arellano"],
+    hosts: ["Enrico Bautista", "Yumin Gao", "Francis Arellano", "Winnie Li", "Jae Min"],
+    guestLimit: 20,
     guests: [],
     cost: 15,
     courses: [
+      {
+        heading: "Aperitivo",
+        items: [
+          {
+            name: "ABG (Aromatic Butter Gin)",
+            recipeSlug: "abg-aromatic-butter-gin",
+            blurb: "Brown-butter gin with pistachio, lemon, and egg white."
+          }
+        ]
+      },
       {
         heading: "Antipasto",
         items: [
@@ -124,12 +135,23 @@ export const menus: Menu[] = [
           {
             name: "Za'atar Chicken",
             recipeSlug: "zaatar-chicken",
-            blurb: "Lemon and garlic grilled chicken with aromatic za'atar."
+            blurb: "Lemon and garlic grilled chicken with Lebanese za'atar."
+          },
+        ]
+      },
+      {
+        heading: "Dolce",
+        items: [
+          {
+            name: "Earl Grey Tiramisu",
+            recipeSlug: "earl-grey-tiramisu",
+            blurb: "Layered tiramisu with Earl Grey mascarpone and matcha-dipped ladyfingers."
           }
         ]
-      }
+      },
     ]
   },
+  
 ];
 
 function normalizeSlug(input: string) {

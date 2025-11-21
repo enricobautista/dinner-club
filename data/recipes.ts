@@ -540,6 +540,64 @@ export const recipes: Recipe[] = [
       "Rest for 5 minutes before serving."
     ]
   },
+  {
+    slug: "earl-grey-tiramisu",
+    title: "Earl Grey Tiramisu",
+    course: "Dolce",
+    type: "dessert",
+    blurb: "A fragrant twist on tiramisu layered with Earl Grey-infused mascarpone and matcha-dipped ladyfingers.",
+    ingredients: [
+      "1 1/4 cup heavy cream, divided",
+      "1 tbsp Earl Grey tea leaves (or 3 tea bags)",
+      "2 egg yolks",
+      "5 tbsp granulated sugar",
+      "2 tsp vanilla extract",
+      "8 oz mascarpone cheese, room temperature",
+      "18-24 ladyfingers",
+      "6 oz hot water",
+      "1-2 tbsp matcha powder",
+      "",
+      "// Matcha Whipped Cream",
+      "8 oz heavy cream",
+      "1 tbsp granulated sugar",
+      "1 tsp matcha powder, sifted"
+    ],
+    steps: [
+      "Heat 1/2 cup of the heavy cream with the Earl Grey tea over low heat for about 5 minutes, until just simmering. Remove from heat; strain if using loose leaves and set aside to cool slightly.",
+      "Prepare a double boiler and whisk the egg yolks with 5 tbsp sugar until pale yellow and slightly thickened. Transfer to a large bowl.",
+      "While the custard is still warm, whisk in the mascarpone using a handheld mixer until smooth.",
+      "Add the Earl Grey cream, the remaining heavy cream, and vanilla extract. Continue whisking until fully incorporated. (Note: the heated cream will prevent it from whipping to stiff peaks—this is normal.)",
+      "Prepare an 8-by-8 pan lined with parchment. Whisk the matcha with hot (not boiling) water until smooth.",
+      "Dip each ladyfinger briefly in the matcha and arrange in a single layer in the pan.",
+      "Spread a layer of the Earl Grey cream over the ladyfingers. Add a second layer of matcha-dipped ladyfingers, then top with the remaining Earl Grey cream. Reserve some cream for piping if desired.",
+      "Smooth the surface and refrigerate at least 4 hours to set.",
+      "For the matcha whipped cream: Whip heavy cream with sugar and sifted matcha until stiff peaks form. Transfer to a piping bag.",
+      "If extra Earl Grey cream was reserved, whip briefly if needed and place into a piping bag.",
+      "Before serving, alternate piping the matcha cream and Earl Grey cream on top. Lightly dust with matcha powder."
+    ]
+  },
+  {
+    slug: "abg-aromatic-butter-gin",
+    title: "ABG (Aromatic Butter Gin)",
+    course: "Aperitivo",
+    type: "cocktail",
+    blurb: "Brown-butter-washed gin shaken with pistachio, lemon, and egg white for a rich, aromatic cocktail.",
+    ingredients: [
+      "2 oz brown-butter-washed gin",
+      "0.75 oz pistachio syrup",
+      "1 oz fresh lemon juice",
+      "0.75 oz egg white",
+      "Small pinch of salt",
+      "Ice",
+      "Grated pistachio, for garnish"
+    ],
+    steps: [
+      "Add all ingredients to a shaker without ice and dry shake to aerate and create texture.",
+      "Add ice and shake vigorously until well chilled.",
+      "Strain into a chilled coupe glass.",
+      "Garnish with freshly grated pistachio."
+    ]
+  },
 ];
 
 export function getRecipe(slug?: string) {
