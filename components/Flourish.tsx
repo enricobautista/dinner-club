@@ -1,6 +1,6 @@
 type Variant = "rule-dot" | "double-diamond" | "fleur" | "s-curve" | "scroll" | "laurel";
 
-export default function Flourish({ variant = "double-diamond", width = 280 }:
+export default function Flourish({ variant = "rule-dot", width = 280 }:
   { variant?: Variant; width?: number }) {
   const render = {
     "rule-dot": (
