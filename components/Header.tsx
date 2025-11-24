@@ -24,32 +24,20 @@ export default function Header() {
   const showHeaderFlourish = !isMenuContext && !(isHome && !hasUpcoming); // hide when menu context or home+Welcome
 
   return (
-    <header className="centered" style={{ position: "relative", paddingTop: 8, minHeight: 56 }}>
-      <Link
-        href="/"
-        aria-label="Table Rounds Dinner Club home"
-        className="link-no-underline"
-        style={{
-          position: "absolute",
-          left: 0,
-          top: 0,
-          display: "inline-flex",
-          alignItems: "center",
-          color: "inherit",
-        }}
-      >
-        <Image
-          src="/logo.png"
-          alt=""
-          priority
-          width={72}
-          height={72}
-          style={{ height: 40, width: "auto" }}
-        />
-      </Link>
+    <header className="centered">
       <h1 className="smallcaps" style={{ fontWeight: 600 }}>
         <Link href="/" className="link-no-underline" style={{ color: "inherit" }}>
-          Table Rounds Dinner Club
+          <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
+            <Image
+              src="/logo.png"
+              alt="Table Rounds Dinner Club logo"
+              priority
+              width={72}
+              height={72}
+              style={{ height: 36, width: "auto" }}
+            />
+            <span>Table Rounds Dinner Club</span>
+          </span>
         </Link>
       </h1>
       {isHome && hasUpcoming ? (
