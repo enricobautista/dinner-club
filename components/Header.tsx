@@ -24,22 +24,34 @@ export default function Header() {
   const showHeaderFlourish = !isMenuContext && !(isHome && !hasUpcoming); // hide when menu context or home+Welcome
 
   return (
-    <header className="centered">
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
+    <header className="centered" style={{ position: "relative", paddingTop: 8, minHeight: 56 }}>
+      <Link
+        href="/"
+        aria-label="Table Rounds Dinner Club home"
+        className="link-no-underline"
+        style={{
+          position: "absolute",
+          left: 0,
+          top: 0,
+          display: "inline-flex",
+          alignItems: "center",
+          color: "inherit",
+        }}
+      >
         <Image
           src="/logo.png"
-          alt="Table Rounds Dinner Club logo"
+          alt=""
           priority
-          width={80}
-          height={80}
-          style={{ height: 48, width: "auto" }}
+          width={72}
+          height={72}
+          style={{ height: 40, width: "auto" }}
         />
-        <h1 className="smallcaps" style={{ fontWeight: 600, margin: 0 }}>
-          <Link href="/" className="link-no-underline" style={{ color: "inherit" }}>
-            Table Rounds Dinner Club
-          </Link>
-        </h1>
-      </div>
+      </Link>
+      <h1 className="smallcaps" style={{ fontWeight: 600 }}>
+        <Link href="/" className="link-no-underline" style={{ color: "inherit" }}>
+          Table Rounds Dinner Club
+        </Link>
+      </h1>
       {isHome && hasUpcoming ? (
         <p className="smallcaps" style={{ margin: ".35rem 0 0", opacity: .9 }}>
           Upcoming Dinner Menu{priceText ? ` • ${priceText}` : ""}
