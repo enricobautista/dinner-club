@@ -460,7 +460,7 @@ export const recipes: Recipe[] = [
     slug: "marinara",
     title: "Rigatoni alla Marinara",
     course: "Primo",
-    type: "pasta-sauce",
+    type: "pasta",
     blurb: "A light, bright marinara made from cherry tomatoes, onion, and garlic.",
     ingredients: [
       "2 tbsp extra virgin olive oil",
@@ -580,7 +580,7 @@ export const recipes: Recipe[] = [
     slug: "abg-aromatic-butter-gin",
     title: "ABG (Aromatic Butter Gin)",
     course: "Aperitivo",
-    type: "cocktail",
+    type: "drink",
     blurb: "Brown-butter-washed gin shaken with pistachio, lemon, and egg white for a rich, aromatic cocktail.",
     ingredients: [
       "2 oz brown-butter-washed gin",

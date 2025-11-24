@@ -1,6 +1,7 @@
 "use client";
 import Flourish from "./Flourish";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { getSortedMenus, parseMenuDate } from "@/data/menus";
 
@@ -24,9 +25,21 @@ export default function Header() {
 
   return (
     <header className="centered">
-      <h1 className="smallcaps" style={{ fontWeight: 600 }}>
-        <Link href="/" className="link-no-underline" style={{ color: "inherit" }}>Break Bread Dinner Club</Link>
-      </h1>
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
+        <Image
+          src="/logo.png"
+          alt="Table Rounds Dinner Club logo"
+          priority
+          width={80}
+          height={80}
+          style={{ height: 48, width: "auto" }}
+        />
+        <h1 className="smallcaps" style={{ fontWeight: 600, margin: 0 }}>
+          <Link href="/" className="link-no-underline" style={{ color: "inherit" }}>
+            Table Rounds Dinner Club
+          </Link>
+        </h1>
+      </div>
       {isHome && hasUpcoming ? (
         <p className="smallcaps" style={{ margin: ".35rem 0 0", opacity: .9 }}>
           Upcoming Dinner Menu{priceText ? ` • ${priceText}` : ""}

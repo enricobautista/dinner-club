@@ -5,7 +5,7 @@ import Footer from "../components/Footer";
 import { EB_Garamond, Inter } from "next/font/google";
 
 export const metadata: Metadata = {
-  title: "Break Bread Dinner Club",
+  title: "Table Rounds Dinner Club",
   description: "Simple, classy dinner menus and recipes",
 };
 
