@@ -1,6 +1,7 @@
 "use client";
 import Flourish from "./Flourish";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { getSortedMenus, parseMenuDate } from "@/data/menus";
 
@@ -19,14 +20,50 @@ export default function Footer() {
   return (
     <footer className="centered" role="contentinfo" style={{ marginTop: "1.25rem" }}>
       {showFooterFlourish && <Flourish />}
-      <p className="smallcaps" style={{ fontSize: 14, opacity: .85, marginTop: 10 }}>
-        {new Date().getFullYear()} Table Rounds Dinner Club
-      </p>
-      <nav className="smallcaps" style={{ fontSize: 13, opacity:.8, marginTop: 8, display:"flex", gap:12, justifyContent:"center", flexWrap:"wrap" }}>
-        <Link href="/menus" style={{ color:"inherit" }}>All Menus</Link>
-        <span aria-hidden>•</span>
-        <Link href="/recipes" style={{ color:"inherit" }}>Recipe Repository</Link>
-      </nav>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: 12,
+          justifyContent: "center",
+          marginTop: 12,
+          flexWrap: "wrap",
+        }}
+      >
+        <Image
+          src="/logo.png"
+          alt="Table Rounds Dinner Club logo"
+          width={64}
+          height={64}
+          style={{ height: 40, width: "auto" }}
+          priority={false}
+        />
+        <div style={{ textAlign: "left" }}>
+          <p className="smallcaps" style={{ fontSize: 14, opacity: .85, margin: 0 }}>
+            {new Date().getFullYear()} Table Rounds Dinner Club
+          </p>
+          <nav
+            className="smallcaps"
+            style={{
+              fontSize: 13,
+              opacity: .8,
+              marginTop: 4,
+              display: "flex",
+              gap: 12,
+              alignItems: "center",
+              flexWrap: "wrap",
+            }}
+          >
+            <Link href="/menus" style={{ color: "inherit" }}>
+              All Menus
+            </Link>
+            <span aria-hidden>•</span>
+            <Link href="/recipes" style={{ color: "inherit" }}>
+              Recipe Repository
+            </Link>
+          </nav>
+        </div>
+      </div>
     </footer>
   );
 }
