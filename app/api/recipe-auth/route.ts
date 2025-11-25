@@ -13,8 +13,9 @@ export const dynamic = "force-dynamic";
 export async function GET() {
   const token = process.env.RECIPE_TOKEN;
   if (!token) return NextResponse.json({ authorized: false });
-  const headerToken = headers().get("x-recipe-token") || "";
-  const cookieStore = cookies();
+  const headerStore = await headers();
+  const headerToken = headerStore.get("x-recipe-token") || "";
+  const cookieStore = await cookies();
   const cookie = cookieStore.get(COOKIE_NAME)?.value;
   const authorized = cookie === hash(token) || headerToken === token || headerToken === hash(token);
   return NextResponse.json({ authorized });
@@ -31,7 +32,8 @@ export async function POST(request: Request) {
   } catch {
     // ignore parse errors; we also check headers
   }
-  const provided = String(body?.password || headers().get("x-recipe-token") || "").trim();
+  const headerStore = await headers();
+  const provided = String(body?.password || headerStore.get("x-recipe-token") || "").trim();
   if (!provided) {
     return NextResponse.json({ authorized: false, error: "Enter a password." }, { status: 400 });
   }
