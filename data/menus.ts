@@ -178,6 +178,9 @@ export const menus: Menu[] = [
             name: "French 75",
             recipeSlug: "french-75",
             blurb: "Gin, lemon, simple syrup, and Champagne."
+          },
+          {
+            name: "Red Wine, Japanese Yuzu Sake, and Imported Beer",
           }
         ]
       },
@@ -220,6 +223,9 @@ export const menus: Menu[] = [
           {
             name: "Biscuits",
             blurb: "Warm, flaky biscuits for the table."
+          },
+          {
+            name: "Tossed Salad",
           }
         ]
       },
