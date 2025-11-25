@@ -3,6 +3,7 @@ export type Recipe = {
   title: string;
   course: string; // Aperitivo, Antipasti, Primo, Secondo, Dolce
   type: string;   // pasta, salad, meat, dessert, drink, etc.
+  requiresToken?: boolean; // mark true to require RECIPE_TOKEN before showing details
   blurb?: string;
   ingredients: string[];
   steps: string[];
@@ -34,6 +35,7 @@ export const recipes: Recipe[] = [
     course: "Aperitivo",
     type: "drink",
     blurb: "Aperol, prosecco, splash of soda",
+    requiresToken: true,
     ingredients: [
       "3 oz prosecco, chilled",
       "2 oz Aperol",
@@ -45,119 +47,6 @@ export const recipes: Recipe[] = [
       "Fill a large wine glass with ice.",
       "Add Aperol, then prosecco; top with a splash of soda.",
       "Garnish with an orange slice.",
-    ],
-  },
-  {
-    slug: "ricotta-honey-crostini",
-    title: "Crostini Ricotta e Miele",
-    course: "Antipasti",
-    type: "crostini",
-    blurb: "Toasted baguette with whipped ricotta, honey, and thyme",
-    ingredients: [
-      "1 baguette, sliced 1/2-inch on a bias",
-      "1 1/2 cups whole-milk ricotta",
-      "2-3 tbsp honey, plus more to finish",
-      "2 tbsp extra-virgin olive oil",
-      "Leaves from 3-4 sprigs fresh thyme",
-      "Kosher salt",
-      "Freshly ground black pepper",
-    ],
-    steps: [
-      "Heat oven to 400 F. Brush baguette slices lightly with olive oil and toast until golden at edges.",
-      "In a bowl, whisk ricotta with a pinch of salt and a drizzle of olive oil until smooth and creamy.",
-      "Spread ricotta on warm crostini; drizzle with honey and sprinkle with thyme and black pepper. Serve immediately.",
-    ],
-  },
-  {
-    slug: "tagliatelle-ai-porcini",
-    title: "Tagliatelle ai Funghi Porcini",
-    course: "Primo",
-    type: "pasta",
-    blurb: "Fresh mushrooms in a glossy butter sauce",
-    ingredients: [
-      "12 oz tagliatelle (fresh or dried)",
-      "12 oz mixed porcini or cremini mushrooms, sliced",
-      "2 tbsp olive oil",
-      "3 tbsp unsalted butter",
-      "2 cloves garlic, thinly sliced",
-      "1/4 cup chopped parsley",
-      "Salt and black pepper",
-      "Parmigiano-Reggiano, finely grated",
-    ],
-    steps: [
-      "Bring a large pot of salted water to a boil.",
-      "Sauté mushrooms in olive oil over medium-high heat with a pinch of salt until browned and their liquid evaporates.",
-      "Add butter and garlic; cook 1-2 minutes until fragrant, then lower heat.",
-      "Cook pasta until al dente; transfer to pan with a splash of pasta water and toss to gloss.",
-      "Off heat, stir in parsley and black pepper. Serve with grated parmigiano.",
-    ],
-  },
-  {
-    slug: "pollo-limone-capperi",
-    title: "Pollo al Limone e Capperi",
-    course: "Secondo",
-    type: "poultry",
-    blurb: "Skillet chicken cutlets in lemon-caper pan sauce",
-    ingredients: [
-      "1 1/2 lb chicken cutlets (or thinly sliced breasts)",
-      "Kosher salt and black pepper",
-      "2 tbsp flour (optional, for light dredge)",
-      "2 tbsp olive oil",
-      "1/2 cup dry white wine",
-      "1/2 cup low-sodium chicken stock",
-      "1 large lemon (zest and 3 tbsp juice)",
-      "2 tbsp capers, rinsed",
-      "2 tbsp cold unsalted butter",
-      "2 tbsp chopped parsley",
-    ],
-    steps: [
-      "Season chicken with salt and pepper; lightly dredge in flour if using.",
-      "Sear in olive oil over medium-high heat 2-3 minutes per side until just cooked; transfer to a warm plate.",
-      "Deglaze pan with wine; reduce by half. Add stock, lemon juice, zest, and capers; simmer 2 minutes.",
-      "Off heat, whisk in cold butter to emulsify. Return chicken to coat, sprinkle with parsley, and serve.",
-    ],
-  },
-  {
-    slug: "branzino-al-forno",
-    title: "Branzino al Forno",
-    course: "Secondo",
-    type: "fish",
-    blurb: "Roasted branzino with lemon and herbs",
-    ingredients: [
-      "2 whole branzini (about 1 lb each), cleaned",
-      "2 tbsp olive oil",
-      "Kosher salt and black pepper",
-      "2 cloves garlic, smashed",
-      "1 lemon, thinly sliced",
-      "Fresh parsley and thyme",
-    ],
-    steps: [
-      "Heat oven to 425 F. Pat fish dry and score each side 2-3 times.",
-      "Season cavity and exterior with salt and pepper; stuff with garlic, a few lemon slices, and herbs.",
-      "Rub with olive oil, place on a lined sheet, and roast 14-18 minutes until flesh flakes easily.",
-      "Finish with a squeeze of lemon and extra olive oil to serve.",
-    ],
-  },
-  {
-    slug: "vanilla-panna-cotta",
-    title: "Panna Cotta alla Vaniglia",
-    course: "Dolce",
-    type: "dessert",
-    blurb: "Silky vanilla panna cotta",
-    ingredients: [
-      "2 cups heavy cream",
-      "1 cup whole milk",
-      "1/2 cup sugar",
-      "1 1/2 tsp powdered gelatin",
-      "2 tbsp cold water",
-      "1 tsp vanilla extract (or seeds from 1/2 vanilla bean)",
-      "Pinch of salt",
-    ],
-    steps: [
-      "Bloom gelatin in cold water 5 minutes.",
-      "Heat cream, milk, sugar, and salt over medium until steaming; do not boil. Remove from heat.",
-      "Stir in bloomed gelatin until dissolved, then add vanilla.",
-      "Pour into 6 small cups; chill until set, at least 4 hours. Unmold or serve in cups.",
     ],
   },
   {

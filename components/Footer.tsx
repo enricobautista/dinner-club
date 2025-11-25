@@ -30,14 +30,16 @@ export default function Footer() {
           flexWrap: "wrap",
         }}
       >
-        <Image
-          src="/logo.png"
-          alt="Table Rounds Dinner Club logo"
-          width={64}
-          height={64}
-          style={{ height: 40, width: "auto" }}
-          priority={false}
-        />
+        <Link href="/ledda" style={{ display: "inline-flex" }} aria-label="Family recipe vault">
+          <Image
+            src="/logo.png"
+            alt="Table Rounds Dinner Club logo"
+            width={64}
+            height={64}
+            style={{ height: 40, width: "auto" }}
+            priority={false}
+          />
+        </Link>
         <div style={{ textAlign: "left" }}>
           <p className="smallcaps" style={{ fontSize: 14, opacity: .85, margin: 0 }}>
             {new Date().getFullYear()} Table Rounds Dinner Club
