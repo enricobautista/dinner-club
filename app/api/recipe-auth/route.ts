@@ -13,7 +13,8 @@ export const dynamic = "force-dynamic";
 export async function GET() {
   const token = process.env.RECIPE_TOKEN;
   if (!token) return NextResponse.json({ authorized: false });
-  const cookie = cookies().get(COOKIE_NAME)?.value;
+  const cookieStore = await cookies();
+  const cookie = cookieStore.get(COOKIE_NAME)?.value;
   const authorized = cookie === hash(token);
   return NextResponse.json({ authorized });
 }
