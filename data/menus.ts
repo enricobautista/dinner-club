@@ -157,6 +157,9 @@ export const menus: Menu[] = [
   dateISO: "2025-11-27",
   time: "12:00 PM",
   hosts: ["Bautista Family"],
+  guestLimit: 25,
+  guests: [],
+  cost: 0,
   courses: [
     {
         heading: "Aperitivi",

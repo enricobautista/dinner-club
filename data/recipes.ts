@@ -519,7 +519,7 @@ export const recipes: Recipe[] = [
     blurb: "A crisp highball of gin, tonic, and lime.",
     ingredients: [
       "2 oz gin",
-      "4–6 oz tonic water, chilled",
+      "4-6 oz tonic water, chilled",
       "Ice",
       "Lime wedge, for garnish"
     ],
