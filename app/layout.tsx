@@ -7,6 +7,9 @@ import { EB_Garamond, Inter } from "next/font/google";
 export const metadata: Metadata = {
   title: "Table Rounds Dinner Club",
   description: "Simple, classy dinner menus and recipes",
+  icons: {
+    icon: "/logo.png",
+  },
 };
 
 const garamond = EB_Garamond({ subsets: ["latin"], weight: ["400", "600"] });
