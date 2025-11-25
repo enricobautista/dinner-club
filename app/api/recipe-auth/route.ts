@@ -1,4 +1,5 @@
 import crypto from "crypto";
+import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
 const COOKIE_NAME = "recipe-auth";
@@ -12,7 +13,7 @@ export const dynamic = "force-dynamic";
 export async function GET() {
   const token = process.env.RECIPE_TOKEN;
   if (!token) return NextResponse.json({ authorized: false });
-  const cookie = (await import("next/headers")).cookies().get(COOKIE_NAME)?.value;
+  const cookie = cookies().get(COOKIE_NAME)?.value;
   const authorized = cookie === hash(token);
   return NextResponse.json({ authorized });
 }
