@@ -1,5 +1,5 @@
 import crypto from "crypto";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { NextResponse } from "next/server";
 
 const COOKIE_NAME = "recipe-auth";
@@ -13,9 +13,10 @@ export const dynamic = "force-dynamic";
 export async function GET() {
   const token = process.env.RECIPE_TOKEN;
   if (!token) return NextResponse.json({ authorized: false });
-  const cookieStore = await cookies();
+  const headerToken = headers().get("x-recipe-token") || "";
+  const cookieStore = cookies();
   const cookie = cookieStore.get(COOKIE_NAME)?.value;
-  const authorized = cookie === hash(token);
+  const authorized = cookie === hash(token) || headerToken === token || headerToken === hash(token);
   return NextResponse.json({ authorized });
 }
 
@@ -28,9 +29,9 @@ export async function POST(request: Request) {
   try {
     body = await request.json();
   } catch {
-    return NextResponse.json({ authorized: false, error: "Invalid request." }, { status: 400 });
+    // ignore parse errors; we also check headers
   }
-  const provided = String(body?.password || "").trim();
+  const provided = String(body?.password || headers().get("x-recipe-token") || "").trim();
   if (!provided) {
     return NextResponse.json({ authorized: false, error: "Enter a password." }, { status: 400 });
   }
