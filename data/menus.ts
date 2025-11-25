@@ -151,7 +151,96 @@ export const menus: Menu[] = [
       },
     ]
   },
-  
+  {
+  slug: "thanksgiving-2025",
+  location: "19509 South Coquina Way, Weston, FL",
+  dateISO: "2025-11-27",
+  time: "12:00 PM",
+  hosts: ["Bautista Family"],
+  courses: [
+    {
+        heading: "Aperitivi",
+        items: [
+          {
+            name: "Gin and Tonic",
+            recipeSlug: "gin-and-tonic",
+            blurb: "Classic gin highball with tonic and lime."
+          },
+          {
+            name: "Old Fashioned",
+            recipeSlug: "old-fashioned",
+            blurb: "Whiskey, sugar, bitters, and orange peel."
+          },
+          {
+            name: "French 75",
+            recipeSlug: "french-75",
+            blurb: "Gin, lemon, simple syrup, and Champagne."
+          }
+        ]
+      },
+      {
+        heading: "Secondi",
+        items: [
+          {
+            name: "Smoked Turkey",
+            blurb: "Slow-smoked turkey served with pan gravy and tart cranberry sauce."
+          },
+          {
+            name: "Small Ham",
+            blurb: "Baked ham with a simple savory-sweet glaze."
+          },
+          {
+            name: "Pot Roast",
+            blurb: "Braised beef roast with vegetables."
+          },
+          {
+            name: "Eggplant Parmigiana",
+            blurb: "Layers of eggplant, tomato sauce, and melted cheese."
+          },
+          {
+            name: "Samgyeopsal",
+            recipeSlug: "samgyeopsal",
+            blurb: "Grilled Korean pork belly with lettuce wraps and condiments."
+          }
+        ]
+      },
+      {
+        heading: "Contorni",
+        items: [
+          {
+            name: "Home Made Mac & Cheese",
+          },
+          {
+            name: "Stuffing",
+            blurb: "Herbed bread stuffing."
+          },
+          {
+            name: "Biscuits",
+            blurb: "Warm, flaky biscuits for the table."
+          }
+        ]
+      },
+      {
+        heading: "Dolci",
+        items: [
+          {
+            name: "Seadas",
+            blurb: "Sardinian cheese-filled pastries with sugar."
+          },
+          {
+            name: "Dessert from Ricardo",
+            blurb: "Chef Ricardo's special dessert selection."
+          },
+          {
+            name: "Apple Pie and Vanilla Ice Cream",
+          },
+          {
+            name: "Fruit Salad",
+          }
+        ]
+      }
+    ]
+  },
 ];
 
 function normalizeSlug(input: string) {

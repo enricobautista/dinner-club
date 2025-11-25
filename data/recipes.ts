@@ -10,93 +10,6 @@ export type Recipe = {
 
 export const recipes: Recipe[] = [
   {
-    slug: "shaved-fennel-parm",
-    title: "Insalata di Finocchi e Parmigiano",
-    course: "Antipasti",
-    type: "salad",
-    blurb: "Shaved fennel with lemon, olive oil, and parmigiano",
-    ingredients: [
-      "2 medium fennel bulbs, trimmed and cored",
-      "1 large lemon (zest and juice)",
-      "1/4 cup extra-virgin olive oil",
-      "2 oz Parmigiano-Reggiano, shaved",
-      "Sea salt",
-      "Freshly ground black pepper",
-      "Small handful fennel fronds (optional)",
-    ],
-    steps: [
-      "Very thinly slice fennel using a mandoline or knife; place in a bowl of cold water 5 minutes to crisp, then drain and pat dry.",
-      "Whisk lemon juice, a bit of zest, and olive oil with a pinch of salt.",
-      "Toss fennel with dressing; season with salt and pepper to taste.",
-      "Plate and finish with shaved parmigiano and fennel fronds.",
-    ],
-  },
-  {
-    slug: "brown-butter-sage-gnocchi",
-    title: "Gnocchi al Burro e Salvia",
-    course: "Primo",
-    type: "pasta",
-    blurb: "Potato gnocchi with brown butter and sage",
-    ingredients: [
-      "1 lb potato gnocchi (fresh or packaged)",
-      "6 tbsp unsalted butter",
-      "12 fresh sage leaves",
-      "Kosher salt",
-      "Freshly ground black pepper",
-      "Parmigiano-Reggiano, finely grated, for serving",
-    ],
-    steps: [
-      "Bring a large pot of salted water to a boil.",
-      "In a wide skillet over medium heat, melt butter; add sage and cook until butter turns nutty brown and sage crisps (3-5 minutes). Remove from heat.",
-      "Cook gnocchi until they float; transfer directly to the brown butter with a splash of pasta water.",
-      "Toss over medium heat to glaze; season with salt and pepper. Serve with grated parmigiano.",
-    ],
-  },
-  {
-    slug: "porcini-hanger-steak",
-    title: "Bistecca al Porcini",
-    course: "Secondo",
-    type: "meat",
-    blurb: "Hanger steak with porcini crust",
-    ingredients: [
-      "1.5 lb hanger steak, trimmed",
-      "1/2 oz dried porcini, finely ground to powder",
-      "1 tbsp olive oil",
-      "Kosher salt",
-      "Freshly ground black pepper",
-      "Butter and thyme (optional, for basting)",
-    ],
-    steps: [
-      "Pat steak dry; rub with olive oil and coat evenly with porcini powder. Season generously with salt and pepper.",
-      "Sear in a hot cast-iron skillet 2-3 minutes per side; lower heat and baste with butter and thyme if desired until medium-rare.",
-      "Rest 8-10 minutes; slice against the grain and serve.",
-    ],
-  },
-  {
-    slug: "olive-oil-cake",
-    title: "Torta all'Olio d'Oliva",
-    course: "Dolce",
-    type: "dessert",
-    blurb: "Moist olive oil cake",
-    ingredients: [
-      "1 1/2 cups all-purpose flour",
-      "1 cup sugar",
-      "1/2 tsp baking powder",
-      "1/2 tsp baking soda",
-      "1/2 tsp kosher salt",
-      "3 large eggs",
-      "3/4 cup extra-virgin olive oil",
-      "3/4 cup whole milk or buttermilk",
-      "Zest of 1 orange or lemon",
-    ],
-    steps: [
-      "Heat oven to 350°F/175°C. Grease and line a 9-inch pan.",
-      "Whisk dry ingredients; in another bowl whisk eggs, oil, milk, and zest.",
-      "Combine wet and dry just until smooth. Pour into pan and bake 30-40 minutes until a tester comes out clean.",
-      "Cool 10 minutes; unmold and cool completely.",
-    ],
-  },
-  {
     slug: "negroni-sbagliato",
     title: "Negroni Sbagliato",
     course: "Aperitivo",
@@ -596,6 +509,66 @@ export const recipes: Recipe[] = [
       "Add ice and shake vigorously until well chilled.",
       "Strain into a chilled coupe glass.",
       "Garnish with freshly grated pistachio."
+    ]
+  },
+  {
+    slug: "gin-and-tonic",
+    title: "Gin and Tonic",
+    course: "Aperitivo",
+    type: "drink",
+    blurb: "A crisp highball of gin, tonic, and lime.",
+    ingredients: [
+      "2 oz gin",
+      "4–6 oz tonic water, chilled",
+      "Ice",
+      "Lime wedge, for garnish"
+    ],
+    steps: [
+      "Fill a highball glass with ice.",
+      "Pour in the gin, then top with chilled tonic water.",
+      "Give a gentle stir to combine.",
+      "Garnish with a lime wedge and serve."
+    ]
+  },
+  {
+    slug: "old-fashioned",
+    title: "Old Fashioned",
+    course: "Aperitivo",
+    type: "drink",
+    blurb: "A classic with whiskey, sugar, and bitters.",
+    ingredients: [
+      "2 oz bourbon or rye whiskey",
+      "1 sugar cube with a few drops of water",
+      "2 dashes Angostura bitters",
+      "Ice (preferably one large cube)",
+      "Orange peel, for garnish"
+    ],
+    steps: [
+      "Add sugar cube, a few drops of water, and bitters to a rocks glass.",
+      "Add the whiskey and stir to combine.",
+      "Add a large ice cube and stir 15-20 seconds to chill and dilute slightly.",
+      "Express an orange peel over the glass, rub the rim, and drop it in as garnish."
+    ]
+  },
+  {
+    slug: "french-75",
+    title: "French 75",
+    course: "Aperitivo",
+    type: "cocktail",
+    blurb: "Gin, lemon, and simple syrup topped with chilled Champagne.",
+    ingredients: [
+      "1 oz gin",
+      "1/2 oz fresh lemon juice",
+      "1/2 oz simple syrup",
+      "2-3 oz dry Champagne or other sparkling wine, chilled",
+      "Ice",
+      "Lemon twist, for garnish"
+    ],
+    steps: [
+      "Fill a shaker with ice and add gin, lemon juice, and simple syrup.",
+      "Shake until well chilled, then strain into a flute or coupe.",
+      "Top with chilled Champagne or sparkling wine.",
+      "Garnish with a lemon twist."
     ]
   },
 ];
