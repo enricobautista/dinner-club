@@ -327,7 +327,8 @@ export const recipes: Recipe[] = [
       "Optional: sliced red onion or cherry tomatoes for roasting",
       "",
       "Homemade Za'atar (optional)",
-      "2 tbsp dried thyme or oregano",
+      "1 tbsp dried thyme",
+      "1 tbsp dried oregano",
       "1 tbsp toasted sesame seeds",
       "1 tbsp ground sumac",
       "1/2 tsp kosher salt"
@@ -383,12 +384,13 @@ export const recipes: Recipe[] = [
     title: "ABG (Aromatic Butter Gin)",
     course: "Aperitivo",
     type: "drink",
-    blurb: "Brown-butter-washed gin shaken with pistachio, lemon, and egg white for a rich, aromatic cocktail.",
+    blurb: "Brown-butter-washed gin shaken with pistachio, lemon, and egg white for a rich cocktail.",
     ingredients: [
       "2 oz brown-butter-washed gin",
-      "0.75 oz pistachio syrup",
-      "1 oz fresh lemon juice",
-      "0.75 oz egg white",
+      "1 oz pistachio cream liquer",
+      "0.5 oz fresh lemon juice",
+      "0.5 oz simple syrup",
+      "1.5 oz egg white",
       "Small pinch of salt",
       "Ice",
       "Grated pistachio, for garnish"
@@ -443,7 +445,7 @@ export const recipes: Recipe[] = [
     slug: "french-75",
     title: "French 75",
     course: "Aperitivo",
-    type: "cocktail",
+    type: "drink",
     blurb: "Gin, lemon, and simple syrup topped with chilled Champagne.",
     ingredients: [
       "1 oz gin",
