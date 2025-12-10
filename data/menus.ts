@@ -250,6 +250,78 @@ export const menus: Menu[] = [
       }
     ]
   },
+  {
+    slug: "winter-send-off-2025",
+    location: "2217 38th St NW, Washington, DC",
+    dateISO: "2025-12-13",
+    time: "6:00 PM",
+    hosts: ["Enrico Bautista", "Yumin Gao", "Aarshi Kibria", "Madhu Saravanan"],
+    guestLimit: 20,
+    guests: [],
+    cost: 15,
+    courses: [
+      {
+        heading: "Aperitivi",
+        items: [
+          {
+            name: "Propo-falala",
+            recipeSlug: "propo-falala",
+            blurb: "Crème de menthe, white rum, pandan, and coconut cream."
+          }
+        ]
+      },
+      {
+        heading: "Antipasti",
+        items: [
+          {
+            name: "Gochujang Tomato Soup with Pear Chutney Grilled Cheese",
+          }
+        ]
+      },
+      {
+        heading: "Primi",
+        items: [
+          {
+            name: "Braised Beef Udon",
+            recipeSlug: "braised-beef-udon",
+            blurb: "Soy-braised beef shank and aromatics served over udon noodles."
+          }
+        ]
+      },
+      {
+        heading: "Contorni",
+        items: [
+          {
+            name: "Typhoon Shelter Lotus Root",
+            blurb: "Crisp lotus root inspired by typhoon shelter flavors."
+          }
+        ]
+      },
+      {
+        heading: "Secondi",
+        items: [
+          {
+            name: "Typhoon Shelter Shrimp",
+            blurb: "Garlic- and chili-loaded shrimp in the typhoon shelter style."
+          },
+          {
+            name: "Lemongrass Pork",
+            recipeSlug: "lemongrass-pork",
+            blurb: "Vietnamese grilled pork marinated with lemongrass, garlic, and fish sauce."
+          }
+        ]
+      },
+      {
+        heading: "Dolce",
+        items: [
+          {
+            name: "Strawberry Matcha Chiffon Cake",
+            blurb: "Light dessert cake."
+          }
+        ]
+      }
+    ]
+  },
 ];
 
 function normalizeSlug(input: string) {

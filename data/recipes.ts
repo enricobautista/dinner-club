@@ -462,6 +462,106 @@ export const recipes: Recipe[] = [
       "Garnish with a lemon twist."
     ]
   },
+  {
+    slug: "propo-falala",
+    title: "Propo-falala",
+    course: "Aperitivo",
+    type: "cocktail",
+    blurb: "A holiday-leaning cocktail with crème de menthe, white rum, pandan, and coconut cream.",
+    ingredients: [
+      "1.5 oz white rum",
+      "0.5 oz crème de menthe (white)",
+      "0.5 oz pandan syrup (or simple syrup with a few drops of pandan extract)",
+      "1 oz coconut cream",
+      "Small pinch of salt",
+      "Ice",
+      "Shaved coconut or mint, for garnish (optional)"
+    ],
+    steps: [
+      "Add the white rum, crème de menthe, pandan syrup, coconut cream, and a small pinch of salt to a shaker without ice.",
+      "Shake briefly to combine, then add ice and shake again until well chilled and slightly frothy.",
+      "Double strain into a chilled coupe or Nick & Nora glass.",
+      "Garnish with shaved coconut or a small mint sprig, if desired."
+    ]
+  },
+  {
+    slug: "braised-beef-udon",
+    title: "Braised Beef Udon",
+    course: "Primo",
+    type: "noodles",
+    blurb: "Rich, aromatic braised beef shank in a soy-based broth served over udon.",
+    ingredients: [
+      "1.5-2 lbs beef shank or tendon, cut into large chunks",
+      "6 cups beef broth",
+      "",
+      "// Spice oil",
+      "1 tsp Sichuan peppercorns",
+      "1 tsp fennel seeds",
+      "2 bay leaves",
+      "1 star anise pod",
+      "1 small cinnamon stick",
+      "1 tsao-ko (black cardamom) pod",
+      "2 white cardamom pods",
+      "Pinch ground nutmeg",
+      "3 tbsp neutral oil",
+      "",
+      "// Aromatics and seasoning",
+      "1 onion, roughly chopped",
+      "2 carrots, cut into chunks",
+      "4-5 slices fresh ginger",
+      "1 small chili pepper, sliced",
+      "Cilantro stems (small handful)",
+      "350 ml water",
+      "175 ml soy sauce",
+      "1-2 tbsp fish sauce",
+      "1-2 tbsp sugar",
+      "2 scallions, cut into large pieces",
+      "Salt, to taste",
+      "White pepper, to taste",
+      "",
+      "// To serve",
+      "4 portions udon noodles",
+      "Cilantro leaves, for garnish",
+      "Extra sliced scallions, for garnish"
+    ],
+    steps: [
+      "In a small bowl, cover the Sichuan peppercorns, fennel seeds, bay leaves, star anise, cinnamon stick, tsao-ko, white cardamom, and nutmeg with hot water and let steep for a few minutes. Drain well.",
+      "Heat the neutral oil in a small pan over medium heat. Add the drained spices and fry gently until fragrant, then strain the oil through cheesecloth, reserving the spiced oil and discarding the solids.",
+      "In a large pot, combine the beef shank or tendon with the beef broth. Bring to a boil, then reduce to a gentle simmer and skim any foam.",
+      "Add the onion, carrots, ginger, chili, and cilantro stems to the pot. Pour in 350 ml water, 175 ml soy sauce, fish sauce, and sugar. Stir to combine.",
+      "In a separate pan, heat a few tablespoons of the reserved spice oil. Add the beef pieces (you can scoop them from the broth) and briefly stir-fry until lightly browned, then return them to the broth.",
+      "Add the scallion pieces to the pot. Taste and adjust seasoning with salt, additional soy sauce, sugar, and white pepper as needed.",
+      "Simmer until the beef is very tender (at least 1.5-2 hours). Remove the scallion pieces and any large ginger slices if desired, then add the meat back if you removed it.",
+      "Cook the udon noodles separately according to package directions. Drain well.",
+      "To serve, divide udon into bowls, ladle the braised beef and broth over the noodles, and garnish with cilantro leaves and sliced scallions."
+    ]
+  },
+  {
+    slug: "lemongrass-pork",
+    title: "Lemongrass Pork",
+    course: "Secondi",
+    type: "meat",
+    blurb: "Grilled pork shoulder steaks marinated with lemongrass, garlic, lime, and fish sauce.",
+    ingredients: [
+      "2 lbs pork shoulder steaks",
+      "6 cloves garlic, minced",
+      "Zest and juice of 1 lime",
+      "4 tbsp fish sauce",
+      "4 tbsp brown sugar",
+      "1 tbsp soy sauce",
+      "3 tbsp neutral oil",
+      "5 tbsp grated lemongrass (tender inner stalks)",
+      "1/2 tsp baking soda (optional, for tenderness)"
+    ],
+    steps: [
+      "In a bowl, combine the garlic, lime zest and juice, fish sauce, brown sugar, soy sauce, neutral oil, grated lemongrass, and baking soda if using.",
+      "Mix until the sugar is mostly dissolved and the marinade is even.",
+      "Add the pork shoulder steaks and coat thoroughly on all sides. Marinate at least 1 hour and up to overnight in the refrigerator.",
+      "Preheat a grill or grill pan over medium-high heat. Lightly oil the grates if needed.",
+      "Grill the pork steaks, turning once, until nicely charred on the outside and cooked through, 4-6 minutes per side depending on thickness.",
+      "Rest a few minutes, then slice and serve."
+    ]
+  },
 ];
 
 export function getRecipe(slug?: string) {
