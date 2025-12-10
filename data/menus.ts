@@ -22,6 +22,7 @@ export type Menu = {
   guestLimit?: number; // optional per-menu override (default 12)
   guests?: Guest[];    // optional archived/seed guest list
   cost?: number;       // optional prezzo fisso in USD
+  venmoTag?: string;   // optional Venmo handle for payments
 };
 
 export const menus: Menu[] = [
@@ -259,6 +260,7 @@ export const menus: Menu[] = [
     guestLimit: 20,
     guests: [],
     cost: 15,
+    venmoTag: "@Yumin-Gao",
     courses: [
       {
         heading: "Aperitivi",
