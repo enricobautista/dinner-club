@@ -276,7 +276,8 @@ export const menus: Menu[] = [
         heading: "Antipasti",
         items: [
           {
-            name: "Gochujang Tomato Soup with Pear Chutney Grilled Cheese",
+            name: "Gochujang Tomato Soup and Grilled Cheese",
+            blurb: "Caramelized gochujang with slowly simmered vine tomatoes served with gruyere and pear chutney on housemade sourdough."
           }
         ]
       },
