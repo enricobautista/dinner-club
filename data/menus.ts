@@ -325,13 +325,94 @@ export const menus: Menu[] = [
       }
     ]
   },
+  {
+    slug: "tahoe-2025",
+    location: "378 Winding Way, Incline Village, NV",
+    dateISO: "2025-12-19",
+    time: "5:00 PM",
+    hosts: ["Francis Arellano", "Enrico Bautista", "Leo Li", "Yumin Gao", "Rohan Rani", "Dylan Ratnarajah"],
+    courses: [
+      {
+        heading: "Aperitivi",
+        items: [
+          {
+            name: "Pineapple Daiquiri",
+            recipeSlug: "pineapple-daiquiri",
+            blurb: "White rum, pineapple juice, lime, and simple syrup."
+          },
+          {
+            name: "Pineapple Whiskey Sour",
+            recipeSlug: "pineapple-whiskey-sour",
+            blurb: "Whiskey sour with pineapple and citrus."
+          }
+        ]
+      },
+      {
+        heading: "Antipasto",
+        items: [
+          {
+            name: "Steamed Egg",
+            recipeSlug: "steamed-egg",
+            blurb: "Silky savory steamed egg custard with soy and sesame oil."
+          }
+        ]
+      },
+      {
+        heading: "Primi",
+        items: [
+          {
+            name: "Moules Marinières",
+            recipeSlug: "moules-marinieres",
+            blurb: "Steamed mussels in white wine with garlic, shallot, and herbs."
+          },
+          {
+            name: "Zuppa di Pesce",
+            recipeSlug: "zuppa-di-pesce",
+            blurb: "Branzino, mussels, and shrimp in a tomato-wine fish broth."
+          }
+        ]
+      },
+      {
+        heading: "Contorno",
+        items: [
+          {
+            name: "Roasted Zucchini and Asparagus",
+            blurb: "Simple roasted seasonal vegetables."
+          }
+        ]
+      },
+      {
+        heading: "Secondi",
+        items: [
+          {
+            name: "Steak with Chimichurri",
+            recipeSlug: "steak-with-chimichurri",
+            blurb: "Grilled steak with fresh herb chimichurri."
+          },
+          {
+            name: "Baked Salmon",
+            blurb: "Oven-baked salmon."
+          }
+        ]
+      },
+      {
+        heading: "Dolce",
+        items: [
+          {
+            name: "Pecan Pie with Ice Cream",
+            blurb: "Classic pecan pie served with vanilla ice cream."
+          }
+        ]
+      }
+    ]
+  },
 ];
 
 function normalizeSlug(input: string) {
   return decodeURIComponent(String(input))
     .normalize("NFKC")
     .replace(/[\u200B-\u200D\uFEFF]/g, "") // strip zero-widths
-    .replace(/[–—−]/g, "-") // various dashes to hyphen
+    .replace(/[-—−]/g, "-") // various dashes to hyphen
     .replace(/^\/+|\/+$/g, "") // trim leading/trailing slashes
     .trim()
     .toLowerCase();

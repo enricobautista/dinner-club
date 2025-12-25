@@ -562,6 +562,159 @@ export const recipes: Recipe[] = [
       "Rest a few minutes, then slice and serve."
     ]
   },
+  {
+    slug: "pineapple-daiquiri",
+    title: "Pineapple Daiquiri",
+    course: "Aperitivo",
+    type: "drink",
+    blurb: "A tropical daiquiri with fresh pineapple juice and lime.",
+    ingredients: [
+      "2 oz white rum",
+      "1.5 oz pineapple juice",
+      "0.75 oz fresh lime juice",
+      "0.75 oz simple syrup",
+      "Ice"
+    ],
+    steps: [
+      "Add all ingredients to a shaker with ice.",
+      "Shake vigorously until well chilled.",
+      "Strain into a chilled coupe or Nick & Nora glass.",
+      "Serve immediately."
+    ]
+  },
+  {
+    slug: "pineapple-whiskey-sour",
+    title: "Pineapple Whiskey Sour",
+    course: "Aperitivo",
+    type: "cocktail",
+    blurb: "A whiskey sour brightened with pineapple and citrus.",
+    ingredients: [
+      "2 oz whiskey",
+      "1 oz pineapple juice",
+      "1 oz simple syrup",
+      "0.5 oz fresh lemon juice",
+      "0.5 oz lime concentrate",
+      "1 oz egg white (optional)",
+      "Ice"
+    ],
+    steps: [
+      "Add all ingredients to a shaker.",
+      "Shake with ice until well chilled and lightly frothy.",
+      "Strain into a rocks glass over fresh ice or into a coupe.",
+      "Serve immediately."
+    ]
+  },
+  {
+    slug: "moules-marinieres",
+    title: "Moules Marinières",
+    course: "Primo",
+    type: "seafood",
+    blurb: "Steamed mussels in white wine with garlic, shallot, and herbs.",
+    ingredients: [
+      "1 lb live mussels, scrubbed and debearded",
+      "1 cup dry white wine",
+      "4-5 garlic cloves, chopped",
+      "1 small shallot, thinly sliced",
+      "1-2 tbsp butter",
+      "1-2 tbsp olive oil",
+      "Red chili flakes, to taste",
+      "Fresh parsley, chopped",
+      "Lemon wedges",
+      "Salt",
+      "Black pepper"
+    ],
+    steps: [
+      "Prepare the mussels by removing beards and scrubbing clean. Discard any cracked or open mussels that do not close.",
+      "Melt the butter in a pot over moderate heat, without browning.",
+      "Add garlic and shallot and cook briefly until fragrant.",
+      "Pour in white wine and bring to a boil.",
+      "Grate in lemon zest, add chili flakes, and grind in black pepper.",
+      "Add olive oil, then add the mussels. Stir, cover, and steam until opened, about 4-5 minutes.",
+      "Remove mussels with a slotted spoon; discard any unopened.",
+      "Taste the broth, adjust with salt or lemon juice, stir in herbs, and pour over mussels.",
+      "Serve with lemon wedges and crusty bread."
+    ]
+  },
+  {
+    slug: "zuppa-di-pesce",
+    title: "Zuppa di Pesce",
+    course: "Primo",
+    type: "seafood-stew",
+    blurb: "Italian fish stew with branzino, mussels, shrimp, tomato, and white wine.",
+    ingredients: [
+      "2 whole branzino, filleted (heads and bones reserved)",
+      "2 lb mussels, scrubbed and debearded",
+      "2 lb shrimp, peeled and deveined (shells reserved)",
+      "",
+      "// Fish Broth",
+      "Branzino heads and bones",
+      "Shrimp shells",
+      "Parsley stems",
+      "Cilantro stems",
+      "1 small onion or shallot, chopped",
+      "2 garlic cloves, smashed",
+      "1 bay leaf",
+      "8 black peppercorns",
+      "2 tbsp olive oil",
+      "8 cups cold water",
+      "Pinch of salt",
+      "",
+      "// Soup Base",
+      "1/2 cup extra-virgin olive oil",
+      "2 medium onions or 3 shallots, sliced",
+      "6 garlic cloves, sliced",
+      "3 tbsp tomato paste",
+      "4 cups tomato sauce",
+      "1.5 cups dry white wine",
+      "1 bay leaf",
+      "Crushed red pepper flakes",
+      "5-6 cups fish broth",
+      "Salt and black pepper",
+      "Lemon wedges",
+      "Crusty bread"
+    ],
+    steps: [
+      "Make the fish broth by sautéing onion and garlic in olive oil, adding bones and shells, aromatics, and cold water.",
+      "Bring to a bare simmer and cook 20-25 minutes. Strain gently and keep hot.",
+      "In a wide pot, heat olive oil and sauté onions with salt until soft and sweet.",
+      "Add garlic and red pepper flakes, then tomato paste and cook until brick-red.",
+      "Add tomato sauce and bay leaf, then deglaze with white wine and reduce by half.",
+      "Add hot fish broth and simmer 15 minutes.",
+      "Add mussels and cover until opened, 3-4 minutes.",
+      "Add branzino and simmer gently 2-3 minutes.",
+      "Add shrimp and cook until opaque, 4-5 minutes.",
+      "Finish with lemon juice and olive oil. Serve immediately with bread."
+    ]
+  },
+  {
+    slug: "steak-with-chimichurri",
+    title: "Steak with Chimichurri",
+    course: "Secondi",
+    type: "meat",
+    blurb: "Grilled steak served with fresh herb chimichurri.",
+    ingredients: [
+      "Steak of choice, grilled",
+      "",
+      "// Chimichurri",
+      "1 bunch parsley",
+      "1/3 bunch cilantro",
+      "4-5 garlic cloves",
+      "1 part red wine vinegar",
+      "3 parts olive oil",
+      "Salt",
+      "Black pepper",
+      "Red pepper flakes"
+    ],
+    steps: [
+      "Pick the leaves from parsley and cilantro. Coarsely chop garlic.",
+      "Add herbs and garlic to a food processor with a splash of olive oil.",
+      "Pulse until coarsely chopped, not a paste.",
+      "Season with salt, black pepper, and red pepper flakes.",
+      "Add red wine vinegar and olive oil until herbs are just covered.",
+      "Process briefly to combine.",
+      "Serve over grilled steak."
+    ]
+  },
 ];
 
 export function getRecipe(slug?: string) {
