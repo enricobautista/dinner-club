@@ -330,7 +330,7 @@ export const menus: Menu[] = [
     location: "378 Winding Way, Incline Village, NV",
     dateISO: "2025-12-19",
     time: "5:00 PM",
-    hosts: ["Francis Arellano", "Enrico Bautista", "Leo Li", "Yumin Gao", "Rohan Rani", "Dylan Ratnarajah"],
+    hosts: ["Francis Arellano", "Enrico Bautista", "Leo Li", "Yumin Gao", "Abe Guo", "Sai Kathika", "Rohan Rani", "Dylan Ratnarajah"],
     courses: [
       {
         heading: "Aperitivi",
