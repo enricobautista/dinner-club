@@ -412,7 +412,7 @@ export const menus: Menu[] = [
     dateISO: "2026-01-27",
     time: "8:30 PM",
     hosts: ["Enrico Bautista"],
-    guestLimit: 0,
+    guestLimit: 1,
     guests: [],
     courses: [
       {
