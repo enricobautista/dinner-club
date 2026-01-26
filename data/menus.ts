@@ -408,11 +408,11 @@ export const menus: Menu[] = [
   },
   {
     slug: "winter-braise-provencal-dinner",
-    location: "Washington, DC",
+    location: "2755 Ordway St NW, Washington, DC",
     dateISO: "2026-01-27",
     time: "8:30 PM",
     hosts: ["Enrico Bautista"],
-    guestLimit: 2,
+    guestLimit: 0,
     guests: [],
     courses: [
       {
