@@ -715,6 +715,95 @@ export const recipes: Recipe[] = [
       "Serve over grilled steak."
     ]
   },
+  {
+    slug: "pasta-provencale",
+    title: "Pasta Provençale",
+    course: "Primo",
+    type: "pasta",
+    blurb: "Pasta tossed with tomatoes, olive oil, garlic, herbs, and olives in the Provençal style.",
+    ingredients: [
+      "1 lb pasta (rigatoni, fusilli, or spaghetti)",
+      "1/4 cup extra-virgin olive oil",
+      "4 cloves garlic, thinly sliced",
+      "1-2 shallots, finely chopped",
+      "1/2 tsp red chili flakes",
+      "1 lb ripe tomatoes, chopped (or good-quality canned tomatoes)",
+      "1/3 cup olives (Niçoise or Kalamata), pitted and sliced",
+      "2 tbsp capers, rinsed",
+      "Salt",
+      "Black pepper",
+      "Fresh basil or parsley, chopped"
+    ],
+    steps: [
+      "Bring a large pot of salted water to a boil and cook the pasta until al dente.",
+      "Meanwhile, heat olive oil over medium heat and gently cook the shallots and garlic until fragrant but not browned.",
+      "Add chili flakes and tomatoes; simmer until the sauce thickens slightly.",
+      "Stir in olives and capers and cook briefly to combine.",
+      "Drain the pasta, reserving a little cooking water.",
+      "Toss pasta with the sauce, adding a splash of pasta water if needed.",
+      "Season with salt and pepper and finish with fresh herbs before serving."
+    ]
+  },
+  {
+    slug: "garlic-lemon-broccolini",
+    title: "Garlic and Lemon Broccolini",
+    course: "Contorno",
+    type: "vegetable",
+    blurb: "Tender broccolini sautéed with garlic and finished with lemon.",
+    ingredients: [
+      "1.5 lb broccolini, trimmed",
+      "2 tbsp olive oil",
+      "3 cloves garlic, thinly sliced",
+      "Salt",
+      "Black pepper",
+      "Zest and juice of 1 lemon",
+      "Optional: red chili flakes"
+    ],
+    steps: [
+      "Bring a pot of salted water to a boil and blanch broccolini for 1-2 minutes. Drain well.",
+      "Heat olive oil in a wide pan over medium heat.",
+      "Add garlic and cook gently until fragrant.",
+      "Add broccolini and sauté until tender and lightly charred in spots.",
+      "Season with salt, pepper, and optional chili flakes.",
+      "Finish with lemon zest and juice just before serving."
+    ]
+  },
+  {
+    slug: "white-wine-braised-oxtail-osso-buco-style",
+    title: "White Wine-Braised Oxtail, Osso Buco Style",
+    course: "Secondi",
+    type: "meat",
+    blurb: "Slow-braised oxtail in white wine with aromatics, inspired by classic osso buco technique.",
+    ingredients: [
+      "4-5 lb oxtail, cut into segments",
+      "Salt",
+      "Black pepper",
+      "Flour",
+      "2-3 tbsp olive oil",
+      "1 large onion, diced",
+      "2 carrots, diced",
+      "2 celery stalks, diced",
+      "4 cloves garlic, smashed",
+      "2 tbsp tomato paste",
+      "2 cups dry white wine",
+      "2 cups light beef or veal stock",
+      "2 bay leaves",
+      "1 sprig thyme",
+      "Zest of 1 lemon",
+      "Optional: chopped parsley for garnish"
+    ],
+    steps: [
+      "Season the oxtail generously with salt and pepper and dredge lightly in flour.",
+      "Heat olive oil in a heavy pot over medium-high heat and brown the oxtail deeply on all sides. Remove and set aside.",
+      "Lower the heat to medium and add onion, carrot, and celery. Cook until softened and lightly golden.",
+      "Add garlic and tomato paste; cook until the paste darkens slightly.",
+      "Deglaze with white wine, scraping the bottom of the pot. Reduce by about half.",
+      "Return the oxtail to the pot and add stock, bay leaves, and thyme. Liquid should mostly cover the meat.",
+      "Bring to a gentle simmer, cover, and braise in a 325°F (165°C) oven for 3-3.5 hours, until the meat is very tender.",
+      "Remove bay and thyme. Adjust seasoning.",
+      "Finish with lemon zest and optional parsley before serving."
+    ]
+  },
 ];
 
 export function getRecipe(slug?: string) {
