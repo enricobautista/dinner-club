@@ -461,7 +461,7 @@ export const menus: Menu[] = [
     location: "2217 38th St NW, Washington, DC",
     dateISO: "2026-02-22",
     time: "5:00 PM",
-    hosts: ["Desai Family", "Shankar Thiuru", "Kajal Desai", "Dylan Ratnarajah", "Rohan Rani", "Enrico Bautista"],
+    hosts: ["Anushka Desai", "Shankar Thiru", "Kajal Desai", "Dylan Ratnarajah", "Rohan Rani", "Enrico Bautista", "Auntie Desai"],
     guestLimit: 25,
     guests: [],
     cost: 16,
