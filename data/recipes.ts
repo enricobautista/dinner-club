@@ -2,7 +2,7 @@ export type Recipe = {
   slug: string;
   title: string;
   course: string; // Aperitivo, Antipasti, Primo, Secondo, Dolce
-  type: string;   // pasta, salad, meat, dessert, drink, etc.
+  type: string;   // pasta, salad, meat, dessert, cocktail, etc.
   requiresToken?: boolean; // mark true to require RECIPE_TOKEN before showing details
   blurb?: string;
   ingredients: string[];
@@ -14,7 +14,7 @@ export const recipes: Recipe[] = [
     slug: "negroni-sbagliato",
     title: "Negroni Sbagliato",
     course: "Aperitivo",
-    type: "drink",
+    type: "cocktail",
     blurb: "Campari, sweet vermouth, prosecco",
     ingredients: [
       "1 oz Campari",
@@ -33,7 +33,7 @@ export const recipes: Recipe[] = [
     slug: "aperol-spritz",
     title: "Aperol Spritz",
     course: "Aperitivo",
-    type: "drink",
+    type: "cocktail",
     blurb: "Aperol, prosecco, splash of soda",
     requiresToken: true,
     ingredients: [
@@ -140,7 +140,7 @@ export const recipes: Recipe[] = [
     slug: "apricot-blossom",
     title: "Apricot Blossom",
     course: "Aperitivo",
-    type: "drink",
+    type: "cocktail",
     blurb: "A bright gin cocktail with apricot liqueur, Lillet/Cocchi, and a touch of orange blossom.",
     ingredients: [
       "2 oz London Dry Gin (or Hendrick's for a softer floral base)",
@@ -383,7 +383,7 @@ export const recipes: Recipe[] = [
     slug: "abg-aromatic-butter-gin",
     title: "ABG (Aromatic Butter Gin)",
     course: "Aperitivo",
-    type: "drink",
+    type: "cocktail",
     blurb: "Brown-butter-washed gin shaken with pistachio, lemon, and egg white for a rich cocktail.",
     ingredients: [
       "2 oz brown-butter-washed gin",
@@ -406,7 +406,7 @@ export const recipes: Recipe[] = [
     slug: "gin-and-tonic",
     title: "Gin and Tonic",
     course: "Aperitivo",
-    type: "drink",
+    type: "cocktail",
     blurb: "A crisp highball of gin, tonic, and lime.",
     ingredients: [
       "2 oz gin",
@@ -425,7 +425,7 @@ export const recipes: Recipe[] = [
     slug: "old-fashioned",
     title: "Old Fashioned",
     course: "Aperitivo",
-    type: "drink",
+    type: "cocktail",
     blurb: "A classic with whiskey, sugar, and bitters.",
     ingredients: [
       "2 oz bourbon or rye whiskey",
@@ -445,7 +445,7 @@ export const recipes: Recipe[] = [
     slug: "french-75",
     title: "French 75",
     course: "Aperitivo",
-    type: "drink",
+    type: "cocktail",
     blurb: "Gin, lemon, and simple syrup topped with chilled Champagne.",
     ingredients: [
       "1 oz gin",
@@ -566,7 +566,7 @@ export const recipes: Recipe[] = [
     slug: "pineapple-daiquiri",
     title: "Pineapple Daiquiri",
     course: "Aperitivo",
-    type: "drink",
+    type: "cocktail",
     blurb: "A tropical daiquiri with fresh pineapple juice and lime.",
     ingredients: [
       "2 oz white rum",
@@ -802,6 +802,135 @@ export const recipes: Recipe[] = [
       "Bring to a gentle simmer, cover, and braise in a 325°F (165°C) oven for 3-3.5 hours, until the meat is very tender.",
       "Remove bay and thyme. Adjust seasoning.",
       "Finish with lemon zest and optional parsley before serving."
+    ]
+  },
+  {
+    slug: "chai-martini",
+    title: "Chai Martini",
+    course: "Aperitivo",
+    type: "cocktail",
+    blurb: "Vodka infused with black tea and warm spices, lightly sweetened and served chilled.",
+    ingredients: [
+      "2 oz chai-infused vodka (see step 1)",
+      "0.5 oz simple syrup",
+      "0.5 oz half-and-half or milk",
+      "Ice",
+      "Ground cinnamon or star anise, for garnish",
+      "",
+      "// For chai infusion",
+      "1 cup vodka",
+      "1 black tea bag",
+      "2 green cardamom pods, lightly crushed",
+      "1 small cinnamon stick",
+      "2 cloves"
+    ],
+    steps: [
+      "To make chai vodka: Combine vodka, tea bag, cardamom, cinnamon, and cloves. Steep 1-2 hours, strain, and chill.",
+      "Add 2 oz chai vodka, simple syrup, and half-and-half to a shaker with ice.",
+      "Shake until well chilled.",
+      "Strain into a chilled martini glass.",
+      "Garnish lightly with cinnamon or a small star anise."
+    ]
+  },
+  {
+    slug: "rum-mango-lassi",
+    title: "Rum Mango Lassi",
+    course: "Aperitivo",
+    type: "cocktail",
+    blurb: "A lightly spiced mango lassi with rum, saffron, and cardamom.",
+    ingredients: [
+      "1 oz Kesar mango pulp",
+      "1 oz plain yogurt",
+      "1 oz white rum",
+      "1 oz water",
+      "1 green cardamom pod, seeds crushed",
+      "Tiny pinch saffron",
+      "Ice"
+    ],
+    steps: [
+      "Lightly crush the cardamom seeds.",
+      "Add mango pulp, yogurt, rum, water, cardamom, saffron, and ice to a shaker.",
+      "Shake until smooth and chilled.",
+      "Strain into a small glass or serve over fresh ice."
+    ]
+  },
+  {
+    slug: "green-goddess-salad-smashed-potatoes",
+    title: "Green Goddess Salad with Spiced Smashed Potatoes",
+    course: "Antipasti",
+    type: "salad",
+    blurb: "Crisp romaine, herbed green goddess dressing, and spiced smashed potatoes with feta.",
+    ingredients: [
+      "// Dressing",
+      "1/2 cup mayonnaise",
+      "1/4 cup buttermilk",
+      "10 basil leaves",
+      "1/4 cup chives",
+      "1/4 cup tarragon",
+      "1/4 cup parsley",
+      "2 tbsp dill",
+      "3 garlic cloves",
+      "1 tbsp white vinegar",
+      "2 tsp honey",
+      "1/4 tsp salt",
+      "",
+      "// Potatoes",
+      "1.5 lb baby creamer potatoes",
+      "4 tbsp olive oil",
+      "1.5 tsp salt",
+      "1/4 tsp red chili powder",
+      "1 tsp garlic powder",
+      "1/4 tsp cumin",
+      "1/4 tsp coriander",
+      "",
+      "// Salad",
+      "2 hearts romaine, chopped",
+      "1/3 cup radishes, sliced",
+      "1/3 cup red onion, thinly sliced",
+      "1/3 cup crumbled feta",
+      "Salt and black pepper"
+    ],
+    steps: [
+      "Blend all dressing ingredients until smooth. Chill.",
+      "Boil potatoes in salted water until fork-tender. Drain and dry.",
+      "Smash potatoes on an oiled baking sheet. Brush with olive oil and sprinkle with spices.",
+      "Bake at 425°F for 30-35 minutes until golden and crisp.",
+      "Toss romaine with 1/2 cup dressing and season.",
+      "Arrange lettuce, potatoes, radish, onion, and feta. Drizzle additional dressing if desired."
+    ]
+  },
+  {
+    slug: "jaffna-prawn-curry",
+    title: "Jaffna Prawn Curry",
+    course: "Secondi",
+    type: "seafood",
+    blurb: "Sri Lankan-style prawn curry with chili, curry leaves, and tomatoes, served with coconut rice.",
+    ingredients: [
+      "6 lb shrimp, cleaned and deveined",
+      "1.5 heads garlic, minced",
+      "6 medium onions, thinly sliced",
+      "6 Roma tomatoes, sliced",
+      "2 tbsp Jaffna chili powder",
+      "Curry leaves (2 sprigs)",
+      "3 tbsp olive oil",
+      "Salt, to taste",
+      "",
+      "// Coconut Rice",
+      "4 cups basmati rice",
+      "2 cups coconut milk",
+      "2 cups water",
+      "1 tsp salt"
+    ],
+    steps: [
+      "Rinse basmati rice until water runs clear.",
+      "Combine rice, coconut milk, water, and salt. Bring to boil, cover, reduce to low, and cook 15 minutes. Rest 10 minutes.",
+      "Heat oil in a large pot over medium heat.",
+      "Add onions and cook until soft and lightly caramelized.",
+      "Add garlic and curry leaves; cook until fragrant.",
+      "Stir in tomatoes and cook until softened.",
+      "Add Jaffna chili powder and cook 1-2 minutes.",
+      "Add shrimp and salt; cook gently until just opaque (4-5 minutes). Do not overcook.",
+      "Adjust salt and serve immediately over coconut rice."
     ]
   },
 ];

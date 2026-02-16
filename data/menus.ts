@@ -456,6 +456,80 @@ export const menus: Menu[] = [
       }
     ]
   },
+  {
+    slug: "south-asian-dinner-club-2026-02-22",
+    location: "2217 38th St NW, Washington, DC",
+    dateISO: "2026-02-22",
+    time: "5:00 PM",
+    hosts: ["Anushka Desai", "Shankar Thiuru", "Dylan Ratnarajah", "Rohan Rani", "Kajal", "Enrico Bautista"],
+    guestLimit: 20,
+    guests: [],
+    cost: 16,
+    venmoTag: "@EricBautista",
+    courses: [
+      {
+        heading: "Aperitivi",
+        items: [
+          {
+            name: "Chai Martini",
+            recipeSlug: "chai-martini",
+            blurb: "Chai-infused vodka with warm spices."
+          },
+          {
+            name: "Mango Lassi",
+            recipeSlug: "rum-mango-lassi",
+            blurb: "Mango, yogurt, rum, saffron, and cardamom."
+          }
+        ]
+      },
+      {
+        heading: "Antipasti",
+        items: [
+          {
+            name: "Green Goddess Salad with Spiced Smashed Potatoes",
+            recipeSlug: "green-goddess-salad-smashed-potatoes",
+            blurb: "Herbed dressing, crisp romaine, and roasted smashed potatoes."
+          },
+          {
+            name: "Pani Puri",
+            blurb: "Crisp puris filled with spiced water and chutneys."
+          }
+        ]
+      },
+      {
+        heading: "Primo",
+        items: [
+          {
+            name: "Pav Bhaji",
+            blurb: "Spiced vegetable mash served with buttered bread rolls."
+          }
+        ]
+      },
+      {
+        heading: "Secondi",
+        items: [
+          {
+            name: "Butter Chicken",
+            blurb: "Creamy tomato-based chicken curry."
+          },
+          {
+            name: "Jaffna Prawn Curry",
+            recipeSlug: "jaffna-prawn-curry",
+            blurb: "Sri Lankan prawn curry with coconut rice."
+          }
+        ]
+      },
+      {
+        heading: "Dolci",
+        items: [
+          {
+            name: "Chai Tiramisu",
+            blurb: "Masala chai-infused tiramisu."
+          }
+        ]
+      }
+    ]
+  },
 ];
 
 function normalizeSlug(input: string) {
