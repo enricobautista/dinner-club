@@ -462,7 +462,7 @@ export const menus: Menu[] = [
     dateISO: "2026-02-22",
     time: "5:00 PM",
     hosts: ["Desai Family", "Shankar Thiuru", "Kajal Desai", "Dylan Ratnarajah", "Rohan Rani", "Enrico Bautista"],
-    guestLimit: 20,
+    guestLimit: 25,
     guests: [],
     cost: 16,
     venmoTag: "@EricBautista",
