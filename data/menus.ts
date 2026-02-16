@@ -461,7 +461,7 @@ export const menus: Menu[] = [
     location: "2217 38th St NW, Washington, DC",
     dateISO: "2026-02-22",
     time: "5:00 PM",
-    hosts: ["Anushka Desai", "Shankar Thiuru", "Dylan Ratnarajah", "Rohan Rani", "Kajal", "Enrico Bautista"],
+    hosts: ["Desai Family", "Shankar Thiuru", "Kajal Desai", "Dylan Ratnarajah", "Rohan Rani", "Enrico Bautista"],
     guestLimit: 20,
     guests: [],
     cost: 16,
@@ -476,7 +476,7 @@ export const menus: Menu[] = [
             blurb: "Chai-infused vodka with warm spices."
           },
           {
-            name: "Mango Lassi",
+            name: "Rum Mango Lassi",
             recipeSlug: "rum-mango-lassi",
             blurb: "Mango, yogurt, rum, saffron, and cardamom."
           }

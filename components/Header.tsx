@@ -19,7 +19,6 @@ export default function Header() {
     .sort((a, b) => parseMenuDate(a.dateISO).getTime() - parseMenuDate(b.dateISO).getTime())[0];
   const priceText = Number.isFinite(Number(next?.cost)) ? `$${next!.cost}` : undefined;
   const venmoText = next?.venmoTag ? `Venmo ${next.venmoTag}` : undefined;
-  const infoParts = [priceText, venmoText].filter(Boolean).join(" • ");
   const isHome = pathname === "/";
   const isMenuContext = pathname?.startsWith("/menus") || (isHome && hasUpcoming);
   const showHeaderFlourish = !isMenuContext && !(isHome && !hasUpcoming); // hide when menu context or home+Welcome
@@ -33,7 +32,9 @@ export default function Header() {
       </h1>
       {isHome && hasUpcoming ? (
         <p className="smallcaps" style={{ margin: ".35rem 0 0", opacity: .9 }}>
-          Upcoming Dinner Menu{infoParts ? ` • ${infoParts}` : ""}
+          Upcoming Dinner Menu
+          {priceText ? <> • <strong>{priceText}</strong></> : null}
+          {venmoText ? <> • <strong>{venmoText}</strong></> : null}
         </p>
       ) : null}
       {showHeaderFlourish && (
