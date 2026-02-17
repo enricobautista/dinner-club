@@ -460,7 +460,7 @@ export const menus: Menu[] = [
     slug: "south-asian-dinner-club-2026-02-22",
     location: "2217 38th St NW, Washington, DC",
     dateISO: "2026-02-22",
-    time: "5:00 PM",
+    time: "6:00 PM",
     hosts: ["Anushka Desai", "Shankar Thiru", "Kajal Desai", "Dylan Ratnarajah", "Rohan Rani", "Enrico Bautista", "Auntie Desai"],
     guestLimit: 25,
     guests: [],
@@ -523,8 +523,8 @@ export const menus: Menu[] = [
         heading: "Dolci",
         items: [
           {
-            name: "Chai Tiramisu",
-            blurb: "Masala chai-infused tiramisu."
+            name: "Gajjar Halwa Cake",
+            blurb: "Indian carrot halwa-inspired cake with pistachio frosting."
           }
         ]
       }
