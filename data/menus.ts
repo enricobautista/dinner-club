@@ -530,6 +530,62 @@ export const menus: Menu[] = [
       }
     ]
   },
+  {
+    slug: "pre-match-dinner",
+    location: "2217 38th St NW, Washington, DC",
+    dateISO: "2026-03-17",
+    time: "6:00 PM",
+    hosts: ["Enrico Bautista, Yumin Gao, Francis Arellano, Jaqueline Sandling"],
+    guestLimit: 16,
+    guests: [],
+    cost: 15,
+    venmoTag: "@Yumin-Gao",
+    courses: [
+      {
+        heading: "Antipasto",
+        items: [
+          {
+            name: "Japanese Salad",
+            blurb: "Fresh Japanese-style salad (recipe TBD)."
+          }
+        ]
+      },
+      {
+        heading: "Primi",
+        items: [
+          {
+            name: "Aguachiles",
+            recipeSlug: "aguachiles",
+            blurb: "Shrimp cured in lime with serrano, cucumber, and cilantro."
+          },
+          {
+            name: "Red Oil Wontons",
+            recipeSlug: "red-oil-wontons",
+            blurb: "Szechuan wontons tossed in spicy chili oil."
+          }
+        ]
+      },
+      {
+        heading: "Secondo",
+        items: [
+          {
+            name: "Steak with Chimichurri",
+            recipeSlug: "steak-with-chimichurri",
+            blurb: "Grilled steak served with herb chimichurri."
+          }
+        ]
+      },
+      {
+        heading: "Dolce",
+        items: [
+          {
+            name: "Tiramisu",
+            blurb: "Classic Italian dessert."
+          }
+        ]
+      }
+    ]
+  },
 ];
 
 function normalizeSlug(input: string) {

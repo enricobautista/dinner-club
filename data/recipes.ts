@@ -933,6 +933,33 @@ export const recipes: Recipe[] = [
       "Adjust salt and serve immediately over coconut rice."
     ]
   },
+  {
+    slug: "aguachiles",
+    title: "Aguachiles",
+    course: "Primo",
+    type: "seafood",
+    blurb: "Fresh shrimp cured in lime with serrano, cilantro, cucumber, and avocado.",
+    ingredients: [
+      "1 pack raw shrimp, peeled and deveined",
+      "1/4 red onion, thinly sliced",
+      "1/2 avocado, sliced",
+      "1 cucumber, thinly sliced",
+      "Juice of 6 limes",
+      "3–4 serrano chiles",
+      "1 cup cilantro leaves and stems",
+      "Salt, to taste",
+      "Tostadas or tortilla chips, for serving"
+    ],
+    steps: [
+      "Butterfly the shrimp lengthwise so they lay flat.",
+      "Place shrimp in a shallow bowl and season lightly with salt.",
+      "Submerge shrimp in lime juice and let sit for 15 minuteswhile preparing the marinade.",
+      "Blend lime juice, serrano chiles, cilantro, and a pinch of salt until smooth.",
+      "Pour the lime mixture over the shrimp.",
+      "Arrange cucumber, red onion, and avocado around the shrimp.",
+      "Serve immediately with tostadas or chips."
+    ]
+  },
 ];
 
 export function getRecipe(slug?: string) {
