@@ -542,7 +542,7 @@ export const menus: Menu[] = [
     venmoTag: "@Yumin-Gao",
     courses: [
       {
-        heading: "Apperitivi",
+        heading: "Aperitivi",
         items: [
           {
             name: "Agave Punch",
