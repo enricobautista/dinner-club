@@ -535,18 +535,35 @@ export const menus: Menu[] = [
     location: "2217 38th St NW, Washington, DC",
     dateISO: "2026-03-17",
     time: "6:00 PM",
-    hosts: ["Enrico Bautista, Yumin Gao, Francis Arellano, Jaqueline Sandling"],
-    guestLimit: 16,
+    hosts: ["Enrico Bautista, Yumin Gao, Jaqueline Sandling, Francis Arellano, Rohan Rani, Dylan Ratnarajah"],
+    guestLimit: 30,
     guests: [],
     cost: 15,
     venmoTag: "@Yumin-Gao",
     courses: [
       {
+        heading: "Apperitivi",
+        items: [
+          {
+            name: "Agave Punch",
+            blurb: "Fruity tequila sour."
+          },
+          {
+            name: "Soju Fizz",
+            blurb: "Bright and bubbly soju cocktail with strawberry Melona."
+          },
+          {
+            name: "Batida de Manga",
+            blurb: "Tropical Brazillian fruit cocktail."
+          }
+        ]
+      },
+      {
         heading: "Antipasto",
         items: [
           {
             name: "Japanese Salad",
-            blurb: "Fresh Japanese-style salad (recipe TBD)."
+            blurb: "Fresh Japanese-style salad."
           }
         ]
       },
