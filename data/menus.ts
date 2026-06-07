@@ -407,56 +407,6 @@ export const menus: Menu[] = [
     ]
   },
   {
-    slug: "winter-braise-provencal-dinner",
-    location: "2755 Ordway St NW, Washington, DC",
-    dateISO: "2026-01-27",
-    time: "8:30 PM",
-    hosts: ["Enrico Bautista"],
-    guestLimit: 1,
-    guests: [],
-    courses: [
-      {
-        heading: "Primo",
-        items: [
-          {
-            name: "Pasta Provençale",
-            recipeSlug: "pasta-provencale",
-            blurb: "Tomatoes, olive oil, garlic, herbs, olives, and capers."
-          }
-        ]
-      },
-      {
-        heading: "Secondo",
-        items: [
-          {
-            name: "White Wine-Braised Oxtail, Osso Buco Style",
-            recipeSlug: "white-wine-braised-oxtail-osso-buco-style",
-            blurb: "Slow-braised oxtail with white wine and aromatics."
-          }
-        ]
-      },
-      {
-        heading: "Contorno",
-        items: [
-          {
-            name: "Garlic-Lemon Broccolini",
-            recipeSlug: "garlic-lemon-broccolini",
-            blurb: "Sautéed broccolini finished with lemon."
-          }
-        ]
-      },
-      {
-        heading: "Dolce",
-        items: [
-          {
-            name: "Seada",
-            blurb: "Traditional Sardinian cheese-filled dessert with sugar."
-          }
-        ]
-      }
-    ]
-  },
-  {
     slug: "south-asian-dinner-club-2026-02-22",
     location: "2217 38th St NW, Washington, DC",
     dateISO: "2026-02-22",
