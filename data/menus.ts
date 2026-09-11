@@ -553,6 +553,83 @@ export const menus: Menu[] = [
       }
     ]
   },
+  {
+    slug: "usf-im-res-dinner-2026-10-03",
+    location: "101 N Meridian Ave",
+    dateISO: "2026-10-03",
+    time: "6:30 PM",
+    hosts: [Enrico Bautista, Max Hernandez],
+    guestLimit: 20,
+    guests: [],
+    cost: 22,
+    venmoTag: "@EricBautista",
+    courses: [
+      {
+        heading: "Aperitivi",
+        items: [
+          {
+            name: "Limonada Suíça",
+            recipeSlug: "limonada-suica",
+            blurb: "Brazilian limeade with condensed milk, coconut, and white rum."
+          },
+          {
+            name: "Hugo Spritz",
+            recipeSlug: "hugo-spritz",
+            blurb: "Refreshing prosecco, mint, lime, and soda."
+          }
+        ]
+      },
+      {
+        heading: "Antipasto",
+        items: [
+          {
+            name: "Insalata di Finocchio, Agrumi e Pistacchio",
+            recipeSlug: "fennel-citrus-pistachio-salad",
+            blurb: "Shaved fennel and radicchio with citrus, mint, and pistachios."
+          }
+        ]
+      },
+      {
+        heading: "Primo",
+        items: [
+          {
+            name: "Rigatoni alla Marinara",
+            recipeSlug: "marinara",
+            blurb: "Rigatoni with a bright cherry-tomato marinara."
+          }
+        ]
+      },
+      {
+        heading: "Secondo",
+        items: [
+          {
+            name: "Galbi",
+            recipeSlug: "galbi",
+            blurb: "Korean grilled short ribs."
+          }
+        ]
+      },
+      {
+        heading: "Contorno",
+        items: [
+          {
+            name: "Charred Broccolini with Sesame & Lemon",
+            recipeSlug: "charred-broccolini-sesame-lemon",
+            blurb: "Served with scallion, sesame, soy, and lemon."
+          }
+        ]
+      },
+      {
+        heading: "Dolce",
+        items: [
+          {
+            name: "Tres Leches Cake",
+            blurb: "Classic milk-soaked sponge cake."
+          }
+        ]
+      }
+    ]
+  },
 ];
 
 function normalizeSlug(input: string) {

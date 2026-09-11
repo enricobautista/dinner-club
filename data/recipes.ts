@@ -960,6 +960,133 @@ export const recipes: Recipe[] = [
       "Serve immediately with tostadas or chips."
     ]
   },
+  {
+    slug: "hugo-spritz",
+    title: "Hugo Spritz",
+    course: "Aperitivo",
+    type: "drink",
+    blurb: "A bright elderflower spritz with prosecco, mint, lime, and soda.",
+    ingredients: [
+      "4 oz prosecco, chilled",
+      "3/4 oz St-Germain elderflower liqueur",
+      "1 oz soda water",
+      "6-8 fresh mint leaves",
+      "1 lime wheel",
+      "Ice"
+    ],
+    steps: [
+      "Fill a large wine glass generously with ice.",
+      "Add St-Germain and mint leaves; stir gently without crushing the mint.",
+      "Add prosecco and soda water.",
+      "Stir briefly and garnish with a lime wheel and fresh mint."
+    ]
+  },
+  {
+    slug: "limonada-suica",
+    title: "Limonada Suíça",
+    course: "Aperitivo",
+    type: "drink",
+    blurb: "Brazilian-style limeade with condensed milk, coconut, and white rum.",
+    ingredients: [
+      "25 limes, thoroughly washed",
+      "19 cups cold water",
+      "6 cups ice",
+      "20 oz sweetened condensed milk",
+      "20 oz cream of coconut",
+      "750 ml white rum",
+      "1/2-3/4 cup sugar, to taste"
+    ],
+    steps: [
+      "Cut the limes into quarters. Work in batches so the blender is not overcrowded.",
+      "Briefly pulse the limes with some of the cold water for about 10-15 seconds; avoid prolonged blending, which can make the lime peel bitter.",
+      "Strain through a fine-mesh strainer, pressing lightly, and discard the solids.",
+      "Combine the strained lime liquid with the remaining water, condensed milk, cream of coconut, rum, and 1/2 cup sugar.",
+      "Blend or whisk until completely combined. Taste and add additional sugar if needed.",
+      "Chill thoroughly. Add the ice shortly before serving and stir well."
+    ]
+  },
+  {
+    slug: "fennel-citrus-pistachio-salad",
+    title: "Insalata di Finocchio, Agrumi e Pistacchio",
+    course: "Antipasto",
+    type: "salad",
+    blurb: "Shaved fennel and radicchio with citrus, mint, pistachios, and a bright vinaigrette.",
+    ingredients: [
+      "5 large fennel bulbs, trimmed and very thinly sliced",
+      "3 heads radicchio, thinly sliced",
+      "6 oranges",
+      "3 grapefruit",
+      "1 1/2 cups roasted pistachios, roughly chopped",
+      "1 bunch fresh mint, leaves picked",
+      "1/2 cup extra-virgin olive oil",
+      "1/4 cup reserved citrus juice",
+      "2 tbsp sherry vinegar",
+      "Kosher salt",
+      "Freshly ground black pepper"
+    ],
+    steps: [
+      "Supreme the oranges and grapefruit over a bowl, reserving at least 1/4 cup of the citrus juice.",
+      "Up to one day ahead, shave the fennel and slice the radicchio. Keep refrigerated separately in airtight containers.",
+      "Whisk together olive oil, reserved citrus juice, sherry vinegar, salt, and black pepper.",
+      "Shortly before serving, toss fennel and radicchio lightly with enough dressing to coat.",
+      "Arrange on large platters with citrus segments, mint leaves, and pistachios.",
+      "Drizzle with a little additional vinaigrette and serve immediately."
+    ]
+  },
+  {
+    slug: "galbi",
+    title: "Galbi",
+    course: "Secondo",
+    type: "meat",
+    blurb: "Korean-style grilled flanken short ribs in a sweet soy, mirin, garlic, onion, and kiwi marinade.",
+    ingredients: [
+      "4 lb LA-style flanken-cut beef short ribs",
+      "1 1/2 cups soy sauce",
+      "1 1/2 cups sugar",
+      "1/2 cup mirin",
+      "1 medium onion",
+      "1 kiwi, peeled",
+      "1 head garlic, peeled (about 10-12 cloves)",
+      "4 scallions, thinly sliced"
+    ],
+    steps: [
+      "Blend the onion, kiwi, and garlic until smooth.",
+      "Combine the puree with soy sauce, sugar, and mirin; stir until the sugar is mostly dissolved.",
+      "Stir in the sliced scallions.",
+      "Place the short ribs in large zip-top bags or nonreactive containers and pour the marinade over them.",
+      "Refrigerate for 4-8 hours, turning occasionally. Because kiwi is a strong tenderizer, avoid an extended overnight marinade.",
+      "Remove the ribs from the marinade and allow excess marinade to drip away.",
+      "Grill over high heat until deeply browned and lightly charred, approximately 2-3 minutes per side depending on thickness.",
+      "Transfer to platters and serve immediately."
+    ]
+  },
+  {
+    slug: "charred-broccolini-sesame-lemon",
+    title: "Charred Broccolini with Sesame & Lemon",
+    course: "Contorno",
+    type: "vegetable",
+    blurb: "Charred broccolini finished with sesame, scallion, soy, and fresh lemon.",
+    ingredients: [
+      "4 lb broccolini, ends trimmed",
+      "1/3 cup neutral oil",
+      "2 tbsp toasted sesame oil",
+      "2 tbsp soy sauce",
+      "3 lemons, zest and juice",
+      "8 scallions, thinly sliced",
+      "1/3 cup toasted sesame seeds",
+      "Kosher salt"
+    ],
+    steps: [
+      "Bring a large pot of salted water to a boil and prepare an ice bath.",
+      "Blanch the broccolini for 60-90 seconds, then immediately transfer to the ice bath.",
+      "Drain extremely well and pat dry. The broccolini can be refrigerated at this stage for up to one day.",
+      "Shortly before serving, toss the broccolini with neutral oil and a light seasoning of salt.",
+      "Roast at 475°F, broil, or grill over high heat until the florets and stems develop dark charred edges.",
+      "Whisk together sesame oil, soy sauce, lemon juice, and lemon zest.",
+      "Transfer the hot broccolini to serving platters and drizzle lightly with the sesame-lemon mixture.",
+      "Finish with scallions and toasted sesame seeds."
+    ]
+  },
 ];
 
 export function getRecipe(slug?: string) {
