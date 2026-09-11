@@ -558,7 +558,7 @@ export const menus: Menu[] = [
     location: "101 N Meridian Ave",
     dateISO: "2026-10-03",
     time: "6:30 PM",
-    hosts: [Enrico Bautista, Max Hernandez],
+    hosts: ["Enrico Bautista", "Max Hernandez"],
     guestLimit: 20,
     guests: [],
     cost: 22,
