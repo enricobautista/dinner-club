@@ -555,7 +555,7 @@ export const menus: Menu[] = [
   },
   {
     slug: "usf-im-res-dinner-2026-10-03",
-    location: "101 N Meridian Ave",
+    location: "1011 E Cumberland Ave",
     dateISO: "2026-10-03",
     time: "6:30 PM",
     hosts: ["Enrico Bautista", "Max Hernandez"],
