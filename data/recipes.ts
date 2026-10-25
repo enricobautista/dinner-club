@@ -945,7 +945,7 @@ export const recipes: Recipe[] = [
       "1/2 avocado, sliced",
       "1 cucumber, thinly sliced",
       "Juice of 6 limes",
-      "3–4 serrano chiles",
+      "3-4 serrano chiles",
       "1 cup cilantro leaves and stems",
       "Salt, to taste",
       "Tostadas or tortilla chips, for serving"
@@ -1086,6 +1086,54 @@ export const recipes: Recipe[] = [
       "Transfer the hot broccolini to serving platters and drizzle lightly with the sesame-lemon mixture.",
       "Finish with scallions and toasted sesame seeds."
     ]
+  },
+  {
+    slug: "beef-lumpiang-shanghai",
+    title: "Beef Lumpiang Shanghai (100 Pieces)",
+    course: "Antipasti",
+    type: "meat",
+    blurb: "Crisp Filipino beef spring rolls with garlic, vegetables, and a spiced vinegar dipping sauce. Makes approximately 100 pieces.",
+    ingredients: [
+      // Filling
+      "4 lbs ground beef (85/15)",
+      "2 medium yellow onions",
+      "3 large carrots",
+      "2 bunches scallions",
+      "12 cloves garlic",
+      "2 large eggs",
+      "1/4 cup soy sauce",
+      "1 tbsp sugar",
+      "1-1.5 tsp kosher salt, to taste",
+      "2 tsp black pepper",
+      "2-3 tbsp cornstarch, plus more as needed",
+
+      // Wrapping and frying
+      "110-120 thin lumpia wrappers",
+      "2 tbsp cornstarch + 3 tbsp water (sealing slurry)",
+      "Neutral oil, for frying",
+
+      // Filipino spiced vinegar sauce
+      "1 cup cane vinegar or rice vinegar",
+      "1/2 cup water",
+      "5 garlic cloves, minced",
+      "1 small shallot, minced",
+      "2-3 Thai chilies, sliced",
+      "2 tsp sugar",
+      "1/2 tsp salt",
+      "Black pepper, to taste",
+    ],
+    steps: [
+      "Prepare vegetables: peel the onions, carrots, and garlic. Roughly chop the onions, carrots, and scallions. Process with the garlic into a fine, nearly smooth purée without adding water.",
+      "Drain vegetables: transfer the purée to a fine-mesh strainer or cheesecloth and squeeze out excess liquid, particularly from the onions.",
+      "Make filling: combine the beef, drained vegetable purée, eggs, soy sauce, sugar, kosher salt, black pepper, and 2-3 tbsp cornstarch. Mix thoroughly for approximately 2 minutes, until uniform and slightly sticky. If the filling seems wet, add more cornstarch 1 tbsp at a time until it holds together.",
+      "Chill and test: refrigerate the filling for 20-30 minutes to firm up. Fry a small test patty, taste, and adjust salt, soy sauce, or pepper as needed before wrapping.",
+      "Make spiced vinegar sauce: combine the vinegar, water, sugar, and salt; stir until dissolved. Add the minced garlic, shallot, and sliced chilies. Season with black pepper and refrigerate for 30-60 minutes or longer. Taste and adjust acidity, salt, and sweetness.",
+      "Prepare wrappers: carefully separate the lumpia wrappers and keep unused wrappers covered with a damp towel. Stir together 2 tbsp cornstarch and 3 tbsp water to make the sealing slurry.",
+      "Wrap: place approximately 1 heaping tablespoon (25-30 g) filling near one edge of each wrapper and shape into a thin, even cylinder. Fold the sides inward, roll tightly without overfilling, and seal the final edge with slurry. Repeat to make approximately 100 lumpia, keeping finished rolls covered to prevent drying.",
+      "Fry: heat neutral oil to 350°F (175°C). Fry in batches without overcrowding for approximately 4-6 minutes, depending on size, until golden brown and crispy. Verify that the beef filling reaches an internal temperature of 160°F.",
+      "Serve: transfer fried lumpia to a wire rack to drain and preserve crispness. Serve hot with the spiced vinegar sauce.",
+      "Make ahead / freezing: arrange uncooked lumpia in a single layer on parchment-lined trays and freeze until solid, then transfer to freezer-safe bags. Fry directly from frozen at 350°F, allowing additional cooking time and verifying that the filling reaches 160°F.",
+    ],
   },
 ];
 
