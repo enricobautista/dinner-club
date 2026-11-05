@@ -1177,6 +1177,53 @@ export const recipes: Recipe[] = [
       "Finish: Return shanks to reduced sauce and warm gently for 5-10 minutes, spooning sauce over the meat. Remove kitchen twine. Serve over Parmesan polenta, saffron risotto, or mashed potatoes. Spoon sauce over each shank and finish with fresh gremolata.",
     ]
   },
+  {
+    slug: "korean-pear-yuja-highball",
+    title: "Korean Pear & Yuja Highball",
+    course: "Aperitivo",
+    type: "drink",
+    blurb: "Distilled soju with Korean pear, yuja, lemon, and sparkling water.",
+    ingredients: [
+      "2 oz distilled soju (ideally 25-40% ABV)",
+      "1 oz Korean pear juice",
+      "1/2 oz fresh lemon juice",
+      "1/4 oz yuja-cheong (sweetened Korean citron preserve)",
+      "2 oz chilled soda water",
+      "Ice",
+      "Thin Korean pear slice, for garnish",
+      "Perilla leaf, for garnish"
+    ],
+    steps: [
+      "Combine soju, Korean pear juice, lemon juice, and yuja-cheong in a cocktail shaker.",
+      "Add ice and shake vigorously until well chilled and the yuja-cheong is fully incorporated.",
+      "Strain into a highball glass filled with fresh ice.",
+      "Top with 2 oz chilled soda water and stir gently.",
+      "Garnish with a thin slice of Korean pear and a fresh perilla leaf."
+    ]
+  },
+  {
+    slug: "baesuk-pear-ginger-fizz",
+    title: "Baesuk Pear & Ginger Fizz",
+    course: "Aperitivo",
+    type: "drink",
+    blurb: "A Korean pear mocktail with warming ginger, bright lemon, sparkling water, and a hint of black pepper.",
+    ingredients: [
+      "2 oz Korean pear juice",
+      "1/4-1/2 oz homemade ginger syrup",
+      "1/2 oz fresh lemon juice",
+      "3 oz chilled sparkling water",
+      "Tiny pinch freshly ground black pepper",
+      "Ice"
+    ],
+    steps: [
+      "Combine Korean pear juice, ginger syrup, and lemon juice in a shaker.",
+      "Add ice and shake briefly until chilled.",
+      "Strain into a highball glass filled with fresh ice.",
+      "Top with 3 oz sparkling water and stir gently.",
+      "Finish with a tiny pinch of freshly ground black pepper.",
+      "Taste and adjust ginger or sweetness as needed."
+    ]
+  },
 ];
 
 export function getRecipe(slug?: string) {

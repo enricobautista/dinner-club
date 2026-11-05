@@ -630,6 +630,69 @@ export const menus: Menu[] = [
       }
     ]
   },
+  {
+    slug: "NYC-dinner-2026",
+    location: "74 Jackson St, Brooklyn, NY",
+    dateISO: "2026-11-08",
+    time: "5:00 PM",
+    hosts: [Enrico Bautista, Yumin Gao, Allison Oh, Natalie Deana],
+    guestLimit: 20,
+    guests: [],
+    courses: [
+      {
+        heading: "Aperitivo",
+        items: [
+          {
+            name: "Korean Pear & Yuja Highball",
+            recipeSlug: "korean-pear-yuja-highball",
+            blurb: "Distilled soju, Korean pear, yuja, lemon, and soda."
+          },
+          {
+            name: "Baesuk Pear & Ginger Fizz",
+            recipeSlug: "baesuk-pear-ginger-fizz",
+            blurb: "A sparkling Korean pear and ginger mocktail with lemon and black pepper."
+          }
+        ]
+      },
+      {
+        heading: "Antipasti",
+        items: [
+          {
+            name: "Beef Lumpiang Shanghai",
+            blurb: "A Filipino classic served with banana sauce and vinegar-based chili sauce."
+            recipeSlug: "beef-lumpiang-shanghai"
+          },
+          {
+            name: "Red Shrimp Salad",
+            blurb: "Red shrimp, citrus, cashews, and lemongrass dressing."
+          }
+        ]
+      },
+      {
+        heading: "Secondo",
+        items: [
+          {
+            name: "Ossobuco in Bianco",
+            blurb: "Slow-braised beef short ribs with white wine, aromatic vegetables, and lemon gremolata."
+            recipeSlug: "ossobuco-in-bianco"
+          }
+        ]
+      },
+      {
+        heading: "Dolce",
+        items: [
+          {
+            name: "Miso Caramel Banana Tiramisu",
+            blurb: "Banana tiramisu layered with rich miso caramel."
+          },
+          {
+            name: "Black Sesame Mochi Cookies",
+            blurb: "Chewy mochi cookies with toasted black sesame."
+          }
+        ]
+      }
+    ]
+  },
 ];
 
 function normalizeSlug(input: string) {
