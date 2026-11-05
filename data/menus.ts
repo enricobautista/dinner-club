@@ -640,7 +640,7 @@ export const menus: Menu[] = [
     guests: [],
     courses: [
       {
-        heading: "Aperitivo",
+        heading: "Aperitivi",
         items: [
           {
             name: "Korean Pear & Yuja Highball",
@@ -683,11 +683,9 @@ export const menus: Menu[] = [
         items: [
           {
             name: "Miso Caramel Banana Tiramisu",
-            blurb: "Banana tiramisu layered with rich miso caramel."
           },
           {
             name: "Black Sesame Mochi Cookies",
-            blurb: "Chewy mochi cookies with toasted black sesame."
           }
         ]
       }
