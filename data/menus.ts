@@ -659,7 +659,7 @@ export const menus: Menu[] = [
         items: [
           {
             name: "Beef Lumpiang Shanghai",
-            blurb: "A Filipino classic served with banana sauce and vinegar-based chili sauce."
+            blurb: "A Filipino classic served with banana sauce and vinegar-based chili sauce.",
             recipeSlug: "beef-lumpiang-shanghai"
           },
           {
@@ -673,7 +673,7 @@ export const menus: Menu[] = [
         items: [
           {
             name: "Ossobuco in Bianco",
-            blurb: "Slow-braised beef short ribs with white wine, aromatic vegetables, and lemon gremolata."
+            blurb: "Slow-braised beef short ribs with white wine, aromatic vegetables, and lemon gremolata.",
             recipeSlug: "ossobuco-in-bianco"
           }
         ]
