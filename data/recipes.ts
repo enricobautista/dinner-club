@@ -1135,6 +1135,48 @@ export const recipes: Recipe[] = [
       "Make ahead / freezing: arrange uncooked lumpia in a single layer on parchment-lined trays and freeze until solid, then transfer to freezer-safe bags. Fry directly from frozen at 350°F, allowing additional cooking time and verifying that the filling reaches 160°F.",
     ],
   },
+  {
+    slug: "ossobuco-in-bianco",
+    title: "Ossobuco in Bianco",
+    course: "Secondo",
+    type: "meat",
+    blurb: "White wine-braised veal shank with aromatic vegetables, silky reduced jus, and fresh lemon gremolata. Serves 4-6; prep 25 minutes; cook 2.5-3.5 hours.",
+    ingredients: [
+      "4-6 cross-cut veal shanks (4-5 lbs total, 1.5-2 inches thick)",
+      "Kosher salt and freshly ground black pepper",
+      "3 tbsp olive oil",
+      "2 cups dry white wine (Pinot Grigio or unoaked Chardonnay)",
+      "2-3 cups unsalted chicken or veal stock",
+      "1 tbsp unsalted butter (optional, for finishing)",
+      "1-2 tsp white wine vinegar or lemon juice (optional, for finishing)",
+      "2 medium yellow onions, finely diced",
+      "2 medium carrots, finely diced",
+      "3 celery stalks, finely diced",
+      "1 leek, white and light green parts finely chopped (optional)",
+      "6 garlic cloves, lightly crushed",
+      "5-6 sprigs fresh thyme",
+      "1 small sprig fresh rosemary",
+      "2 bay leaves",
+      "6-8 parsley stems",
+      "1 small Parmesan rind (optional)",
+      "Gremolata: 1/2 cup flat-leaf parsley, finely chopped",
+      "Gremolata: zest of 1 lemon",
+      "Gremolata: 1 small garlic clove, finely grated",
+      "Gremolata: 1 tbsp extra-virgin olive oil (optional)"
+    ],
+    steps: [
+      "Prepare veal: Pat shanks thoroughly dry and season generously with salt and pepper. Ideally, refrigerate uncovered for 8-24 hours. Tie kitchen twine around each shank to preserve its shape, if desired. Remove from refrigerator 30 minutes before cooking.",
+      "Sear veal: Preheat oven to 325°F (163°C). Heat olive oil in a large Dutch oven over medium-high heat. Sear shanks in batches for 3-4 minutes per side until deeply golden. Avoid overcrowding. Transfer to a plate, reserving accumulated juices.",
+      "Cook aromatics: Reduce heat to medium-low, leaving approximately 2 tbsp fat in the pot. Add onions, carrots, celery, and optional leek. Cook 10-15 minutes until softened and lightly golden. Add garlic and cook 1-2 minutes more.",
+      "Deglaze: Increase heat to medium-high. Add white wine, scraping up the browned fond. Simmer uncovered for 8-12 minutes until reduced by approximately half.",
+      "Assemble braise: Return shanks and juices to the pot in a single layer. Add thyme, rosemary, bay leaves, parsley stems, and optional Parmesan rind. Add stock until liquid reaches halfway to two-thirds up the shanks. Bring to a gentle simmer, cover, and transfer to oven.",
+      "Braise: Cook at 325°F for 2-3 hours, checking tenderness after 1 hour 45 minutes. Carefully turn shanks halfway through cooking. Add warm stock if liquid reduces excessively. The meat should be fork-tender while remaining attached to the bone.",
+      "Prepare sauce: Transfer shanks to a warm platter. Remove herbs, bay leaves, and Parmesan rind. Strain braising liquid through a fine-mesh sieve, gently pressing vegetables to extract juices. Optionally retain some vegetables for a rustic sauce. Skim excess fat.",
+      "Reduce sauce: Simmer strained liquid over medium heat for 10-20 minutes until lightly coating the back of a spoon. Adjust salt and pepper. Add 1-2 tsp white wine vinegar or lemon juice if needed for balance. Optionally whisk in 1 tbsp cold butter off heat.",
+      "Prepare gremolata: Combine finely chopped parsley, lemon zest, and grated garlic. Add olive oil if desired. Mix and refrigerate until serving. Prepare shortly before serving for optimal freshness.",
+      "Finish: Return shanks to reduced sauce and warm gently for 5-10 minutes, spooning sauce over the meat. Remove kitchen twine. Serve over Parmesan polenta, saffron risotto, or mashed potatoes. Spoon sauce over each shank and finish with fresh gremolata.",
+    ]
+  },
 ];
 
 export function getRecipe(slug?: string) {
