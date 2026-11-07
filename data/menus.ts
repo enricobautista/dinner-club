@@ -635,7 +635,7 @@ export const menus: Menu[] = [
     location: "74 Jackson St, Brooklyn, NY",
     dateISO: "2026-11-08",
     time: "5:00 PM",
-    hosts: ["Enrico Bautista", "Yumin Gao", "Allison Oh", "Natalie Deana"],
+    hosts: ["Enrico Bautista", "Yumin Gao", "Allison Oh", "Natalie Badillo"],
     guestLimit: 20,
     guests: [],
     courses: [
