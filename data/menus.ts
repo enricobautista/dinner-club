@@ -694,7 +694,7 @@ export const menus: Menu[] = [
   {
     slug: "DICE-latin-american-caribbean-menu",
     location: "TBD",
-    dateISO: "2026-06-12",
+    dateISO: "2026-12-06",
     hosts: ["Dr. Perez Colon", "USF Wellness Committee", "USF DICE"],
     guestLimit: 100,
     guests: [],
