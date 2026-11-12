@@ -1241,9 +1241,9 @@ export const recipes: Recipe[] = [
       "Boiled sweet potato and corn, for serving"
     ],
     steps: [
-      "1. Cut the chilled fish into 1/2-inch cubes. Thinly slice the onion and peppers.",
-      "2. Combine fish, onion, peppers, lime juice, and salt. Refrigerate for 5-15 minutes.",
-      "3. Stir in cilantro and adjust seasoning. Serve immediately with sweet potato and corn."
+      "Cut the chilled fish into 1/2-inch cubes. Thinly slice the onion and peppers.",
+      "Combine fish, onion, peppers, lime juice, and salt. Refrigerate for 5-15 minutes.",
+      "Stir in cilantro and adjust seasoning. Serve immediately with sweet potato and corn."
     ]
   },
   {
@@ -1267,11 +1267,11 @@ export const recipes: Recipe[] = [
       "Salt and black pepper"
     ],
     steps: [
-      "1. Mix masarepa, water, oil, salt, and sazón into a smooth dough. Cover and rest for 20 minutes.",
-      "2. Boil potatoes until tender, about 20 minutes. Drain and mash.",
-      "3. Sauté onion, tomato, and garlic. Add beef, season, and cook until browned and fairly dry. Mix with potatoes and cilantro.",
-      "4. Flatten small dough balls between sheets of plastic. Fill with beef mixture, fold into half-moons, and seal.",
-      "5. Fry at 350°F until crisp and golden, about 3-5 minutes per batch."
+      "Mix masarepa, water, oil, salt, and sazón into a smooth dough. Cover and rest for 20 minutes.",
+      "Boil potatoes until tender, about 20 minutes. Drain and mash.",
+      "Sauté onion, tomato, and garlic. Add beef, season, and cook until browned and fairly dry. Mix with potatoes and cilantro.",
+      "Flatten small dough balls between sheets of plastic. Fill with beef mixture, fold into half-moons, and seal.",
+      "Fry at 350°F until crisp and golden, about 3-5 minutes per batch."
     ]
   },
   {
@@ -1289,10 +1289,10 @@ export const recipes: Recipe[] = [
       "2 tbsp neutral oil"
     ],
     steps: [
-      "1. Combine masa harina, salt, and warm water into a soft dough. Rest for 5 minutes.",
-      "2. Divide into 14 balls. Flatten each, add beans and cheese, and seal the filling inside.",
-      "3. Gently flatten into thick discs.",
-      "4. Cook in a lightly oiled skillet over medium heat for 3-4 minutes per side until browned."
+      "Combine masa harina, salt, and warm water into a soft dough. Rest for 5 minutes.",
+      "Divide into 14 balls. Flatten each, add beans and cheese, and seal the filling inside.",
+      "Gently flatten into thick discs.",
+      "Cook in a lightly oiled skillet over medium heat for 3-4 minutes per side until browned."
     ]
   },
   {
@@ -1308,10 +1308,10 @@ export const recipes: Recipe[] = [
       "1/4 cup vegetable oil, as needed for frying"
     ],
     steps: [
-      "1. Dissolve salt in water. Gradually mix in masarepa until a soft dough forms. Rest for 5 minutes.",
-      "2. Divide into 8 balls and flatten into discs about 3/8 inch thick.",
-      "3. Pan-fry in a lightly oiled skillet over medium heat for 5-7 minutes per side until golden and cooked through.",
-      "4. Serve warm, plain or split open for filling."
+      "Dissolve salt in water. Gradually mix in masarepa until a soft dough forms. Rest for 5 minutes.",
+      "Divide into 8 balls and flatten into discs about 3/8 inch thick.",
+      "Pan-fry in a lightly oiled skillet over medium heat for 5-7 minutes per side until golden and cooked through.",
+      "Serve warm, plain or split open for filling."
     ]
   },
   {
@@ -1330,10 +1330,10 @@ export const recipes: Recipe[] = [
       "4 tbsp butter"
     ],
     steps: [
-      "1. Slice bread lengthwise and spread mustard on the inside.",
-      "2. Layer roast pork, ham, Swiss cheese, and pickles. Close the sandwich.",
-      "3. Butter the exterior and press in a sandwich press or weighted skillet for 5-6 minutes per side until crisp and the cheese melts.",
-      "4. Slice diagonally into smaller portions for serving."
+      "Slice bread lengthwise and spread mustard on the inside.",
+      "Layer roast pork, ham, Swiss cheese, and pickles. Close the sandwich.",
+      "Butter the exterior and press in a sandwich press or weighted skillet for 5-6 minutes per side until crisp and the cheese melts.",
+      "Slice diagonally into smaller portions for serving."
     ]
   },
   {
@@ -1355,10 +1355,10 @@ export const recipes: Recipe[] = [
       "Salt and black pepper"
     ],
     steps: [
-      "1. Cook pasta in salted water until al dente. Reserve 1/2 cup pasta water.",
-      "2. Blend spinach, basil, queso fresco, garlic, shallot, walnuts, olive oil, and evaporated milk until smooth.",
-      "3. Season with salt and pepper.",
-      "4. Toss with hot pasta, adding reserved pasta water as needed to loosen the sauce."
+      "Cook pasta in salted water until al dente. Reserve 1/2 cup pasta water.",
+      "Blend spinach, basil, queso fresco, garlic, shallot, walnuts, olive oil, and evaporated milk until smooth.",
+      "Season with salt and pepper.",
+      "Toss with hot pasta, adding reserved pasta water as needed to loosen the sauce."
     ]
   },
   {
@@ -1389,12 +1389,12 @@ export const recipes: Recipe[] = [
       "Chopped onion and cilantro, for serving"
     ],
     steps: [
-      "1. Soak guajillo chilies in hot water for 15 minutes. Blend with chipotles, vinegar, tomatoes, garlic, oregano, cumin, and paprika until smooth.",
-      "2. Season beef with salt and pepper. Coat with chili mixture and marinate for at least 2 hours.",
-      "3. Sauté onion in a large pot. Add beef, marinade, cinnamon, bay leaves, cloves, and enough stock to nearly cover.",
-      "4. Cover and simmer gently for 3-4 hours until the beef shreds easily. Remove bones and whole spices, then shred the meat.",
-      "5. Dip tortillas in the fat from the braising liquid. Fill with beef and cheese, fold, and fry in a skillet until crisp.",
-      "6. Serve with chopped onion, cilantro, and warm consommé for dipping."
+      "Soak guajillo chilies in hot water for 15 minutes. Blend with chipotles, vinegar, tomatoes, garlic, oregano, cumin, and paprika until smooth.",
+      "Season beef with salt and pepper. Coat with chili mixture and marinate for at least 2 hours.",
+      "Sauté onion in a large pot. Add beef, marinade, cinnamon, bay leaves, cloves, and enough stock to nearly cover.",
+      "Cover and simmer gently for 3-4 hours until the beef shreds easily. Remove bones and whole spices, then shred the meat.",
+      "Dip tortillas in the fat from the braising liquid. Fill with beef and cheese, fold, and fry in a skillet until crisp.",
+      "Serve with chopped onion, cilantro, and warm consommé for dipping."
     ]
   },
   {
@@ -1420,11 +1420,11 @@ export const recipes: Recipe[] = [
       "1/4 tsp black pepper"
     ],
     steps: [
-      "1. Preheat oven to 425°F.",
-      "2. Combine olive oil, brown sugar, thyme, spices, salt, and pepper into a paste.",
-      "3. Pat chicken dry and rub seasoning thoroughly over and underneath the skin.",
-      "4. Arrange on a baking sheet and roast for 40-50 minutes until browned and cooked through, reaching at least 165°F internally.",
-      "5. Serve with pan juices."
+      "Preheat oven to 425°F.",
+      "Combine olive oil, brown sugar, thyme, spices, salt, and pepper into a paste.",
+      "Pat chicken dry and rub seasoning thoroughly over and underneath the skin.",
+      "Arrange on a baking sheet and roast for 40-50 minutes until browned and cooked through, reaching at least 165°F internally.",
+      "Serve with pan juices."
     ]
   },
   {
@@ -1451,12 +1451,12 @@ export const recipes: Recipe[] = [
       "Fresh parsley, for serving"
     ],
     steps: [
-      "1. Season chicken with salt. Squeeze citrus over chicken and rub with the cut halves. Add onion, garlic, chilies, and thyme. Marinate refrigerated for 12-24 hours.",
-      "2. Preheat oven to 375°F. Remove chicken from marinade, reserving the marinade. Pat chicken dry.",
-      "3. Heat olive oil in an ovenproof pot and brown chicken skin-side down for about 8 minutes. Remove.",
-      "4. Add tomato paste and cook for 2-3 minutes. Add bell peppers and reserved marinade, cooking until slightly softened.",
-      "5. Return chicken to pot. Add stock, cover, and braise in the oven for about 1 hour until tender and cooked through.",
-      "6. Adjust seasoning and garnish with parsley."
+      "Season chicken with salt. Squeeze citrus over chicken and rub with the cut halves. Add onion, garlic, chilies, and thyme. Marinate refrigerated for 12-24 hours.",
+      "Preheat oven to 375°F. Remove chicken from marinade, reserving the marinade. Pat chicken dry.",
+      "Heat olive oil in an ovenproof pot and brown chicken skin-side down for about 8 minutes. Remove.",
+      "Add tomato paste and cook for 2-3 minutes. Add bell peppers and reserved marinade, cooking until slightly softened.",
+      "Return chicken to pot. Add stock, cover, and braise in the oven for about 1 hour until tender and cooked through.",
+      "Adjust seasoning and garnish with parsley."
     ]
   },
   {
@@ -1488,11 +1488,11 @@ export const recipes: Recipe[] = [
       "Salt, to taste"
     ],
     steps: [
-      "1. Season oxtail with brown sugar, soy sauce, Worcestershire, allspice, garlic powder, black pepper, and browning sauce.",
-      "2. Heat oil in a Dutch oven and brown oxtail on all sides. Remove.",
-      "3. Sauté onion, scallions, garlic, carrots, and Scotch bonnet until softened.",
-      "4. Return oxtail to pot with stock, ketchup, and thyme. Cover and simmer gently for 3-4 hours until tender, adding stock as needed.",
-      "5. Stir in butter beans and cornstarch slurry. Simmer for 5-10 minutes until sauce thickens. Adjust salt and serve."
+      "Season oxtail with brown sugar, soy sauce, Worcestershire, allspice, garlic powder, black pepper, and browning sauce.",
+      "Heat oil in a Dutch oven and brown oxtail on all sides. Remove.",
+      "Sauté onion, scallions, garlic, carrots, and Scotch bonnet until softened.",
+      "Return oxtail to pot with stock, ketchup, and thyme. Cover and simmer gently for 3-4 hours until tender, adding stock as needed.",
+      "Stir in butter beans and cornstarch slurry. Simmer for 5-10 minutes until sauce thickens. Adjust salt and serve."
     ]
   },
   {
@@ -1517,10 +1517,10 @@ export const recipes: Recipe[] = [
       "Salt, to taste"
     ],
     steps: [
-      "1. Heat olive oil in a skillet. Sauté onion, bell pepper, and garlic until softened, about 5 minutes.",
-      "2. Add ground beef and cook until browned, breaking into small pieces.",
-      "3. Stir in tomato sauce, olives, raisins, capers, sazón, cumin, and sugar.",
-      "4. Cover and simmer for 10 minutes. Adjust salt and serve with rice."
+      "Heat olive oil in a skillet. Sauté onion, bell pepper, and garlic until softened, about 5 minutes.",
+      "Add ground beef and cook until browned, breaking into small pieces.",
+      "Stir in tomato sauce, olives, raisins, capers, sazón, cumin, and sugar.",
+      "Cover and simmer for 10 minutes. Adjust salt and serve with rice."
     ]
   },
   {
@@ -1550,11 +1550,11 @@ export const recipes: Recipe[] = [
       "Salt and black pepper"
     ],
     steps: [
-      "1. Preheat oven to 275°F. Season ribs with adobo.",
-      "2. Blend cilantro, red onion, bell pepper, 4 garlic cloves, and 3 tbsp olive oil into a sofrito. Rub over ribs.",
-      "3. Wrap ribs tightly in foil and bake for 3-3 1/2 hours until tender.",
-      "4. For the glaze, sauté yellow onion, pickles, and remaining garlic in 1 tbsp olive oil. Add guava purée, rum, ketchup, mustard, brown sugar, and Maggi. Simmer 10 minutes until thickened.",
-      "5. Unwrap ribs, brush with glaze, and broil or grill for 5-8 minutes until caramelized. Season to taste and serve."
+      "Preheat oven to 275°F. Season ribs with adobo.",
+      "Blend cilantro, red onion, bell pepper, 4 garlic cloves, and 3 tbsp olive oil into a sofrito. Rub over ribs.",
+      "Wrap ribs tightly in foil and bake for 3-3 1/2 hours until tender.",
+      "For the glaze, sauté yellow onion, pickles, and remaining garlic in 1 tbsp olive oil. Add guava purée, rum, ketchup, mustard, brown sugar, and Maggi. Simmer 10 minutes until thickened.",
+      "Unwrap ribs, brush with glaze, and broil or grill for 5-8 minutes until caramelized. Season to taste and serve."
     ]
   },
   {
@@ -1578,11 +1578,11 @@ export const recipes: Recipe[] = [
       "Cooked white rice, for serving"
     ],
     steps: [
-      "1. Heat 1 tbsp oil in a large skillet over high heat. Season beef with salt and pepper and sear until browned. Remove.",
-      "2. Add remaining oil and sauté red onion until lightly browned, about 3-5 minutes.",
-      "3. Add tomato, garlic, and ají amarillo paste. Cook until tomatoes soften but retain their shape.",
-      "4. Add soy sauce and vinegar. Simmer for 1 minute.",
-      "5. Return beef to pan with hot fries and cilantro. Toss gently and serve immediately with rice."
+      "Heat 1 tbsp oil in a large skillet over high heat. Season beef with salt and pepper and sear until browned. Remove.",
+      "Add remaining oil and sauté red onion until lightly browned, about 3-5 minutes.",
+      "Add tomato, garlic, and ají amarillo paste. Cook until tomatoes soften but retain their shape.",
+      "Add soy sauce and vinegar. Simmer for 1 minute.",
+      "Return beef to pan with hot fries and cilantro. Toss gently and serve immediately with rice."
     ]
   },
   {
@@ -1607,11 +1607,11 @@ export const recipes: Recipe[] = [
       "Salt and black pepper"
     ],
     steps: [
-      "1. Place beef in a pot, cover with water, and season with salt. Simmer gently for about 2 hours until tender.",
-      "2. Remove beef and shred with two forks. Reserve some cooking liquid.",
-      "3. Heat olive oil in a large skillet. Sauté onion, green pepper, pimientos, and garlic until softened.",
-      "4. Add tomato sauce, wine, cumin, oregano, and bay leaf. Simmer for 15 minutes.",
-      "5. Stir in shredded beef and cook for another 10-15 minutes, adding reserved liquid if needed. Season and serve."
+      "Place beef in a pot, cover with water, and season with salt. Simmer gently for about 2 hours until tender.",
+      "Remove beef and shred with two forks. Reserve some cooking liquid.",
+      "Heat olive oil in a large skillet. Sauté onion, green pepper, pimientos, and garlic until softened.",
+      "Add tomato sauce, wine, cumin, oregano, and bay leaf. Simmer for 15 minutes.",
+      "Stir in shredded beef and cook for another 10-15 minutes, adding reserved liquid if needed. Season and serve."
     ]
   },
   {
@@ -1634,11 +1634,11 @@ export const recipes: Recipe[] = [
       "Salt, to taste"
     ],
     steps: [
-      "1. Heat olive oil in a caldero or Dutch oven. Sauté ham or bacon with sofrito for 3-4 minutes.",
-      "2. Stir in tomato paste, sazón, oregano, bay leaves, pigeon peas, and broth. Bring to a boil.",
-      "3. Add rice and stir to distribute evenly. Cook uncovered until most visible liquid is absorbed.",
-      "4. Stir once, cover, and reduce heat to low. Steam for 20-25 minutes until rice is tender and fluffy.",
-      "5. Rest covered for 5 minutes before serving."
+      "Heat olive oil in a caldero or Dutch oven. Sauté ham or bacon with sofrito for 3-4 minutes.",
+      "Stir in tomato paste, sazón, oregano, bay leaves, pigeon peas, and broth. Bring to a boil.",
+      "Add rice and stir to distribute evenly. Cook uncovered until most visible liquid is absorbed.",
+      "Stir once, cover, and reduce heat to low. Steam for 20-25 minutes until rice is tender and fluffy.",
+      "Rest covered for 5 minutes before serving."
     ]
   },
   {
@@ -1660,10 +1660,10 @@ export const recipes: Recipe[] = [
       "1/2 cup olive oil"
     ],
     steps: [
-      "1. Peel plantains and slice diagonally into 1/2-inch pieces.",
-      "2. Heat neutral oil in a skillet over medium heat. Fry plantains for 3-5 minutes per side until golden and caramelized.",
-      "3. Blend mint, parsley, lemon juice, orange juice, garlic, capers, onion, and olive oil into a smooth sauce.",
-      "4. Serve warm plantains with mint mojo."
+      "Peel plantains and slice diagonally into 1/2-inch pieces.",
+      "Heat neutral oil in a skillet over medium heat. Fry plantains for 3-5 minutes per side until golden and caramelized.",
+      "Blend mint, parsley, lemon juice, orange juice, garlic, capers, onion, and olive oil into a smooth sauce.",
+      "Serve warm plantains with mint mojo."
     ]
   },
   {
@@ -1681,11 +1681,11 @@ export const recipes: Recipe[] = [
       "1/4-1/2 cup water, as needed"
     ],
     steps: [
-      "1. Preheat broiler. Place tomatoes and peppers on a foil-lined baking sheet and broil for 2-5 minutes per side until charred.",
-      "2. Cool slightly. Core tomatoes and remove charred skins. Remove pepper stems.",
-      "3. Soak chopped onion in cold water for 5 minutes, then drain.",
-      "4. Blend tomatoes, peppers, onion, cilantro, and salt to the desired consistency.",
-      "5. Thin with water if needed. Rest for 30 minutes before serving."
+      "Preheat broiler. Place tomatoes and peppers on a foil-lined baking sheet and broil for 2-5 minutes per side until charred.",
+      "Cool slightly. Core tomatoes and remove charred skins. Remove pepper stems.",
+      "Soak chopped onion in cold water for 5 minutes, then drain.",
+      "Blend tomatoes, peppers, onion, cilantro, and salt to the desired consistency.",
+      "Thin with water if needed. Rest for 30 minutes before serving."
     ]
   },
   {
@@ -1704,9 +1704,9 @@ export const recipes: Recipe[] = [
       "Salt and black pepper"
     ],
     steps: [
-      "1. Combine tomatoes, onion, garlic, jalapeño, and lime juice.",
-      "2. Season with salt and pepper. Stir in half the cilantro.",
-      "3. Rest for 30-60 minutes. Adjust seasoning and garnish with remaining cilantro."
+      "Combine tomatoes, onion, garlic, jalapeño, and lime juice.",
+      "Season with salt and pepper. Stir in half the cilantro.",
+      "Rest for 30-60 minutes. Adjust seasoning and garnish with remaining cilantro."
     ]
   },
   {
@@ -1723,11 +1723,11 @@ export const recipes: Recipe[] = [
       "Ground cinnamon, for serving"
     ],
     steps: [
-      "1. Whisk cornstarch into one can of coconut milk until completely smooth.",
-      "2. Combine with remaining coconut milk, sugar, and salt in a saucepan.",
-      "3. Cook over medium heat, stirring constantly, until thickened and bubbling, about 5-8 minutes.",
-      "4. Pour into individual molds or a serving dish. Cool, then refrigerate for at least 3 hours.",
-      "5. Unmold if desired and dust with cinnamon."
+      "Whisk cornstarch into one can of coconut milk until completely smooth.",
+      "Combine with remaining coconut milk, sugar, and salt in a saucepan.",
+      "Cook over medium heat, stirring constantly, until thickened and bubbling, about 5-8 minutes.",
+      "Pour into individual molds or a serving dish. Cool, then refrigerate for at least 3 hours.",
+      "Unmold if desired and dust with cinnamon."
     ]
   },
   {
@@ -1763,13 +1763,13 @@ export const recipes: Recipe[] = [
       "Sauce: 1/4 tsp salt"
     ],
     steps: [
-      "1. Preheat oven to 350°F. Grease and line a 9-inch round cake pan with parchment.",
-      "2. Spread coconut and walnuts in the pan. Melt topping butter with brown sugar, stir in rum, and pour over coconut mixture.",
-      "3. Whisk flour, baking powder, salt, cinnamon, and cardamom.",
-      "4. Cream cake butter with both sugars. Beat in eggs and vanilla. Mix in dry ingredients, alternating with coconut milk and sour cream, until just combined.",
-      "5. Spread batter over topping. Bake for 45-50 minutes until a toothpick comes out clean. Cool briefly, then invert onto a rack.",
-      "6. For sauce, combine sauce ingredients in a saucepan. Bring to a boil, then simmer for 2-3 minutes while stirring.",
-      "7. Serve cake with warm rum sauce."
+      "Preheat oven to 350°F. Grease and line a 9-inch round cake pan with parchment.",
+      "Spread coconut and walnuts in the pan. Melt topping butter with brown sugar, stir in rum, and pour over coconut mixture.",
+      "Whisk flour, baking powder, salt, cinnamon, and cardamom.",
+      "Cream cake butter with both sugars. Beat in eggs and vanilla. Mix in dry ingredients, alternating with coconut milk and sour cream, until just combined.",
+      "Spread batter over topping. Bake for 45-50 minutes until a toothpick comes out clean. Cool briefly, then invert onto a rack.",
+      "For sauce, combine sauce ingredients in a saucepan. Bring to a boil, then simmer for 2-3 minutes while stirring.",
+      "Serve cake with warm rum sauce."
     ]
   },
   {
@@ -1789,11 +1789,11 @@ export const recipes: Recipe[] = [
       "1 tsp ground cinnamon"
     ],
     steps: [
-      "1. Combine water, 2 1/2 tbsp sugar, oil, and salt in a saucepan. Bring to a boil and remove from heat.",
-      "2. Stir in flour until a smooth dough forms. Allow to cool slightly.",
-      "3. Transfer dough to a sturdy piping bag fitted with a star tip.",
-      "4. Heat frying oil to 375°F. Pipe 5-6 inch strips into hot oil and fry until golden and crisp.",
-      "5. Drain briefly and roll in cinnamon sugar while warm."
+      "Combine water, 2 1/2 tbsp sugar, oil, and salt in a saucepan. Bring to a boil and remove from heat.",
+      "Stir in flour until a smooth dough forms. Allow to cool slightly.",
+      "Transfer dough to a sturdy piping bag fitted with a star tip.",
+      "Heat frying oil to 375°F. Pipe 5-6 inch strips into hot oil and fry until golden and crisp.",
+      "Drain briefly and roll in cinnamon sugar while warm."
     ]
   },
   {
@@ -1818,13 +1818,13 @@ export const recipes: Recipe[] = [
       "Topping: 1 tsp cinnamon, optional"
     ],
     steps: [
-      "1. Combine flour, sugar, yeast, and salt. Mix in butter, eggs, vanilla, and warm milk. Knead for 7-10 minutes until soft and elastic.",
-      "2. Transfer to a greased bowl, cover, and let rise until doubled, about 1-2 hours.",
-      "3. Cream shortening and powdered sugar, then mix in flour to form a soft paste. Divide and add cocoa or cinnamon if desired.",
-      "4. Divide risen dough into 16 balls and arrange on greased baking sheets.",
-      "5. Flatten topping into thin discs and press onto each dough ball. Score a shell pattern with a knife.",
-      "6. Cover and let rise until nearly doubled, about 1-2 hours.",
-      "7. Bake at 325°F for about 20 minutes until the bottoms are lightly golden."
+      "Combine flour, sugar, yeast, and salt. Mix in butter, eggs, vanilla, and warm milk. Knead for 7-10 minutes until soft and elastic.",
+      "Transfer to a greased bowl, cover, and let rise until doubled, about 1-2 hours.",
+      "Cream shortening and powdered sugar, then mix in flour to form a soft paste. Divide and add cocoa or cinnamon if desired.",
+      "Divide risen dough into 16 balls and arrange on greased baking sheets.",
+      "Flatten topping into thin discs and press onto each dough ball. Score a shell pattern with a knife.",
+      "Cover and let rise until nearly doubled, about 1-2 hours.",
+      "Bake at 325°F for about 20 minutes until the bottoms are lightly golden."
     ]
   },
   {
@@ -1850,13 +1850,13 @@ export const recipes: Recipe[] = [
       "Ground cinnamon, for garnish"
     ],
     steps: [
-      "1. Preheat oven to 350°F. Whisk flour, baking powder, and salt.",
-      "2. Beat egg yolks with 3/4 cup sugar until pale. Mix in 1/3 cup milk and vanilla, then fold into flour mixture.",
-      "3. Beat egg whites to soft peaks, gradually adding remaining 1/4 cup sugar. Continue to stiff peaks and gently fold into batter.",
-      "4. Pour into an ungreased 9x13-inch baking dish. Bake for 25-35 minutes until cooked through. Cool completely.",
-      "5. Combine evaporated milk, condensed milk, and 1/4 cup whole milk. Poke holes throughout the cake and slowly pour mixture over the top.",
-      "6. Refrigerate for at least 1 hour, preferably overnight.",
-      "7. Whip heavy cream with powdered sugar and vanilla until stiff peaks form. Spread over cake and finish with cinnamon."
+      "Preheat oven to 350°F. Whisk flour, baking powder, and salt.",
+      "Beat egg yolks with 3/4 cup sugar until pale. Mix in 1/3 cup milk and vanilla, then fold into flour mixture.",
+      "Beat egg whites to soft peaks, gradually adding remaining 1/4 cup sugar. Continue to stiff peaks and gently fold into batter.",
+      "Pour into an ungreased 9x13-inch baking dish. Bake for 25-35 minutes until cooked through. Cool completely.",
+      "Combine evaporated milk, condensed milk, and 1/4 cup whole milk. Poke holes throughout the cake and slowly pour mixture over the top.",
+      "Refrigerate for at least 1 hour, preferably overnight.",
+      "Whip heavy cream with powdered sugar and vanilla until stiff peaks form. Spread over cake and finish with cinnamon."
     ]
   },
 ];
