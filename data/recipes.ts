@@ -1184,7 +1184,7 @@ export const recipes: Recipe[] = [
     type: "drink",
     blurb: "Distilled soju with Korean pear, yuja, lemon, and sparkling water.",
     ingredients: [
-      "2 oz distilled soju (ideally 25-40% ABV)",
+      "2 oz distilled soju",
       "1 oz Korean pear juice",
       "1/2 oz fresh lemon juice",
       "1/4 oz yuja-cheong (sweetened Korean citron preserve)",
@@ -1222,6 +1222,641 @@ export const recipes: Recipe[] = [
       "Top with 3 oz sparkling water and stir gently.",
       "Finish with a tiny pinch of freshly ground black pepper.",
       "Taste and adjust ginger or sweetness as needed."
+    ]
+  },
+  //DICE-Latin-Caribbean-Night
+  {
+    slug: "peruvian-ceviche",
+    title: "Peruvian Ceviche",
+    course: "Antipasti",
+    type: "seafood",
+    blurb: "Peruvian fish ceviche with lime, red onion, chili, and cilantro.",
+    ingredients: [
+      "1 1/2 lbs white fish suitable for raw consumption, diced",
+      "1 red onion, thinly sliced",
+      "1 cup fresh lime juice",
+      "1-2 habanero or ají limo peppers, deseeded and sliced",
+      "1/4 cup fresh cilantro, chopped",
+      "Salt, to taste",
+      "Boiled sweet potato and corn, for serving"
+    ],
+    steps: [
+      "1. Cut the chilled fish into 1/2-inch cubes. Thinly slice the onion and peppers.",
+      "2. Combine fish, onion, peppers, lime juice, and salt. Refrigerate for 5-15 minutes.",
+      "3. Stir in cilantro and adjust seasoning. Serve immediately with sweet potato and corn."
+    ]
+  },
+  {
+    slug: "colombian-empanadas",
+    title: "Colombian Empanadas",
+    course: "Antipasti",
+    type: "meat",
+    blurb: "Colombian corn empanadas filled with seasoned beef and potatoes.",
+    ingredients: [
+      "1 1/2 cups precooked yellow cornmeal (masarepa)",
+      "2 cups warm water",
+      "1 tbsp vegetable oil, plus oil for frying",
+      "1/2 tsp salt",
+      "1/2 tbsp sazón with achiote",
+      "2 cups potatoes, peeled and diced",
+      "1/2 lb ground beef",
+      "1/4 cup white onion, chopped",
+      "1 cup tomato, chopped",
+      "1 garlic clove, minced",
+      "2 tbsp cilantro, chopped",
+      "Salt and black pepper"
+    ],
+    steps: [
+      "1. Mix masarepa, water, oil, salt, and sazón into a smooth dough. Cover and rest for 20 minutes.",
+      "2. Boil potatoes until tender, about 20 minutes. Drain and mash.",
+      "3. Sauté onion, tomato, and garlic. Add beef, season, and cook until browned and fairly dry. Mix with potatoes and cilantro.",
+      "4. Flatten small dough balls between sheets of plastic. Fill with beef mixture, fold into half-moons, and seal.",
+      "5. Fry at 350°F until crisp and golden, about 3-5 minutes per batch."
+    ]
+  },
+  {
+    slug: "pupusas",
+    title: "Pupusas",
+    course: "Antipasti",
+    type: "vegetarian",
+    blurb: "Salvadoran corn cakes stuffed with beans and cheese.",
+    ingredients: [
+      "3 cups masa harina",
+      "2 3/4 cups warm water",
+      "2 tsp salt",
+      "1 cup shredded mozzarella",
+      "1/2 cup refried beans",
+      "2 tbsp neutral oil"
+    ],
+    steps: [
+      "1. Combine masa harina, salt, and warm water into a soft dough. Rest for 5 minutes.",
+      "2. Divide into 14 balls. Flatten each, add beans and cheese, and seal the filling inside.",
+      "3. Gently flatten into thick discs.",
+      "4. Cook in a lightly oiled skillet over medium heat for 3-4 minutes per side until browned."
+    ]
+  },
+  {
+    slug: "arepas",
+    title: "Arepas",
+    course: "Antipasti",
+    type: "vegetarian",
+    blurb: "Colombian and Venezuelan corn cakes with a crisp crust and soft center.",
+    ingredients: [
+      "2 cups precooked white cornmeal (masarepa)",
+      "2 1/2 cups lukewarm water",
+      "1 tsp salt",
+      "1/4 cup vegetable oil, as needed for frying"
+    ],
+    steps: [
+      "1. Dissolve salt in water. Gradually mix in masarepa until a soft dough forms. Rest for 5 minutes.",
+      "2. Divide into 8 balls and flatten into discs about 3/8 inch thick.",
+      "3. Pan-fry in a lightly oiled skillet over medium heat for 5-7 minutes per side until golden and cooked through.",
+      "4. Serve warm, plain or split open for filling."
+    ]
+  },
+  {
+    slug: "cuban-sandwiches",
+    title: "Cuban Sandwiches",
+    course: "Antipasti",
+    type: "meat",
+    blurb: "Cuban-American pressed sandwiches with roast pork, ham, Swiss cheese, and pickles.",
+    ingredients: [
+      "1 large loaf Cuban bread",
+      "1 lb cooked roast pork, sliced",
+      "1 lb sliced ham",
+      "4 oz Swiss cheese, sliced",
+      "4 oz dill pickles, sliced",
+      "2 tbsp yellow mustard",
+      "4 tbsp butter"
+    ],
+    steps: [
+      "1. Slice bread lengthwise and spread mustard on the inside.",
+      "2. Layer roast pork, ham, Swiss cheese, and pickles. Close the sandwich.",
+      "3. Butter the exterior and press in a sandwich press or weighted skillet for 5-6 minutes per side until crisp and the cheese melts.",
+      "4. Slice diagonally into smaller portions for serving."
+    ]
+  },
+  {
+    slug: "tallarines-verdes",
+    title: "Tallarines Verdes",
+    course: "Primo",
+    type: "pasta",
+    blurb: "Peruvian pasta with creamy spinach, basil, and queso fresco sauce.",
+    ingredients: [
+      "1 lb spaghetti or linguine",
+      "2 cups packed spinach",
+      "1 cup packed fresh basil",
+      "5 oz queso fresco",
+      "2 garlic cloves",
+      "1/2 shallot",
+      "1/4 cup walnuts",
+      "1/4 cup olive oil",
+      "1/4 cup evaporated milk",
+      "Salt and black pepper"
+    ],
+    steps: [
+      "1. Cook pasta in salted water until al dente. Reserve 1/2 cup pasta water.",
+      "2. Blend spinach, basil, queso fresco, garlic, shallot, walnuts, olive oil, and evaporated milk until smooth.",
+      "3. Season with salt and pepper.",
+      "4. Toss with hot pasta, adding reserved pasta water as needed to loosen the sauce."
+    ]
+  },
+  {
+    slug: "birria-tacos",
+    title: "Birria Tacos",
+    course: "Primo",
+    type: "meat",
+    blurb: "Mexican braised beef tacos with chilies, melted cheese, and consommé.",
+    ingredients: [
+      "1 1/2 lbs beef shank",
+      "1 lb beef chuck or sirloin",
+      "3 dried guajillo chilies, deseeded",
+      "2 chipotle peppers in adobo",
+      "1/4 cup vinegar",
+      "1/2 cup crushed tomatoes",
+      "5 garlic cloves",
+      "1 tsp dried oregano",
+      "1 tsp ground cumin",
+      "1/2 tsp smoked paprika",
+      "1 onion, chopped",
+      "1 cinnamon stick",
+      "2 bay leaves",
+      "6 whole cloves",
+      "3-4 cups chicken or beef stock",
+      "Salt and black pepper",
+      "12-16 corn tortillas",
+      "1 cup shredded Oaxaca or mozzarella cheese",
+      "Chopped onion and cilantro, for serving"
+    ],
+    steps: [
+      "1. Soak guajillo chilies in hot water for 15 minutes. Blend with chipotles, vinegar, tomatoes, garlic, oregano, cumin, and paprika until smooth.",
+      "2. Season beef with salt and pepper. Coat with chili mixture and marinate for at least 2 hours.",
+      "3. Sauté onion in a large pot. Add beef, marinade, cinnamon, bay leaves, cloves, and enough stock to nearly cover.",
+      "4. Cover and simmer gently for 3-4 hours until the beef shreds easily. Remove bones and whole spices, then shred the meat.",
+      "5. Dip tortillas in the fat from the braising liquid. Fill with beef and cheese, fold, and fry in a skillet until crisp.",
+      "6. Serve with chopped onion, cilantro, and warm consommé for dipping."
+    ]
+  },
+  {
+    slug: "jamaican-jerk-chicken",
+    title: "Jamaican Jerk Chicken",
+    course: "Secondo",
+    type: "poultry",
+    blurb: "Jamaican-style roasted chicken with allspice, thyme, and warm spices.",
+    ingredients: [
+      "10 chicken drumsticks",
+      "1/3 cup olive oil",
+      "2 tbsp brown sugar",
+      "1 tbsp dried thyme",
+      "2 tsp ground allspice",
+      "2 tsp smoked paprika",
+      "1 tsp ground ginger",
+      "1 tsp ground cloves",
+      "1/2 tsp ground cinnamon",
+      "1 tsp cayenne pepper",
+      "1 tsp garlic powder",
+      "1 tsp onion powder",
+      "2 tsp kosher salt",
+      "1/4 tsp black pepper"
+    ],
+    steps: [
+      "1. Preheat oven to 425°F.",
+      "2. Combine olive oil, brown sugar, thyme, spices, salt, and pepper into a paste.",
+      "3. Pat chicken dry and rub seasoning thoroughly over and underneath the skin.",
+      "4. Arrange on a baking sheet and roast for 40-50 minutes until browned and cooked through, reaching at least 165°F internally.",
+      "5. Serve with pan juices."
+    ]
+  },
+  {
+    slug: "haitian-poul-nan-sos",
+    title: "Poul Nan Sos",
+    course: "Secondo",
+    type: "poultry",
+    blurb: "Haitian chicken braised with citrus, peppers, garlic, and tomato.",
+    ingredients: [
+      "3 lbs bone-in chicken thighs and drumsticks",
+      "2 yellow onions, thinly sliced",
+      "2 Scotch bonnet or habanero peppers, sliced",
+      "8 garlic cloves, sliced",
+      "1/4 cup fresh thyme leaves",
+      "1 orange",
+      "1 lime",
+      "1 lemon",
+      "2 red bell peppers, sliced",
+      "2 yellow bell peppers, sliced",
+      "1/2 cup tomato paste",
+      "2 cups chicken stock",
+      "1/3 cup olive oil",
+      "Kosher salt, to taste",
+      "Fresh parsley, for serving"
+    ],
+    steps: [
+      "1. Season chicken with salt. Squeeze citrus over chicken and rub with the cut halves. Add onion, garlic, chilies, and thyme. Marinate refrigerated for 12-24 hours.",
+      "2. Preheat oven to 375°F. Remove chicken from marinade, reserving the marinade. Pat chicken dry.",
+      "3. Heat olive oil in an ovenproof pot and brown chicken skin-side down for about 8 minutes. Remove.",
+      "4. Add tomato paste and cook for 2-3 minutes. Add bell peppers and reserved marinade, cooking until slightly softened.",
+      "5. Return chicken to pot. Add stock, cover, and braise in the oven for about 1 hour until tender and cooked through.",
+      "6. Adjust seasoning and garnish with parsley."
+    ]
+  },
+  {
+    slug: "jamaican-oxtail",
+    title: "Jamaican Oxtail",
+    course: "Secondo",
+    type: "meat",
+    blurb: "Jamaican braised oxtail with allspice, thyme, and butter beans.",
+    ingredients: [
+      "2 1/2 lbs oxtail",
+      "1/4 cup brown sugar",
+      "1 tbsp soy sauce",
+      "1 tbsp Worcestershire sauce",
+      "1 tsp ground allspice",
+      "2 tsp garlic powder",
+      "1 tsp black pepper",
+      "1 tsp browning sauce",
+      "2 tbsp vegetable oil",
+      "1 yellow onion, chopped",
+      "4 scallions, chopped",
+      "3 garlic cloves, minced",
+      "2 carrots, chopped",
+      "1 Scotch bonnet or habanero pepper, deseeded",
+      "2 cups beef stock, plus more as needed",
+      "1 tbsp ketchup",
+      "1 tsp dried thyme",
+      "1 can (16 oz) butter beans, drained",
+      "1 tbsp cornstarch mixed with 2 tbsp water",
+      "Salt, to taste"
+    ],
+    steps: [
+      "1. Season oxtail with brown sugar, soy sauce, Worcestershire, allspice, garlic powder, black pepper, and browning sauce.",
+      "2. Heat oil in a Dutch oven and brown oxtail on all sides. Remove.",
+      "3. Sauté onion, scallions, garlic, carrots, and Scotch bonnet until softened.",
+      "4. Return oxtail to pot with stock, ketchup, and thyme. Cover and simmer gently for 3-4 hours until tender, adding stock as needed.",
+      "5. Stir in butter beans and cornstarch slurry. Simmer for 5-10 minutes until sauce thickens. Adjust salt and serve."
+    ]
+  },
+  {
+    slug: "cuban-picadillo",
+    title: "Cuban Picadillo",
+    course: "Secondo",
+    type: "meat",
+    blurb: "Cuban ground beef with tomato, green olives, raisins, and spices.",
+    ingredients: [
+      "1 lb ground beef",
+      "1 tbsp olive oil",
+      "1 small onion, chopped",
+      "1/2 green bell pepper, chopped",
+      "1 garlic clove, minced",
+      "8 oz tomato sauce",
+      "6 green olives, quartered",
+      "1/2 cup raisins",
+      "1 tbsp capers",
+      "1 tsp sazón seasoning",
+      "1 tsp ground cumin",
+      "1 tsp sugar",
+      "Salt, to taste"
+    ],
+    steps: [
+      "1. Heat olive oil in a skillet. Sauté onion, bell pepper, and garlic until softened, about 5 minutes.",
+      "2. Add ground beef and cook until browned, breaking into small pieces.",
+      "3. Stir in tomato sauce, olives, raisins, capers, sazón, cumin, and sugar.",
+      "4. Cover and simmer for 10 minutes. Adjust salt and serve with rice."
+    ]
+  },
+  {
+    slug: "rum-guava-spareribs",
+    title: "Rum and Guava Spareribs",
+    course: "Secondo",
+    type: "meat",
+    blurb: "Dominican-inspired pork ribs with a sweet rum and guava glaze.",
+    ingredients: [
+      "5 lbs pork spareribs, membranes removed",
+      "2 tsp adobo seasoning",
+      "1/2 cup fresh cilantro",
+      "1/2 red onion",
+      "1/2 green bell pepper",
+      "4 garlic cloves",
+      "3 tbsp olive oil, for sofrito",
+      "1 tbsp olive oil, for glaze",
+      "1 cup yellow onion, chopped",
+      "1/4 cup dill pickles, chopped",
+      "2 garlic cloves, minced",
+      "2/3 cup guava purée",
+      "1/3 cup aged rum",
+      "1/2 cup ketchup",
+      "2 tbsp Dijon mustard",
+      "2 tbsp brown sugar",
+      "1 tbsp Maggi seasoning",
+      "Salt and black pepper"
+    ],
+    steps: [
+      "1. Preheat oven to 275°F. Season ribs with adobo.",
+      "2. Blend cilantro, red onion, bell pepper, 4 garlic cloves, and 3 tbsp olive oil into a sofrito. Rub over ribs.",
+      "3. Wrap ribs tightly in foil and bake for 3-3 1/2 hours until tender.",
+      "4. For the glaze, sauté yellow onion, pickles, and remaining garlic in 1 tbsp olive oil. Add guava purée, rum, ketchup, mustard, brown sugar, and Maggi. Simmer 10 minutes until thickened.",
+      "5. Unwrap ribs, brush with glaze, and broil or grill for 5-8 minutes until caramelized. Season to taste and serve."
+    ]
+  },
+  {
+    slug: "lomo-saltado",
+    title: "Lomo Saltado",
+    course: "Secondo",
+    type: "meat",
+    blurb: "Peruvian stir-fried beef with tomatoes, onions, soy sauce, and fries.",
+    ingredients: [
+      "1 lb sirloin steak, sliced into strips",
+      "2 tbsp vegetable oil",
+      "1/2 red onion, sliced",
+      "1 medium tomato, sliced",
+      "2 garlic cloves, minced",
+      "1 tbsp ají amarillo paste",
+      "2 tbsp soy sauce",
+      "1 tbsp white vinegar",
+      "1 tbsp fresh cilantro, chopped",
+      "1 lb cooked French fries",
+      "Salt and black pepper",
+      "Cooked white rice, for serving"
+    ],
+    steps: [
+      "1. Heat 1 tbsp oil in a large skillet over high heat. Season beef with salt and pepper and sear until browned. Remove.",
+      "2. Add remaining oil and sauté red onion until lightly browned, about 3-5 minutes.",
+      "3. Add tomato, garlic, and ají amarillo paste. Cook until tomatoes soften but retain their shape.",
+      "4. Add soy sauce and vinegar. Simmer for 1 minute.",
+      "5. Return beef to pan with hot fries and cilantro. Toss gently and serve immediately with rice."
+    ]
+  },
+  {
+    slug: "ropa-vieja",
+    title: "Ropa Vieja",
+    course: "Secondo",
+    type: "meat",
+    blurb: "Cuban shredded beef braised with peppers, tomato, and spices.",
+    ingredients: [
+      "2 lbs flank steak",
+      "Water, enough to cover the beef",
+      "1/3 cup olive oil",
+      "1 yellow onion, diced",
+      "1 green bell pepper, sliced",
+      "7 oz jarred red pimientos, sliced",
+      "4 garlic cloves, minced",
+      "8 oz tomato sauce",
+      "1/2 cup dry white cooking wine",
+      "1 tsp ground cumin",
+      "1 tsp dried oregano",
+      "1 bay leaf",
+      "Salt and black pepper"
+    ],
+    steps: [
+      "1. Place beef in a pot, cover with water, and season with salt. Simmer gently for about 2 hours until tender.",
+      "2. Remove beef and shred with two forks. Reserve some cooking liquid.",
+      "3. Heat olive oil in a large skillet. Sauté onion, green pepper, pimientos, and garlic until softened.",
+      "4. Add tomato sauce, wine, cumin, oregano, and bay leaf. Simmer for 15 minutes.",
+      "5. Stir in shredded beef and cook for another 10-15 minutes, adding reserved liquid if needed. Season and serve."
+    ]
+  },
+  {
+    slug: "arroz-con-gandules",
+    title: "Arroz con Gandules",
+    course: "Contorno",
+    type: "rice",
+    blurb: "Puerto Rican rice with pigeon peas, sofrito, and sazón.",
+    ingredients: [
+      "2 cups parboiled rice",
+      "1 can (15 oz) pigeon peas, drained",
+      "1/3 cup sofrito",
+      "1 tbsp olive oil",
+      "1/3 cup diced country ham or bacon",
+      "2 tbsp tomato paste",
+      "1 1/2 tsp sazón with achiote",
+      "1 tsp dried oregano",
+      "2 bay leaves",
+      "3 cups chicken broth or water",
+      "Salt, to taste"
+    ],
+    steps: [
+      "1. Heat olive oil in a caldero or Dutch oven. Sauté ham or bacon with sofrito for 3-4 minutes.",
+      "2. Stir in tomato paste, sazón, oregano, bay leaves, pigeon peas, and broth. Bring to a boil.",
+      "3. Add rice and stir to distribute evenly. Cook uncovered until most visible liquid is absorbed.",
+      "4. Stir once, cover, and reduce heat to low. Steam for 20-25 minutes until rice is tender and fluffy.",
+      "5. Rest covered for 5 minutes before serving."
+    ]
+  },
+  {
+    slug: "maduros-mint-mojo",
+    title: "Maduros with Mint Mojo",
+    course: "Contorno",
+    type: "vegetarian",
+    blurb: "Caribbean-style fried sweet plantains with Cuban-inspired mint mojo.",
+    ingredients: [
+      "2 very ripe plantains",
+      "Neutral oil, for frying",
+      "1/2 cup fresh mint leaves",
+      "1 cup fresh parsley",
+      "1 1/2 tbsp lemon juice",
+      "2 tbsp orange juice",
+      "2 garlic cloves",
+      "1/4 cup capers",
+      "1 small onion",
+      "1/2 cup olive oil"
+    ],
+    steps: [
+      "1. Peel plantains and slice diagonally into 1/2-inch pieces.",
+      "2. Heat neutral oil in a skillet over medium heat. Fry plantains for 3-5 minutes per side until golden and caramelized.",
+      "3. Blend mint, parsley, lemon juice, orange juice, garlic, capers, onion, and olive oil into a smooth sauce.",
+      "4. Serve warm plantains with mint mojo."
+    ]
+  },
+  {
+    slug: "green-tomato-salsa-verde",
+    title: "Green Tomato Salsa Verde",
+    course: "Contorno",
+    type: "sauce",
+    blurb: "Mexican-style roasted green tomato salsa with chilies and cilantro.",
+    ingredients: [
+      "1 lb green unripe tomatoes",
+      "2-3 jalapeño or serrano peppers",
+      "1/2 white onion, chopped",
+      "1/2 cup fresh cilantro, chopped",
+      "Salt, to taste",
+      "1/4-1/2 cup water, as needed"
+    ],
+    steps: [
+      "1. Preheat broiler. Place tomatoes and peppers on a foil-lined baking sheet and broil for 2-5 minutes per side until charred.",
+      "2. Cool slightly. Core tomatoes and remove charred skins. Remove pepper stems.",
+      "3. Soak chopped onion in cold water for 5 minutes, then drain.",
+      "4. Blend tomatoes, peppers, onion, cilantro, and salt to the desired consistency.",
+      "5. Thin with water if needed. Rest for 30 minutes before serving."
+    ]
+  },
+  {
+    slug: "pico-de-gallo",
+    title: "Pico de Gallo",
+    course: "Contorno",
+    type: "sauce",
+    blurb: "Mexican fresh tomato salsa with onion, jalapeño, lime, and cilantro.",
+    ingredients: [
+      "2 cups tomatoes, peeled, seeded, and chopped",
+      "1 cup white onion or scallions, minced",
+      "1 garlic clove, minced",
+      "1 jalapeño, minced",
+      "Juice of 1 lime",
+      "1/2 cup cilantro, chopped",
+      "Salt and black pepper"
+    ],
+    steps: [
+      "1. Combine tomatoes, onion, garlic, jalapeño, and lime juice.",
+      "2. Season with salt and pepper. Stir in half the cilantro.",
+      "3. Rest for 30-60 minutes. Adjust seasoning and garnish with remaining cilantro."
+    ]
+  },
+  {
+    slug: "tembleque",
+    title: "Tembleque",
+    course: "Dolce",
+    type: "dessert",
+    blurb: "Puerto Rican coconut pudding with cinnamon.",
+    ingredients: [
+      "2 cans (13.5 oz each) coconut milk",
+      "1/2 cup cornstarch",
+      "2/3 cup sugar",
+      "1/2 tsp salt",
+      "Ground cinnamon, for serving"
+    ],
+    steps: [
+      "1. Whisk cornstarch into one can of coconut milk until completely smooth.",
+      "2. Combine with remaining coconut milk, sugar, and salt in a saucepan.",
+      "3. Cook over medium heat, stirring constantly, until thickened and bubbling, about 5-8 minutes.",
+      "4. Pour into individual molds or a serving dish. Cool, then refrigerate for at least 3 hours.",
+      "5. Unmold if desired and dust with cinnamon."
+    ]
+  },
+  {
+    slug: "caribbean-coconut-rum-cake",
+    title: "Caribbean Coconut Rum Cake",
+    course: "Dolce",
+    type: "dessert",
+    blurb: "Caribbean-inspired coconut and walnut cake with a buttery rum sauce.",
+    ingredients: [
+      "Topping: 1/2 cup sweetened coconut flakes",
+      "Topping: 1/3 cup chopped walnuts",
+      "Topping: 1/4 cup unsalted butter",
+      "Topping: 3/4 cup brown sugar",
+      "Topping: 2 tbsp dark rum",
+      "Cake: 1 3/4 cups all-purpose flour",
+      "Cake: 1 1/2 tsp baking powder",
+      "Cake: 1 tsp kosher salt",
+      "Cake: 1/2 tsp ground cinnamon",
+      "Cake: 1/4 tsp ground cardamom",
+      "Cake: 1/2 cup unsalted butter, softened",
+      "Cake: 1/2 cup white sugar",
+      "Cake: 1/2 cup brown sugar",
+      "Cake: 2 eggs",
+      "Cake: 1 tbsp vanilla extract",
+      "Cake: 3/4 cup coconut milk",
+      "Cake: 1/4 cup sour cream",
+      "Sauce: 1/2 cup unsalted butter",
+      "Sauce: 1/2 cup brown sugar",
+      "Sauce: 1/4 cup dark rum",
+      "Sauce: 2 tbsp dark corn syrup",
+      "Sauce: 2 tbsp heavy cream",
+      "Sauce: 1 tsp vanilla extract",
+      "Sauce: 1/4 tsp salt"
+    ],
+    steps: [
+      "1. Preheat oven to 350°F. Grease and line a 9-inch round cake pan with parchment.",
+      "2. Spread coconut and walnuts in the pan. Melt topping butter with brown sugar, stir in rum, and pour over coconut mixture.",
+      "3. Whisk flour, baking powder, salt, cinnamon, and cardamom.",
+      "4. Cream cake butter with both sugars. Beat in eggs and vanilla. Mix in dry ingredients, alternating with coconut milk and sour cream, until just combined.",
+      "5. Spread batter over topping. Bake for 45-50 minutes until a toothpick comes out clean. Cool briefly, then invert onto a rack.",
+      "6. For sauce, combine sauce ingredients in a saucepan. Bring to a boil, then simmer for 2-3 minutes while stirring.",
+      "7. Serve cake with warm rum sauce."
+    ]
+  },
+  {
+    slug: "churros",
+    title: "Churros",
+    course: "Dolce",
+    type: "dessert",
+    blurb: "Spanish-origin fried pastries coated in cinnamon sugar.",
+    ingredients: [
+      "1 cup water",
+      "2 1/2 tbsp sugar",
+      "2 tbsp vegetable oil",
+      "1/2 tsp salt",
+      "1 cup all-purpose flour",
+      "Neutral oil, for deep frying",
+      "1/2 cup sugar, for coating",
+      "1 tsp ground cinnamon"
+    ],
+    steps: [
+      "1. Combine water, 2 1/2 tbsp sugar, oil, and salt in a saucepan. Bring to a boil and remove from heat.",
+      "2. Stir in flour until a smooth dough forms. Allow to cool slightly.",
+      "3. Transfer dough to a sturdy piping bag fitted with a star tip.",
+      "4. Heat frying oil to 375°F. Pipe 5-6 inch strips into hot oil and fry until golden and crisp.",
+      "5. Drain briefly and roll in cinnamon sugar while warm."
+    ]
+  },
+  {
+    slug: "conchas",
+    title: "Conchas",
+    course: "Dolce",
+    type: "bread",
+    blurb: "Mexican sweet bread with a shell-patterned sugar crust.",
+    ingredients: [
+      "Dough: 500 g all-purpose flour",
+      "Dough: 125 g sugar",
+      "Dough: 2 1/2 tsp instant yeast",
+      "Dough: 1/2 tsp salt",
+      "Dough: 100 g unsalted butter, softened",
+      "Dough: 2 large eggs",
+      "Dough: 1 tsp vanilla extract",
+      "Dough: 1/2 cup warm milk",
+      "Topping: 100 g vegetable shortening",
+      "Topping: 100 g powdered sugar",
+      "Topping: 120 g all-purpose flour",
+      "Topping: 1 tsp cocoa powder, optional",
+      "Topping: 1 tsp cinnamon, optional"
+    ],
+    steps: [
+      "1. Combine flour, sugar, yeast, and salt. Mix in butter, eggs, vanilla, and warm milk. Knead for 7-10 minutes until soft and elastic.",
+      "2. Transfer to a greased bowl, cover, and let rise until doubled, about 1-2 hours.",
+      "3. Cream shortening and powdered sugar, then mix in flour to form a soft paste. Divide and add cocoa or cinnamon if desired.",
+      "4. Divide risen dough into 16 balls and arrange on greased baking sheets.",
+      "5. Flatten topping into thin discs and press onto each dough ball. Score a shell pattern with a knife.",
+      "6. Cover and let rise until nearly doubled, about 1-2 hours.",
+      "7. Bake at 325°F for about 20 minutes until the bottoms are lightly golden."
+    ]
+  },
+  {
+    slug: "tres-leches",
+    title: "Tres Leches",
+    course: "Dolce",
+    type: "dessert",
+    blurb: "Latin American sponge cake soaked in three milks and topped with cream.",
+    ingredients: [
+      "Cake: 1 cup all-purpose flour",
+      "Cake: 1 1/2 tsp baking powder",
+      "Cake: 1/4 tsp salt",
+      "Cake: 5 eggs, separated",
+      "Cake: 1 cup sugar, divided",
+      "Cake: 1/3 cup whole milk",
+      "Cake: 1 tsp vanilla extract",
+      "Soak: 1 can (12 oz) evaporated milk",
+      "Soak: 1 can (14 oz) sweetened condensed milk",
+      "Soak: 1/4 cup whole milk",
+      "Topping: 2 cups heavy whipping cream",
+      "Topping: 3 tbsp powdered sugar",
+      "Topping: 1/2 tsp vanilla extract",
+      "Ground cinnamon, for garnish"
+    ],
+    steps: [
+      "1. Preheat oven to 350°F. Whisk flour, baking powder, and salt.",
+      "2. Beat egg yolks with 3/4 cup sugar until pale. Mix in 1/3 cup milk and vanilla, then fold into flour mixture.",
+      "3. Beat egg whites to soft peaks, gradually adding remaining 1/4 cup sugar. Continue to stiff peaks and gently fold into batter.",
+      "4. Pour into an ungreased 9x13-inch baking dish. Bake for 25-35 minutes until cooked through. Cool completely.",
+      "5. Combine evaporated milk, condensed milk, and 1/4 cup whole milk. Poke holes throughout the cake and slowly pour mixture over the top.",
+      "6. Refrigerate for at least 1 hour, preferably overnight.",
+      "7. Whip heavy cream with powdered sugar and vanilla until stiff peaks form. Spread over cake and finish with cinnamon."
     ]
   },
 ];
