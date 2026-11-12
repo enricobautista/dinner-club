@@ -691,6 +691,156 @@ export const menus: Menu[] = [
       }
     ]
   },
+  {
+    slug: "DICE-latin-american-caribbean-menu",
+    location: "TBD",
+    dateISO: "2026-06-12",
+    hosts: ["Dr. Perez Colon", "USF Wellness Committee", "USF DICE"],
+    guestLimit: 100,
+    guests: [],
+    courses: [
+      {
+        heading: "Antipasti",
+        items: [
+          {
+            name: "Peruvian Ceviche",
+            recipeSlug: "peruvian-ceviche",
+            blurb: "Peruvian fish ceviche with lime, red onion, chili, and cilantro."
+          },
+          {
+            name: "Colombian Empanadas",
+            recipeSlug: "colombian-empanadas",
+            blurb: "Colombian corn empanadas filled with seasoned beef and potatoes."
+          },
+          {
+            name: "Pupusas",
+            recipeSlug: "pupusas",
+            blurb: "Salvadoran corn cakes stuffed with beans and cheese."
+          },
+          {
+            name: "Arepas",
+            recipeSlug: "arepas",
+            blurb: "Colombian and Venezuelan corn cakes with a crisp crust and soft center."
+          },
+          {
+            name: "Cuban Sandwiches",
+            recipeSlug: "cuban-sandwiches",
+            blurb: "Cuban-American pressed sandwiches with roast pork, ham, Swiss cheese, and pickles."
+          }
+        ]
+      },
+      {
+        heading: "Primo",
+        items: [
+          {
+            name: "Tallarines Verdes",
+            recipeSlug: "tallarines-verdes",
+            blurb: "Peruvian pasta with creamy spinach, basil, and queso fresco sauce."
+          },
+          {
+            name: "Birria Tacos",
+            recipeSlug: "birria-tacos",
+            blurb: "Mexican braised beef tacos with chilies, melted cheese, and consommé."
+          }
+        ]
+      },
+      {
+        heading: "Secondo",
+        items: [
+          {
+            name: "Jamaican Jerk Chicken",
+            recipeSlug: "jamaican-jerk-chicken",
+            blurb: "Jamaican-style roasted chicken with allspice, thyme, and warm spices."
+          },
+          {
+            name: "Poul Nan Sos",
+            recipeSlug: "haitian-poul-nan-sos",
+            blurb: "Haitian chicken braised with citrus, peppers, garlic, and tomato."
+          },
+          {
+            name: "Jamaican Oxtail",
+            recipeSlug: "jamaican-oxtail",
+            blurb: "Jamaican braised oxtail with allspice, thyme, and butter beans."
+          },
+          {
+            name: "Cuban Picadillo",
+            recipeSlug: "cuban-picadillo",
+            blurb: "Cuban ground beef with tomato, green olives, raisins, and spices."
+          },
+          {
+            name: "Rum and Guava Spareribs",
+            recipeSlug: "rum-guava-spareribs",
+            blurb: "Dominican-inspired pork ribs with a sweet rum and guava glaze."
+          },
+          {
+            name: "Lomo Saltado",
+            recipeSlug: "lomo-saltado",
+            blurb: "Peruvian stir-fried beef with tomatoes, onions, soy sauce, and fries."
+          },
+          {
+            name: "Ropa Vieja",
+            recipeSlug: "ropa-vieja",
+            blurb: "Cuban shredded beef braised with peppers, tomato, and spices."
+          }
+        ]
+      },
+      {
+        heading: "Contorno",
+        items: [
+          {
+            name: "Arroz con Gandules",
+            recipeSlug: "arroz-con-gandules",
+            blurb: "Puerto Rican rice with pigeon peas, sofrito, and sazón."
+          },
+          {
+            name: "Maduros with Mint Mojo",
+            recipeSlug: "maduros-mint-mojo",
+            blurb: "Caribbean-style fried sweet plantains with Cuban-inspired mint mojo."
+          },
+          {
+            name: "Green Tomato Salsa Verde",
+            recipeSlug: "green-tomato-salsa-verde",
+            blurb: "Mexican-style roasted green tomato salsa with chilies and cilantro."
+          },
+          {
+            name: "Pico de Gallo",
+            recipeSlug: "pico-de-gallo",
+            blurb: "Mexican fresh tomato salsa with onion, jalapeño, lime, and cilantro."
+          }
+        ]
+      },
+      {
+        heading: "Dolce",
+        items: [
+          {
+            name: "Tembleque",
+            recipeSlug: "tembleque",
+            blurb: "Puerto Rican coconut pudding with cinnamon."
+          },
+          {
+            name: "Caribbean Coconut Rum Cake",
+            recipeSlug: "caribbean-coconut-rum-cake",
+            blurb: "Caribbean-inspired coconut and walnut cake with a buttery rum sauce."
+          },
+          {
+            name: "Churros",
+            recipeSlug: "churros",
+            blurb: "Spanish-origin fried pastries coated in cinnamon sugar."
+          },
+          {
+            name: "Conchas",
+            recipeSlug: "conchas",
+            blurb: "Mexican sweet bread with a shell-patterned sugar crust."
+          },
+          {
+            name: "Tres Leches",
+            recipeSlug: "tres-leches",
+            blurb: "Latin American sponge cake soaked in three milks and topped with cream."
+          }
+        ]
+      }
+    ]
+  },
 ];
 
 function normalizeSlug(input: string) {
