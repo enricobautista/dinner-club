@@ -63,3 +63,22 @@ test('admin-only deletion releases dish claims', () => {
   const deleted = updateGuestList(guests, menu, 10, { action: 'delete', id: guests[0].id }, true);
   assert.equal(add(deleted, { dishes: ['Rice'] }).length, 1);
 });
+
+test('public removal frees a signup, its plus one, and all its dishes', () => {
+  const guests = add(add([], { dishes: ['Rice', 'Cake'], plusOne: true }), { name: 'Sam', dishes: ['Beans'] });
+  const removed = updateGuestList(guests, menu, 3, { action: 'remove', id: guests[0].id }, false);
+  assert.deepEqual(removed, [guests[1]]);
+  const replacement = updateGuestList(removed, menu, 3, { action: 'add', name: 'Replacement', plusOne: true, dishes: ['Rice', 'Cake'] }, false);
+  assert.equal(replacement.length, 2);
+  assert.equal(guests.length, 2);
+});
+
+test('public removal requires an exact existing guest ID', () => {
+  const guests = add([], { dishes: ['Rice'] });
+  for (const id of [undefined, '', ' ', 1]) {
+    rejects(() => updateGuestList(guests, menu, 10, { action: 'remove', id, name: 'Alex' }, false), 400);
+  }
+  rejects(() => updateGuestList(guests, menu, 10, { action: 'remove', id: 'missing' }, false), 404);
+  const standard = add([], {}, { potluck: false });
+  assert.deepEqual(updateGuestList(standard, { ...menu, potluck: false }, 10, { action: 'remove', id: standard[0].id }, false), []);
+});

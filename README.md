@@ -87,6 +87,10 @@ a dish releases the old choice. One dish is required per signup, including a
 signup bringing a plus one. Dish choices also appear in the host dashboard, CSV,
 and archive export.
 
+To remove a signup, open **Edit guest list**, choose **Edit** beside that guest,
+then **Remove guest** and confirm. This frees their spot, their plus one's spot,
+and all their dish choices. Removal is available for standard menus as well.
+
 Signups use the existing `BLOB_READ_WRITE_TOKEN`; no new service is needed.
 Uncached reads and conditional Blob writes prevent simultaneous saves from
 claiming the same dish or overwriting another signup. Failed saves keep the form

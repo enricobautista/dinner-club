@@ -20,6 +20,7 @@ export default function GuestListModal({ slug, limit, seedGuests = EMPTY_GUESTS,
   const [dietary, setDietary] = useState("");
   const [dishes, setDishes] = useState<string[]>([]);
   const [editingId, setEditingId] = useState<string | null>(null);
+  const [confirmRemoval, setConfirmRemoval] = useState(false);
   const [editName, setEditName] = useState("");
   const [editPlusOne, setEditPlusOne] = useState(false);
   const [editDietary, setEditDietary] = useState("");
@@ -81,7 +82,7 @@ export default function GuestListModal({ slug, limit, seedGuests = EMPTY_GUESTS,
       }
       setGuests(data.guests);
       window.dispatchEvent(new CustomEvent("guestlist:updated", { detail: { slug } }));
-      setMessage(body.action === "add" ? "Saved! You're on the list." : "Guest updated.");
+      setMessage(body.action === "add" ? "Saved! You're on the list." : body.action === "remove" ? "Guest removed." : "Guest updated.");
       return true;
     } catch (err) {
       setError(err instanceof Error ? err.message : "Could not save guest. Please try again.");
@@ -98,6 +99,7 @@ export default function GuestListModal({ slug, limit, seedGuests = EMPTY_GUESTS,
   }
 
   function startEdit(g: Guest) {
+    setConfirmRemoval(false);
     setEditingId(g.id || null); setEditName(g.name); setEditPlusOne(!!g.plusOne);
     setEditDietary(g.dietary || ""); setEditDishes(g.dishes || []); setError(null); setMessage(null);
   }
@@ -106,6 +108,14 @@ export default function GuestListModal({ slug, limit, seedGuests = EMPTY_GUESTS,
     if (!editingId || !editName.trim() || (potluck && !selectedEditDishes.length)) return;
     if (await save({ action: "edit", id: editingId, name: editName.trim(), plusOne: editPlusOne,
       dietary: editDietary.trim(), ...(potluck ? { dishes: selectedEditDishes } : {}) })) setEditingId(null);
+  }
+
+  async function removeGuest() {
+    if (!editingId || !ready || saving) return;
+    if (await save({ action: "remove", id: editingId })) {
+      setEditingId(null);
+      setConfirmRemoval(false);
+    }
   }
 
   if (!open) return null;
@@ -142,7 +152,16 @@ export default function GuestListModal({ slug, limit, seedGuests = EMPTY_GUESTS,
                   <input className="guest-input underline grow" value={editDietary} onChange={e => setEditDietary(e.target.value)} aria-label="Edit dietary" placeholder="Dietary (optional)" />
                   {potluck ? <DishChecklist courses={courses} guests={guests} selected={selectedEditDishes} onChange={setEditDishes} editingId={editingId} /> : null}
                   <button className="guest-btn primary" type="button" disabled={!editName.trim() || (potluck && !selectedEditDishes.length)} onClick={saveEdit}>Save</button>
-                  <button className="guest-btn ghost" type="button" onClick={() => setEditingId(null)}>Cancel</button>
+                  <button className="guest-btn ghost" type="button" onClick={() => { setEditingId(null); setConfirmRemoval(false); }}>Cancel</button>
+                  {confirmRemoval ? (
+                    <div style={{ flexBasis: "100%" }}>
+                      <p>Remove {g.name}{g.plusOne ? " and their plus one" : ""} from the guest list?{g.dishes?.length ? " Their dishes will become available again." : ""}</p>
+                      <button className="guest-btn ghost" type="button" onClick={removeGuest} aria-label={`Confirm removal of ${g.name}`}>Confirm removal</button>
+                      <button className="guest-btn ghost" type="button" onClick={() => setConfirmRemoval(false)}>Keep guest</button>
+                    </div>
+                  ) : (
+                    <button className="guest-btn ghost" type="button" onClick={() => setConfirmRemoval(true)} aria-label={`Remove ${g.name}`}>Remove guest</button>
+                  )}
                 </fieldset>
               ) : (
                 <div>

@@ -8,8 +8,12 @@ export class GuestListError extends Error {
 export function updateGuestList(
   current: Guest[], menu: Menu, limit: number, body: Record<string, unknown>, canDelete: boolean,
 ): Guest[] {
-  if (body.action === "delete") {
-    if (!canDelete) throw new GuestListError("Unauthorized", 401);
+  if (body.action === "delete" || body.action === "remove") {
+    if (body.action === "delete" && !canDelete) throw new GuestListError("Unauthorized", 401);
+    // Public removal uses an exact signup ID; the admin tool retains its name fallback.
+    if (body.action === "remove" && (typeof body.id !== "string" || !body.id.trim())) {
+      throw new GuestListError("Guest id required");
+    }
     const index = current.findIndex(g => body.id ? g.id === body.id :
       typeof body.name === "string" && g.name.toLowerCase() === body.name.trim().toLowerCase());
     if (index < 0) throw new GuestListError("Guest not found", 404);
