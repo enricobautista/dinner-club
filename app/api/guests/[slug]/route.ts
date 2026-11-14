@@ -1,177 +1,61 @@
-import { put, list } from "@vercel/blob";
+import { put, BlobPreconditionFailedError } from "@vercel/blob";
 import { NextRequest, NextResponse } from "next/server";
 import { getGuestLimit, getMenu } from "@/data/menus";
+import { GuestListError, updateGuestList } from "@/lib/guest-list";
+import { guestKey, readGuestList } from "@/lib/guest-storage";
 
-type GuestEdit = { ts: number; field: "name" | "dietary" | "plusOne"; from: any; to: any };
-type Guest = { id: string; name: string; plusOne?: boolean; dietary?: string; history?: GuestEdit[] };
+const headers = { "Cache-Control": "no-store, no-cache, must-revalidate" };
+type Context = { params: Promise<{ slug: string }> };
 
-const keyFor = (slug: string) => `guestlists/${slug}.json`; // Blob path
-
-function uuid() {
-  // Prefer crypto.randomUUID when available
-  // @ts-ignore
-  if (typeof crypto !== "undefined" && crypto.randomUUID) return crypto.randomUUID();
-  return Math.random().toString(36).slice(2) + Date.now().toString(36);
-}
-
-export async function GET(_: NextRequest, ctx: { params: Promise<{ slug: string }> }) {
+export async function GET(_: NextRequest, ctx: Context) {
   const { slug } = await ctx.params;
-  const s = String(slug || "").trim();
+  const menu = getMenu(slug);
+  if (!menu) return NextResponse.json({ error: "Menu not found" }, { status: 404 });
   try {
-    const menu = getMenu(s);
-    const limit = getGuestLimit(menu || {});
-    // Try to find a blob for this slug
-    const token = process.env.BLOB_READ_WRITE_TOKEN;
-    const items = token ? await list({ prefix: keyFor(s), token }) : { blobs: [] as any[] } as any;
-    let guests: Guest[] = (menu?.guests as Guest[] | undefined) || [];
-    if (items.blobs?.length) {
-      const sorted = items.blobs
-        .slice()
-        .sort((a: any, b: any) => new Date(a.uploadedAt).getTime() - new Date(b.uploadedAt).getTime());
-      const url = sorted[sorted.length - 1].url;
-      const res = await fetch(url, { cache: "no-store" });
-      if (res.ok) {
-        const data = await res.json().catch(() => null);
-        if (Array.isArray(data)) guests = data as Guest[];
-      }
-    }
-    return NextResponse.json({ guests, limit }, { status: 200, headers: { "Cache-Control": "no-store, no-cache, must-revalidate" } });
-  } catch (e) {
-    return NextResponse.json({ error: "Failed to load guest list" }, { status: 500 });
+    const { guests } = await readGuestList(menu, process.env.BLOB_READ_WRITE_TOKEN);
+    return NextResponse.json({ guests, limit: getGuestLimit(menu) }, { headers });
+  } catch {
+    return NextResponse.json({ error: "Failed to load guest list" }, { status: 500, headers });
   }
 }
 
-export async function POST(req: NextRequest, ctx: { params: Promise<{ slug: string }> }) {
+export async function POST(req: NextRequest, ctx: Context) {
   const { slug } = await ctx.params;
-  const s = String(slug || "").trim();
+  const menu = getMenu(slug);
+  if (!menu) return NextResponse.json({ error: "Menu not found" }, { status: 404 });
+  const token = process.env.BLOB_READ_WRITE_TOKEN;
+  if (!token) return NextResponse.json({ error: "Guest list storage is unavailable." }, { status: 503 });
   try {
-    const menu = getMenu(s);
-    const limit = getGuestLimit(menu || {});
-    const key = keyFor(s);
-    const token = process.env.BLOB_READ_WRITE_TOKEN;
-    if (!token) {
-      return NextResponse.json({ error: "Missing BLOB_READ_WRITE_TOKEN env var" }, { status: 500 });
+    const body = await req.json();
+    if (!body || typeof body !== "object" || Array.isArray(body)) {
+      throw new GuestListError("Invalid request");
     }
-    const body = await req.json().catch(() => ({}));
-    const action = String(body?.action || "");
-    const adminToken = req.headers.get("x-admin-token") || req.headers.get("x-api-key") || "";
-    // Load current from blob (or fallback to menu guests)
-    let current: Guest[] = [];
-    const items = await list({ prefix: key, token });
-    if (items.blobs?.length) {
-      const latest = items.blobs
-        .slice()
-        .sort((a: any, b: any) => new Date(a.uploadedAt).getTime() - new Date(b.uploadedAt).getTime())
-        .slice(-1)[0];
-      const res = await fetch(latest.url, { cache: "no-store" });
-      current = (await res.json().catch(() => [])) || [];
-    } else if (Array.isArray(menu?.guests)) {
-      current = (menu!.guests as Guest[]) || [];
-    }
-
-    if (action === "add") {
-      const name = String(body?.name || "").trim();
-      const plusOne = !!body?.plusOne;
-      const dietary = String(body?.dietary || "").trim() || undefined;
-      if (!name) return NextResponse.json({ error: "Name required" }, { status: 400 });
-      const used = current.reduce((acc, g) => acc + 1 + (g.plusOne ? 1 : 0), 0);
-      const willUse = 1 + (plusOne ? 1 : 0);
-      if (used + willUse > limit) return NextResponse.json({ error: "Guest list full" }, { status: 409 });
-      const entry: Guest = { id: uuid(), name, plusOne, dietary, history: [] };
-      const next = [...current, entry];
+    const adminToken = req.headers.get("x-admin-token") || req.headers.get("x-api-key");
+    const canDelete = !!process.env.ADMIN_TOKEN && adminToken === process.env.ADMIN_TOKEN;
+    // Re-read and validate after a competing write so dish claims and capacity remain exclusive.
+    for (let attempt = 0; attempt < 3; attempt++) {
+      const { guests, etag } = await readGuestList(menu, token);
+      const updated = updateGuestList(guests, menu, getGuestLimit(menu), body, canDelete);
       try {
-        await put(key, JSON.stringify(next), {
-          access: "public",
-          contentType: "application/json",
-          addRandomSuffix: false,
-          allowOverwrite: true,
-          token,
+        await put(guestKey(menu.slug), JSON.stringify(updated), {
+          access: "public", contentType: "application/json", addRandomSuffix: false,
+          allowOverwrite: !!etag, ...(etag ? { ifMatch: etag } : {}),
+          cacheControlMaxAge: 60, token,
         });
-      } catch (err: any) {
-        console.error("[blob] add guest write failed", { key, message: err?.message, status: err?.status });
-        return NextResponse.json({ error: "Blob write failed", detail: err?.message || String(err) }, { status: 500 });
+        return NextResponse.json({ ok: true, guests: updated }, { headers });
+      } catch (error) {
+        const creationConflict = !etag && error instanceof Error && /already exists/i.test(error.message);
+        if (error instanceof BlobPreconditionFailedError || creationConflict) continue;
+        throw error;
       }
-      return NextResponse.json({ ok: true, guests: next }, { status: 200, headers: { "Cache-Control": "no-store" } });
     }
-
-    if (action === "edit") {
-      const id = String(body?.id || "").trim();
-      if (!id) return NextResponse.json({ error: "id required" }, { status: 400 });
-      const name = typeof body?.name === "string" ? String(body.name) : undefined;
-      const dietary = typeof body?.dietary === "string" ? String(body.dietary) : undefined;
-      const plusOne = typeof body?.plusOne === "boolean" ? !!body.plusOne : undefined;
-
-      let updated: Guest[] = current.slice();
-      updated = updated.map((g) => {
-        if (g.id !== id) return g;
-        const history = Array.isArray(g.history) ? g.history.slice() : [];
-        const now = Date.now();
-        const next: Guest = { ...g };
-        if (typeof name === "string" && name.trim() !== g.name) {
-          history.push({ ts: now, field: "name", from: g.name, to: name.trim() });
-          next.name = name.trim();
-        }
-        if (typeof plusOne === "boolean" && !!plusOne !== !!g.plusOne) {
-          history.push({ ts: now, field: "plusOne", from: !!g.plusOne, to: !!plusOne });
-          next.plusOne = !!plusOne;
-        }
-        if (typeof dietary === "string" && (g.dietary || "") !== (dietary.trim() || "")) {
-          history.push({ ts: now, field: "dietary", from: g.dietary || "", to: dietary.trim() || "" });
-          next.dietary = dietary.trim() || undefined;
-        }
-        next.history = history;
-        return next;
-      });
-      // Optional: enforce capacity on edit when toggling plusOne
-      const used = updated.reduce((acc, g) => acc + 1 + (g.plusOne ? 1 : 0), 0);
-      if (used > limit) return NextResponse.json({ error: "Guest list full" }, { status: 409 });
-      try {
-        await put(key, JSON.stringify(updated), {
-          access: "public",
-          contentType: "application/json",
-          addRandomSuffix: false,
-          allowOverwrite: true,
-          token,
-        });
-      } catch (err: any) {
-        console.error("[blob] edit guest write failed", { key, message: err?.message, status: err?.status });
-        return NextResponse.json({ error: "Blob write failed", detail: err?.message || String(err) }, { status: 500 });
-      }
-      return NextResponse.json({ ok: true, guests: updated }, { status: 200, headers: { "Cache-Control": "no-store" } });
+    return NextResponse.json({ error: "The guest list just changed. Please try again." }, { status: 409, headers });
+  } catch (error) {
+    if (error instanceof GuestListError) {
+      return NextResponse.json({ error: error.message }, { status: error.status, headers });
     }
-
-    if (action === "delete") {
-      const expected = process.env.ADMIN_TOKEN || "";
-      if (!expected || adminToken !== expected) {
-        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-      }
-      const id = typeof body?.id === "string" ? String(body.id).trim() : "";
-      const name = typeof body?.name === "string" ? String(body.name).trim().toLowerCase() : "";
-      let removeIndex = -1;
-      if (id) removeIndex = current.findIndex((g) => g.id === id);
-      if (removeIndex === -1 && name) {
-        removeIndex = current.findIndex((g) => g.name.trim().toLowerCase() === name);
-      }
-      if (removeIndex === -1) return NextResponse.json({ error: "Guest not found" }, { status: 404 });
-      const updated = current.slice(0, removeIndex).concat(current.slice(removeIndex + 1));
-      try {
-        await put(key, JSON.stringify(updated), {
-          access: "public",
-          contentType: "application/json",
-          addRandomSuffix: false,
-          allowOverwrite: true,
-          token,
-        });
-      } catch (err: any) {
-        console.error("[blob] delete guest write failed", { key, message: err?.message, status: err?.status });
-        return NextResponse.json({ error: "Blob write failed", detail: err?.message || String(err) }, { status: 500 });
-      }
-      return NextResponse.json({ ok: true, guests: updated }, { status: 200, headers: { "Cache-Control": "no-store" } });
-    }
-
-    return NextResponse.json({ error: "Unsupported action" }, { status: 400 });
-  } catch (e) {
-    return NextResponse.json({ error: "Failed to update guest list", detail: (e as any)?.message || String(e) }, { status: 500 });
+    console.error("Guest list update failed", error);
+    return NextResponse.json({ error: "Could not save the guest list. Please try again." }, { status: 500, headers });
   }
 }
 export const dynamic = "force-dynamic";

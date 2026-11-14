@@ -1,14 +1,9 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-
-export type Guest = {
-  id?: string;
-  name: string;
-  plusOne?: boolean;
-  dietary?: string;
-  history?: { ts: number; field: "name"|"dietary"|"plusOne"; from: any; to: any }[];
-};
+import type { Guest } from "@/data/menus";
+export type { Guest } from "@/data/menus";
+const EMPTY_GUESTS: Guest[] = [];
 
 type Props = {
   slug: string;
@@ -30,7 +25,7 @@ async function fetchGuests(slug: string, seed: Guest[] = []): Promise<Guest[]> {
   }
 }
 
-export default function GuestListDisplay({ slug, limit, seedGuests = [], showJoinButton, onJoinClick, heading = "Guest List" }: Props) {
+export default function GuestListDisplay({ slug, limit, seedGuests = EMPTY_GUESTS, showJoinButton, onJoinClick, heading = "Guest List" }: Props) {
   const [guests, setGuests] = useState<Guest[]>(seedGuests);
 
   useEffect(() => {
@@ -43,10 +38,9 @@ export default function GuestListDisplay({ slug, limit, seedGuests = [], showJoi
     return () => {
       if (typeof window !== "undefined") window.removeEventListener("guestlist:updated", onUpdated as EventListener);
     };
-  }, [slug]);
+  }, [slug, seedGuests]);
 
   const usedSpots = useMemo(() => guests.reduce((acc, g) => acc + 1 + (g.plusOne ? 1 : 0), 0), [guests]);
-  const remaining = Math.max(0, limit - usedSpots);
 
   const title = String(heading || "Guest List").toUpperCase();
   return (
@@ -61,6 +55,7 @@ export default function GuestListDisplay({ slug, limit, seedGuests = [], showJoi
             <span style={{ fontWeight: 600 }}>{g.name}</span>
             {g.plusOne ? <span style={{ opacity:.8 }}> +1</span> : null}
             {g.dietary ? <span style={{ opacity:.8 }}> — {g.dietary}</span> : null}
+            {g.dishes?.length ? <p className="guest-dishes">Bringing: {g.dishes.join(", ")}</p> : null}
           </li>
         ))}
       </ul>

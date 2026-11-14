@@ -1,282 +1,172 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import type { Course, Guest } from "@/data/menus";
+import DishChecklist from "./DishChecklist";
+export type { Guest, GuestEdit } from "@/data/menus";
 
-export type GuestEdit = { ts: number; field: "name"|"dietary"|"plusOne"; from: any; to: any };
-export type Guest = {
-  id?: string;
-  name: string;
-  plusOne?: boolean;
-  dietary?: string;
-  history?: GuestEdit[];
-};
-
+const EMPTY_GUESTS: Guest[] = [];
+const EMPTY_COURSES: Course[] = [];
 type Props = {
-  slug: string;
-  limit: number;
-  seedGuests?: Guest[];
-  open: boolean;
-  onClose: () => void;
-  cost?: number;
+  slug: string; limit: number; seedGuests?: Guest[]; open: boolean; onClose: () => void;
+  cost?: number; potluck?: boolean; courses?: Course[];
 };
 
-function uuid() {
-  if (typeof crypto !== "undefined" && (crypto as any).randomUUID) return (crypto as any).randomUUID();
-  return Math.random().toString(36).slice(2) + Date.now().toString(36);
-}
-
-function normalizeGuests(arr: Guest[]): Guest[] {
-  return (arr || []).map(g => ({ ...g, id: g.id || uuid(), history: g.history || [] }));
-}
-
-async function apiFetchGuests(slug: string, seed: Guest[] = []): Promise<Guest[]> {
-  try {
-    const res = await fetch(`/api/guests/${encodeURIComponent(slug)}`, { cache: "no-store" });
-    if (!res.ok) return normalizeGuests(seed);
-    const data = await res.json();
-    const guests = Array.isArray(data?.guests) ? (data.guests as Guest[]) : seed;
-    return normalizeGuests(guests);
-  } catch {
-    return normalizeGuests(seed);
-  }
-}
-
-async function apiAddGuest(slug: string, g: { name: string; plusOne?: boolean; dietary?: string }) {
-  const res = await fetch(`/api/guests/${encodeURIComponent(slug)}`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ action: "add", ...g }),
-  });
-  if (!res.ok) {
-    let msg = "Add failed";
-    try {
-      const j = await res.json();
-      if (j?.error) {
-        msg = j.detail ? `${j.error}: ${j.detail}` : j.error;
-      } else if (j?.detail) {
-        msg = `Add failed: ${j.detail}`;
-      }
-    } catch {}
-    throw new Error(msg);
-  }
-  return res.json();
-}
-
-async function apiEditGuest(slug: string, g: { id: string; name?: string; plusOne?: boolean; dietary?: string }) {
-  const res = await fetch(`/api/guests/${encodeURIComponent(slug)}`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ action: "edit", ...g }),
-  });
-  if (!res.ok) {
-    let msg = "Edit failed";
-    try {
-      const j = await res.json();
-      if (j?.error) {
-        msg = j.detail ? `${j.error}: ${j.detail}` : j.error;
-      } else if (j?.detail) {
-        msg = `Edit failed: ${j.detail}`;
-      }
-    } catch {}
-    throw new Error(msg);
-  }
-  return res.json();
-}
-
-export default function GuestListModal({ slug, limit, seedGuests = [], open, onClose, cost }: Props) {
+export default function GuestListModal({ slug, limit, seedGuests = EMPTY_GUESTS, open, onClose, cost,
+  potluck = false, courses = EMPTY_COURSES }: Props) {
   const [guests, setGuests] = useState<Guest[]>(seedGuests);
   const [name, setName] = useState("");
   const [plusOne, setPlusOne] = useState(false);
   const [dietary, setDietary] = useState("");
+  const [dishes, setDishes] = useState<string[]>([]);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editName, setEditName] = useState("");
   const [editPlusOne, setEditPlusOne] = useState(false);
   const [editDietary, setEditDietary] = useState("");
-  const [toast, setToast] = useState<string | null>(null);
-  const [toastTs, setToastTs] = useState<number>(0);
+  const [editDishes, setEditDishes] = useState<string[]>([]);
+  const [message, setMessage] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [ready, setReady] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const card = useRef<HTMLDivElement>(null);
+  const closeButton = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (!open) return;
-    apiFetchGuests(slug, seedGuests).then(setGuests);
+    let active = true;
+    setReady(false);
+    async function refresh() {
+      try {
+        const res = await fetch(`/api/guests/${encodeURIComponent(slug)}`, { cache: "no-store" });
+        if (!res.ok) throw new Error("Unable to load the guest list. Please reopen it to try again.");
+        const data = await res.json();
+        if (active) { setGuests(data.guests); setReady(true); }
+      } catch (err) {
+        if (active) { setError(err instanceof Error ? err.message : "Unable to load guest list."); setReady(false); }
+      }
+    }
+    refresh();
+    const interval = window.setInterval(refresh, 15000);
+    window.addEventListener("focus", refresh);
+    return () => { active = false; clearInterval(interval); window.removeEventListener("focus", refresh); };
   }, [open, slug]);
 
-  // Broadcast updates to other components/tabs when local state changes due to API success
   useEffect(() => {
-    if (typeof window !== "undefined") {
+    if (!open) return;
+    const previous = document.activeElement as HTMLElement | null;
+    const overflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    closeButton.current?.focus();
+    return () => { document.body.style.overflow = overflow; previous?.focus(); };
+  }, [open]);
+
+  const usedSpots = guests.reduce((sum, g) => sum + 1 + (g.plusOne ? 1 : 0), 0);
+  const remaining = limit - usedSpots;
+  const selectedDishes = dishes.filter(d => !guests.some(g => g.dishes?.includes(d)));
+  const selectedEditDishes = editDishes.filter(d => !guests.some(g => g.id !== editingId && g.dishes?.includes(d)));
+
+  async function save(body: Record<string, unknown>) {
+    setSaving(true); setError(null); setMessage(null);
+    try {
+      const res = await fetch(`/api/guests/${encodeURIComponent(slug)}`, {
+        method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        if (res.status === 409) {
+          const latest = await fetch(`/api/guests/${encodeURIComponent(slug)}`, { cache: "no-store" });
+          if (latest.ok) setGuests((await latest.json()).guests);
+        }
+        throw new Error(data.error || "Could not save guest.");
+      }
+      setGuests(data.guests);
       window.dispatchEvent(new CustomEvent("guestlist:updated", { detail: { slug } }));
-    }
-  }, [guests, slug]);
-
-  const usedSpots = useMemo(() => guests.reduce((acc, g) => acc + 1 + (g.plusOne ? 1 : 0), 0), [guests]);
-  const remaining = Math.max(0, limit - usedSpots);
-  const isFull = remaining <= 0;
-
-  useEffect(() => {
-    if (!toast) return;
-    const created = toastTs;
-    const handle = setTimeout(() => {
-      // Only clear if nothing newer replaced it
-      setToast(prev => (prev && toastTs === created ? null : prev));
-    }, 3000);
-    return () => clearTimeout(handle);
-  }, [toast, toastTs]);
+      setMessage(body.action === "add" ? "Saved! You're on the list." : "Guest updated.");
+      return true;
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Could not save guest. Please try again.");
+      return false;
+    } finally { setSaving(false); }
+  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!name.trim()) return;
-    const willUse = 1 + (plusOne ? 1 : 0);
-    if (willUse > remaining) return; // over limit
-    // Attempt server add first; fall back to optimistic update on failure
-    try {
-      await apiAddGuest(slug, { name: name.trim(), plusOne, dietary: dietary.trim() || undefined });
-      const latest = await apiFetchGuests(slug, seedGuests);
-      setGuests(latest);
-      setToast("Saved! You're on the list.");
-      setToastTs(Date.now());
-    } catch (err: any) {
-      if (typeof window !== "undefined") alert(err?.message || "Could not save guest.");
-      const entry: Guest = { id: uuid(), name: name.trim(), plusOne, dietary: dietary.trim() || undefined, history: [] };
-      setGuests(prev => [...prev, entry]);
+    if (!ready || saving || !name.trim() || (potluck && !selectedDishes.length)) return;
+    if (await save({ action: "add", name: name.trim(), plusOne, dietary: dietary.trim(), ...(potluck ? { dishes: selectedDishes } : {}) })) {
+      setName(""); setPlusOne(false); setDietary(""); setDishes([]);
     }
-    setName("");
-    setPlusOne(false);
-    setDietary("");
   }
 
-  function startEdit(id: string) {
-    const g = guests.find(x => x.id === id);
-    if (!g) return;
-    setEditingId(id);
-    setEditName(g.name);
-    setEditPlusOne(!!g.plusOne);
-    setEditDietary(g.dietary || "");
-  }
-
-  function cancelEdit() {
-    setEditingId(null);
+  function startEdit(g: Guest) {
+    setEditingId(g.id || null); setEditName(g.name); setEditPlusOne(!!g.plusOne);
+    setEditDietary(g.dietary || ""); setEditDishes(g.dishes || []); setError(null); setMessage(null);
   }
 
   async function saveEdit() {
-    if (!editingId) return;
-    try {
-      await apiEditGuest(slug, { id: editingId, name: editName.trim(), plusOne: !!editPlusOne, dietary: editDietary.trim() || "" });
-      const latest = await apiFetchGuests(slug, seedGuests);
-      setGuests(latest);
-      setToast("Guest updated.");
-      setToastTs(Date.now());
-    } catch (err: any) {
-      if (typeof window !== "undefined") alert(err?.message || "Could not edit guest.");
-      setGuests(prev => prev.map(g => {
-        if (g.id !== editingId) return g;
-        const history = g.history ? [...g.history] : [];
-        const now = Date.now();
-        if (g.name !== editName.trim()) history.push({ ts: now, field: "name", from: g.name, to: editName.trim() });
-        if (!!g.plusOne !== !!editPlusOne) history.push({ ts: now, field: "plusOne", from: !!g.plusOne, to: !!editPlusOne });
-        if ((g.dietary || "") !== (editDietary.trim() || "")) history.push({ ts: now, field: "dietary", from: g.dietary || "", to: editDietary.trim() || "" });
-        return { ...g, name: editName.trim(), plusOne: !!editPlusOne, dietary: editDietary.trim() || undefined, history };
-      }));
-    }
-    setEditingId(null);
+    if (!editingId || !editName.trim() || (potluck && !selectedEditDishes.length)) return;
+    if (await save({ action: "edit", id: editingId, name: editName.trim(), plusOne: editPlusOne,
+      dietary: editDietary.trim(), ...(potluck ? { dishes: selectedEditDishes } : {}) })) setEditingId(null);
   }
 
   if (!open) return null;
-
   return (
-    <div className="guest-modal-overlay" role="dialog" aria-modal>
-      <div className="guest-modal-card menu">
-        <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center" }}>
-          <button onClick={onClose} aria-label="Close guest list" className="guest-btn ghost">✕</button>
-        </div>
-        {toast ? (
-          <div
-            role="status"
-            aria-live="polite"
-            style={{
-              marginTop: 8,
-              background: "rgba(48, 204, 140, 0.12)",
-              border: "1px solid rgba(48, 204, 140, 0.35)",
-              color: "#075E3D",
-              padding: "0.5rem 0.75rem",
-              borderRadius: 8,
-              textAlign: "center",
-              fontWeight: 600,
-            }}
-          >
-            {toast}
-          </div>
-        ) : null}
-        <h2 className="smallcaps centered" style={{ margin: 0 }}>
-          GUEST LIST
-        </h2>
-        <div className="hair" aria-hidden />
-
-        {(typeof cost === "number" || true) ? (
-          <p className="smallcaps centered" style={{ marginTop: 6 }}>
-            {typeof cost === "number" ? <>PREZZO FISSO <strong>${cost}</strong> <span aria-hidden>•</span> </> : null}
-            <strong className="guest-fraction">{usedSpots}/{limit}</strong>
-          </p>
-        ) : null}
-
-        <ul style={{ listStyle: "none", padding: 0, marginTop: 8, textAlign:"left" }}>
-          {guests.length === 0 && <li style={{ opacity:.8 }}>No one yet. Be the first to join!</li>}
-          {guests.map((g) => (
-            <li key={g.id || g.name} style={{ margin: ".35rem 0" }}>
+    <div className="guest-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="guest-modal-title"
+      onKeyDown={e => {
+        if (e.key === "Escape" && !saving) onClose();
+        if (e.key === "Tab") {
+          const elements = card.current?.querySelectorAll<HTMLElement>('button:not(:disabled), input:not(:disabled)');
+          const first = elements?.[0], last = elements?.[elements.length - 1];
+          if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last?.focus(); }
+          else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first?.focus(); }
+        }
+      }}>
+      <div className="guest-modal-card menu" ref={card}>
+        <button ref={closeButton} onClick={onClose} disabled={saving} aria-label="Close guest list" className="guest-btn ghost">✕</button>
+        <h2 id="guest-modal-title" className="smallcaps centered">{potluck ? "Potluck guest list" : "Guest list"}</h2>
+        <p className="smallcaps centered" style={{ marginTop: 6 }}>
+          {typeof cost === "number" ? <>PREZZO FISSO <strong>${cost}</strong> · </> : null}
+          <strong className="guest-fraction">{usedSpots}/{limit}</strong>
+        </p>
+        {potluck ? <p className="centered" style={{ marginTop: 8 }}>Bring something to the table. Choose your dishes below, and edit your signup anytime.</p> : null}
+        {message ? <p role="status" className="guest-feedback">{message}</p> : null}
+        {error ? <p role="alert" className="guest-feedback error">{error}</p> : null}
+        {!ready ? <p role="status">Loading the guest list…</p> : null}
+        <ul className="guest-entries">
+          {!guests.length && ready ? <li>No one yet. Be the first to join!</li> : null}
+          {guests.map(g => (
+            <li key={g.id || g.name}>
               {editingId === g.id ? (
-                <div style={{ display:"flex", gap: 8, alignItems:"center", flexWrap:"wrap" }}>
-                  <input className="guest-input underline" value={editName} onChange={e => setEditName(e.target.value)} aria-label="Edit name" />
-                  <label style={{ display:"flex", alignItems:"center", gap: 6 }}>
-                    <input className="guest-checkbox" type="checkbox" checked={editPlusOne} onChange={e => setEditPlusOne(e.target.checked)} />
-                    Plus one
-                  </label>
+                <fieldset className="guest-edit" disabled={saving || !ready}>
+                  <input className="guest-input underline" value={editName} onChange={e => setEditName(e.target.value)} aria-label="Edit name" required />
+                  <label className="guest-inline"><input className="guest-checkbox" type="checkbox" checked={editPlusOne} onChange={e => setEditPlusOne(e.target.checked)} />Plus one</label>
                   <input className="guest-input underline grow" value={editDietary} onChange={e => setEditDietary(e.target.value)} aria-label="Edit dietary" placeholder="Dietary (optional)" />
-                  <button className="guest-btn primary" type="button" onClick={saveEdit}>Save</button>
-                  <button className="guest-btn ghost" type="button" onClick={cancelEdit}>Cancel</button>
-                </div>
+                  {potluck ? <DishChecklist courses={courses} guests={guests} selected={selectedEditDishes} onChange={setEditDishes} editingId={editingId} /> : null}
+                  <button className="guest-btn primary" type="button" disabled={!editName.trim() || (potluck && !selectedEditDishes.length)} onClick={saveEdit}>Save</button>
+                  <button className="guest-btn ghost" type="button" onClick={() => setEditingId(null)}>Cancel</button>
+                </fieldset>
               ) : (
-                <div style={{ display:"flex", alignItems:"center", gap: 8, flexWrap:"wrap" }}>
-                  <span style={{ fontWeight: 600 }}>{g.name}</span>
-                  {g.plusOne ? <span style={{ opacity:.8 }}> +1</span> : null}
-                  {g.dietary ? <span style={{ opacity:.8 }}> — {g.dietary}</span> : null}
-                  <button className="guest-btn ghost" type="button" onClick={() => startEdit(g.id!)} aria-label={`Edit ${g.name}`}>Edit</button>
+                <div>
+                  <strong>{g.name}</strong>{g.plusOne ? " +1" : ""}{g.dietary ? ` — ${g.dietary}` : ""}
+                  <button className="guest-btn ghost" disabled={saving || !ready} type="button" onClick={() => startEdit(g)} aria-label={`Edit ${g.name}`}>Edit</button>
+                  {g.dishes?.length ? <p className="guest-dishes">Bringing: {g.dishes.join(", ")}</p> : null}
                 </div>
               )}
             </li>
           ))}
         </ul>
-
-        <div className="hair" aria-hidden />
-
-        <form onSubmit={handleSubmit} style={{ marginTop: 8 }}>
-          <fieldset
-            style={{ display:"flex", gap: 8, flexWrap: "wrap", alignItems: "center", border: "none", padding: 0, margin: 0 }}
-            disabled={isFull}
-          >
-            <input
-              aria-label="Your name"
-              placeholder="Your name"
-              value={name}
-              onChange={e => setName(e.target.value)}
-              className="guest-input underline"
-              required
-            />
-            <label style={{ display:"flex", alignItems:"center", gap: 6 }}>
-              <input className="guest-checkbox" type="checkbox" checked={plusOne} onChange={e => setPlusOne(e.target.checked)} />
-              Bringing a plus one
-            </label>
-            <input
-              aria-label="Dietary restrictions or allergies"
-              placeholder="Dietary restrictions/allergies (optional)"
-              value={dietary}
-              onChange={e => setDietary(e.target.value)}
-              className="guest-input underline grow"
-            />
-            <button type="submit" className="guest-btn primary" disabled={!name.trim()}>Join</button>
+        <form onSubmit={handleSubmit} style={{ marginTop: 12 }}>
+          <fieldset className="guest-edit" disabled={!ready || saving || remaining <= 0}>
+            <input aria-label="Your name" placeholder="Your name" value={name} onChange={e => setName(e.target.value)} className="guest-input underline" required />
+            <label className="guest-inline"><input className="guest-checkbox" type="checkbox" checked={plusOne} onChange={e => setPlusOne(e.target.checked)} />Bringing a plus one</label>
+            <input aria-label="Dietary restrictions or allergies" placeholder="Dietary restrictions/allergies (optional)" value={dietary} onChange={e => setDietary(e.target.value)} className="guest-input underline grow" />
+            {potluck ? <DishChecklist courses={courses} guests={guests} selected={selectedDishes} onChange={setDishes} /> : null}
+            <button type="submit" className="guest-btn primary" disabled={!name.trim() || (potluck && !selectedDishes.length) || 1 + (plusOne ? 1 : 0) > remaining}>{saving ? "Saving…" : "Join"}</button>
           </fieldset>
-          {isFull ? <p style={{ color: "#b00", marginTop: 6 }}>Guest list is full.</p> : null}
+          {remaining <= 0 ? <p className="guest-feedback error">Guest list is full. Existing signups can still be edited.</p> :
+            plusOne && remaining < 2 ? <p className="guest-feedback error">Only one spot remains; there isn&apos;t room for a plus one.</p> : null}
         </form>
-
-        <p style={{ opacity:.75, marginTop: 10, fontSize: 13 }}>
-          Kindly note: the cover charge will be collected after the meal. Grazie!
+        <p className="dish-help" style={{ marginTop: 12 }}>
+          {potluck ? "You can edit any signup above to update names, plus ones, or dishes. Changing a dish makes it available for someone else." : "Kindly note: the cover charge will be collected after the meal. Grazie!"}
         </p>
       </div>
     </div>

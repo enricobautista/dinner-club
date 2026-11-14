@@ -70,4 +70,26 @@ curl -s -H "x-admin-token: $ADMIN_TOKEN" \
 3) Copy the `tsArray` value from the response and replace the `guests: []` for that menu inside `data/menus.ts`. Commit the change to preserve the archive.
 
 Notes:
-- The export includes only `name`, `plusOne`, and `dietary` for a clean archive (no volatile IDs/history).
+- The export includes `name`, `plusOne`, `dietary`, and potluck `dishes` for a clean archive (no volatile IDs/history).
+
+
+## Potluck menus
+
+Set `potluck: true` on a menu in `data/menus.ts` to require each signup to choose
+one or more dishes from that menu's courses. The DICE Latin American / Caribbean
+menu uses this mode. Omit it or set `potluck: false` to keep standard signup.
+
+Each menu item name is a unique claimable dish; keep names unique and stable after
+signups begin. Claimed dishes show a checked, disabled checkbox with the guest's
+name. Guests can use **Edit guest list** on the homepage or upcoming menu page to
+change any signup, including names, plus ones, dietary notes, and dishes. Replacing
+a dish releases the old choice. One dish is required per signup, including a
+signup bringing a plus one. Dish choices also appear in the host dashboard, CSV,
+and archive export.
+
+Signups use the existing `BLOB_READ_WRITE_TOKEN`; no new service is needed.
+Uncached reads and conditional Blob writes prevent simultaneous saves from
+claiming the same dish or overwriting another signup. Failed saves keep the form
+values and display an error without adding an unsaved guest to the list.
+
+Run `npm test` with Node 22.6+ to check signup rules and standard-menu compatibility.

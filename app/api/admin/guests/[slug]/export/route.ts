@@ -1,9 +1,7 @@
-import { list } from "@vercel/blob";
 import { NextRequest, NextResponse } from "next/server";
 
-type Guest = { id?: string; name: string; plusOne?: boolean; dietary?: string; history?: any[] };
-
-const keyFor = (slug: string) => `guestlists/${slug}.json`;
+import { getMenu, type Guest } from "@/data/menus";
+import { readGuestList } from "@/lib/guest-storage";
 
 function toTsGuestArray(guests: Guest[]) {
   const lines: string[] = [];
@@ -12,6 +10,7 @@ function toTsGuestArray(guests: Guest[]) {
     const parts: string[] = [`name: ${JSON.stringify(g.name)}`];
     if (g.plusOne) parts.push("plusOne: true");
     if (g.dietary) parts.push(`dietary: ${JSON.stringify(g.dietary)}`);
+    if (g.dishes?.length) parts.push(`dishes: ${JSON.stringify(g.dishes)}`);
     lines.push("  { " + parts.join(", ") + " },");
   }
   lines.push("]");
@@ -19,11 +18,12 @@ function toTsGuestArray(guests: Guest[]) {
 }
 
 function toCsv(guests: Guest[]) {
-  const header = ["Name", "Plus One", "Dietary Notes"];
+  const header = ["Name", "Plus One", "Dietary Notes", "Dishes"];
   const rows = guests.map(g => [
     g.name,
     g.plusOne ? "Yes" : "No",
     g.dietary ? g.dietary : "",
+    (g.dishes || []).join("; "),
   ]);
   const encode = (value: string) => {
     const needsQuotes = /[",\n]/.test(value);
@@ -45,16 +45,13 @@ export async function GET(req: NextRequest, ctx: { params: Promise<{ slug: strin
 
   const blobToken = process.env.BLOB_READ_WRITE_TOKEN || process.env.BLOB_READ_TOKEN || undefined;
 
-  let guests: Guest[] = [];
-  const items = await list({ prefix: keyFor(s), token: blobToken });
-  if (items.blobs?.length) {
-    const sorted = items.blobs
-      .slice()
-      .sort((a: any, b: any) => new Date(a.uploadedAt).getTime() - new Date(b.uploadedAt).getTime());
-    const res = await fetch(sorted[sorted.length - 1].url, { cache: "no-store" });
-    if (res.ok) {
-      guests = (await res.json().catch(() => [])) || [];
-    }
+  const menu = getMenu(s);
+  if (!menu) return NextResponse.json({ error: "Menu not found" }, { status: 404 });
+  let guests: Guest[];
+  try {
+    ({ guests } = await readGuestList(menu, blobToken));
+  } catch {
+    return NextResponse.json({ error: "Failed to load guest list" }, { status: 500 });
   }
 
   const plusOneCount = guests.reduce((acc, g) => acc + (g.plusOne ? 1 : 0), 0);
@@ -67,7 +64,7 @@ export async function GET(req: NextRequest, ctx: { params: Promise<{ slug: strin
   const historyEntries = guests
     .flatMap((g) =>
       Array.isArray(g.history)
-        ? g.history.map((h: any) => ({
+        ? g.history.map((h) => ({
             guestId: g.id,
             guestName: g.name,
             field: h.field,

@@ -39,6 +39,7 @@ export default function Home() {
               <button className="guest-btn ghost" onClick={() => setShowList(s => !s)} aria-expanded={showList} aria-controls="guest-list">
                 {showList ? "Hide guest list" : "Guest list"}
               </button>
+              <button className="guest-btn ghost" onClick={() => setModalOpen(true)}>Edit guest list</button>
             </div>
             {showList && (
               <div id="guest-list" style={{ marginTop: 10 }}>
@@ -60,6 +61,8 @@ export default function Home() {
             open={modalOpen}
             onClose={() => setModalOpen(false)}
             cost={next.cost}
+            potluck={next.potluck}
+            courses={next.courses}
           />
         </>
       ) : (

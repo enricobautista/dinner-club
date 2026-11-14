@@ -2,12 +2,13 @@ import type { Recipe } from "./recipes";
 
 type Item = { name: string; recipeSlug?: string; blurb?: string };
 export type Course = { heading: string; items: Item[] };
-export type GuestEdit = { ts: number; field: "name"|"dietary"|"plusOne"; from: any; to: any };
+export type GuestEdit = { ts: number; field: "name"|"dietary"|"plusOne"|"dishes"; from: string | boolean | string[]; to: string | boolean | string[] };
 export type Guest = {
   id?: string;
   name: string;
   plusOne?: boolean;
   dietary?: string;
+  dishes?: string[];
   history?: GuestEdit[];
 };
 
@@ -21,6 +22,7 @@ export type Menu = {
   courses: Course[];
   guestLimit?: number; // optional per-menu override (default 12)
   guests?: Guest[];    // optional archived/seed guest list
+  potluck?: boolean;  // opt in to required, exclusive dish signups from courses
   cost?: number;       // optional prezzo fisso in USD
   venmoTag?: string;   // optional Venmo handle for payments
 };
@@ -693,6 +695,7 @@ export const menus: Menu[] = [
   },
   {
     slug: "DICE-latin-american-caribbean-menu",
+    potluck: true,
     location: "TBD",
     dateISO: "2026-12-06",
     hosts: ["Dr. Perez Colon", "USF Wellness Committee", "USF DICE"],

@@ -134,3 +134,33 @@ header .rule-spaced{ margin: .5rem 0 .35rem; }
 
 /* Fraction style next to guest list title */
 .guest-fraction{ font-size:.85em; opacity:.9; margin-left:.25em; }
+
+/* Potluck signups follow the printed menu's paper, ink, and hairline rules. */
+.guest-modal-card{ background:var(--paper); color:var(--ink); max-height:85dvh; overflow-y:auto; }
+.guest-edit{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; border:0; padding:0; margin:0; min-width:0; }
+.guest-edit > input{ max-width:100%; box-sizing:border-box; }
+.guest-inline{ display:flex; align-items:center; gap:6px; }
+.guest-entries{ text-align:left; }
+.guest-entries > li{ padding:.65rem 0; border-bottom:1px solid var(--rule); }
+.guest-dishes{ font-size:.92em; opacity:.85; margin-top:.2rem !important; overflow-wrap:anywhere; }
+.dish-checklist{ flex-basis:100%; min-width:0; border:1px solid var(--rule); margin:8px 0; padding:.75rem; }
+.dish-checklist legend{ padding:0 .3rem; font-weight:600; }
+.dish-help{ font-size:.85em; opacity:.75; }
+.dish-course + .dish-course{ border-top:1px solid var(--rule); margin-top:.65rem; padding-top:.5rem; }
+.dish-course h3{ margin:0 0 .35rem; font-size:1em; }
+.dish-option{ display:flex; align-items:flex-start; gap:9px; padding:.35rem 0; line-height:1.4; cursor:pointer; }
+.dish-option .guest-checkbox{ flex:0 0 18px; margin:2px 0 0; }
+.dish-option.is-claimed{ opacity:.6; cursor:not-allowed; }
+.dish-owner{ font-size:.88em; }
+.guest-checkbox{ position:relative; }
+.guest-checkbox:checked::after{ content:"✓"; display:block; color:var(--paper); font:14px/16px sans-serif; text-align:center; }
+.guest-checkbox:disabled{ cursor:not-allowed; }
+.guest-checkbox:focus-visible, .guest-btn:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
+.guest-btn:disabled{ opacity:.45; cursor:not-allowed; transform:none; }
+.guest-feedback{ padding:.5rem 0; color:#075e3d; }
+.guest-feedback.error{ color:var(--accent); }
+@media (max-width:480px){
+  .guest-modal-overlay{ padding:.5rem; }
+  .guest-modal-card{ padding:.75rem; }
+  .guest-edit > .guest-input{ flex-basis:100%; min-width:0; width:100%; }
+}

@@ -3,13 +3,16 @@
 import { useParams } from "next/navigation";
 import DinnerMenu from "@/components/DinnerMenu";
 import GuestListDisplay from "@/components/GuestListDisplay";
+import GuestListModal from "@/components/GuestListModal";
 import { getGuestLimit, getMenu, getSortedMenus, parseMenuDate } from "@/data/menus";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 
 export default function MenuPage() {
   const params = useParams<{ slug?: string | string[] }>();
   const slug = Array.isArray(params?.slug) ? params?.slug?.[0] : params?.slug || "";
   const menu = getMenu(slug);
+  const [showList, setShowList] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
   if (!menu) {
     const slugs = getSortedMenus().map(m => m.slug).join(", ");
     return (
@@ -20,15 +23,13 @@ export default function MenuPage() {
       </section>
     );
   }
-  const isPast = useMemo(() => {
+  const isPast = (() => {
     const today = new Date(); today.setHours(0,0,0,0);
     const d = parseMenuDate(menu.dateISO); d.setHours(0,0,0,0);
     return d.getTime() < today.getTime();
-  }, [menu.dateISO]);
+  })();
 
   const limit = getGuestLimit(menu);
-
-  const [showList, setShowList] = useState(false);
 
   return (
     <>
@@ -42,9 +43,11 @@ export default function MenuPage() {
       />
       <div className="menu" style={{ marginTop: 12 }}>
         <div style={{ display:"flex", gap:12, alignItems:"center", justifyContent:"center", flexWrap:"wrap" }}>
+          {!isPast ? <button className="guest-btn primary" onClick={() => setModalOpen(true)}>Join the guest list</button> : null}
           <button className="guest-btn ghost" onClick={() => setShowList(s => !s)} aria-expanded={showList} aria-controls="guest-list">
             {showList ? "Hide guest list" : "Guest list"}
           </button>
+          {!isPast ? <button className="guest-btn ghost" onClick={() => setModalOpen(true)}>Edit guest list</button> : null}
         </div>
         {showList && (
           <div id="guest-list" style={{ marginTop: 10 }}>
@@ -59,6 +62,9 @@ export default function MenuPage() {
           </div>
         )}
       </div>
+      <GuestListModal slug={menu.slug} limit={limit} seedGuests={menu.guests || []}
+        open={modalOpen} onClose={() => setModalOpen(false)} cost={menu.cost}
+        potluck={menu.potluck} courses={menu.courses} />
     </>
   );
 }

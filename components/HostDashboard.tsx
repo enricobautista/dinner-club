@@ -8,6 +8,7 @@ type ApiGuest = {
   name: string;
   plusOne?: boolean;
   dietary?: string;
+  dishes?: string[];
   history?: { ts: number; field: string; from: any; to: any }[];
 };
 
@@ -320,6 +321,7 @@ export default function HostDashboard({ menus }: Props) {
                   {guestsWithPlusOne.map((g) => (
                     <li key={g.id || g.name}>
                       <strong>{g.name}</strong>
+                      {g.dishes?.length ? <span> · Bringing: {g.dishes.join(", ")}</span> : null}
                       {g.dietary ? <span style={{ opacity: 0.7 }}> · {g.dietary}</span> : null}
                       <button
                         type="button"
@@ -341,6 +343,7 @@ export default function HostDashboard({ menus }: Props) {
                   {guestsSolo.map((g) => (
                     <li key={g.id || g.name}>
                       <strong>{g.name}</strong>
+                      {g.dishes?.length ? <span> · Bringing: {g.dishes.join(", ")}</span> : null}
                       {g.dietary ? <span style={{ opacity: 0.7 }}> · {g.dietary}</span> : null}
                       <button
                         type="button"

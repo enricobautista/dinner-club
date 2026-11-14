@@ -37,3 +37,6 @@ Thumbs.db
 # Misc
 coverage/
 dist/
+# Local browser verification artifacts
+.playwright-cli/
+output/playwright/
