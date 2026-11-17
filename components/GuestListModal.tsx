@@ -1,8 +1,11 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import type { Course, Guest } from "@/data/menus";
+import type { Course, CustomDish, Guest } from "@/data/menus";
 import DishChecklist from "./DishChecklist";
+import CustomDishFields from "./CustomDishFields";
+import GuestDishes from "./GuestDishes";
+import { customDishIsComplete } from "@/lib/potluck";
 export type { Guest, GuestEdit } from "@/data/menus";
 
 const EMPTY_GUESTS: Guest[] = [];
@@ -19,12 +22,14 @@ export default function GuestListModal({ slug, limit, seedGuests = EMPTY_GUESTS,
   const [plusOne, setPlusOne] = useState(false);
   const [dietary, setDietary] = useState("");
   const [dishes, setDishes] = useState<string[]>([]);
+  const [customDishes, setCustomDishes] = useState<CustomDish[]>([]);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [confirmRemoval, setConfirmRemoval] = useState(false);
   const [editName, setEditName] = useState("");
   const [editPlusOne, setEditPlusOne] = useState(false);
   const [editDietary, setEditDietary] = useState("");
   const [editDishes, setEditDishes] = useState<string[]>([]);
+  const [editCustomDishes, setEditCustomDishes] = useState<CustomDish[]>([]);
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [ready, setReady] = useState(false);
@@ -66,6 +71,8 @@ export default function GuestListModal({ slug, limit, seedGuests = EMPTY_GUESTS,
   const selectedDishes = dishes.filter(d => !guests.some(g => g.dishes?.includes(d)));
   const selectedEditDishes = editDishes.filter(d => !guests.some(g => g.id !== editingId && g.dishes?.includes(d)));
 
+  const validSelection = (selected: string[], custom: CustomDish[]) => (selected.length > 0 || custom.length > 0) && custom.every(customDishIsComplete);
+
   async function save(body: Record<string, unknown>) {
     setSaving(true); setError(null); setMessage(null);
     try {
@@ -92,22 +99,22 @@ export default function GuestListModal({ slug, limit, seedGuests = EMPTY_GUESTS,
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!ready || saving || !name.trim() || (potluck && !selectedDishes.length)) return;
-    if (await save({ action: "add", name: name.trim(), plusOne, dietary: dietary.trim(), ...(potluck ? { dishes: selectedDishes } : {}) })) {
-      setName(""); setPlusOne(false); setDietary(""); setDishes([]);
+    if (!ready || saving || !name.trim() || (potluck && !validSelection(selectedDishes, customDishes))) return;
+    if (await save({ action: "add", name: name.trim(), plusOne, dietary: dietary.trim(), ...(potluck ? { dishes: selectedDishes, customDishes } : {}) })) {
+      setName(""); setPlusOne(false); setDietary(""); setDishes([]); setCustomDishes([]);
     }
   }
 
   function startEdit(g: Guest) {
     setConfirmRemoval(false);
     setEditingId(g.id || null); setEditName(g.name); setEditPlusOne(!!g.plusOne);
-    setEditDietary(g.dietary || ""); setEditDishes(g.dishes || []); setError(null); setMessage(null);
+    setEditDietary(g.dietary || ""); setEditDishes(g.dishes || []); setEditCustomDishes(g.customDishes || []); setError(null); setMessage(null);
   }
 
   async function saveEdit() {
-    if (!editingId || !editName.trim() || (potluck && !selectedEditDishes.length)) return;
+    if (!editingId || !editName.trim() || (potluck && !validSelection(selectedEditDishes, editCustomDishes))) return;
     if (await save({ action: "edit", id: editingId, name: editName.trim(), plusOne: editPlusOne,
-      dietary: editDietary.trim(), ...(potluck ? { dishes: selectedEditDishes } : {}) })) setEditingId(null);
+      dietary: editDietary.trim(), ...(potluck ? { dishes: selectedEditDishes, customDishes: editCustomDishes } : {}) })) setEditingId(null);
   }
 
   async function removeGuest() {
@@ -124,7 +131,7 @@ export default function GuestListModal({ slug, limit, seedGuests = EMPTY_GUESTS,
       onKeyDown={e => {
         if (e.key === "Escape" && !saving) onClose();
         if (e.key === "Tab") {
-          const elements = card.current?.querySelectorAll<HTMLElement>('button:not(:disabled), input:not(:disabled)');
+          const elements = card.current?.querySelectorAll<HTMLElement>('button:not(:disabled), input:not(:disabled), textarea:not(:disabled), select:not(:disabled)');
           const first = elements?.[0], last = elements?.[elements.length - 1];
           if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last?.focus(); }
           else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first?.focus(); }
@@ -137,7 +144,7 @@ export default function GuestListModal({ slug, limit, seedGuests = EMPTY_GUESTS,
           {typeof cost === "number" ? <>PREZZO FISSO <strong>${cost}</strong> · </> : null}
           <strong className="guest-fraction">{usedSpots}/{limit}</strong>
         </p>
-        {potluck ? <p className="centered" style={{ marginTop: 8 }}>Bring something to the table. Choose your dishes below, and edit your signup anytime.</p> : null}
+        {potluck ? <p className="centered" style={{ marginTop: 8 }}>Bring something to the table. Choose a menu dish or add your own, and edit your signup anytime.</p> : null}
         {message ? <p role="status" className="guest-feedback">{message}</p> : null}
         {error ? <p role="alert" className="guest-feedback error">{error}</p> : null}
         {!ready ? <p role="status">Loading the guest list…</p> : null}
@@ -150,12 +157,15 @@ export default function GuestListModal({ slug, limit, seedGuests = EMPTY_GUESTS,
                   <input className="guest-input underline" value={editName} onChange={e => setEditName(e.target.value)} aria-label="Edit name" required />
                   <label className="guest-inline"><input className="guest-checkbox" type="checkbox" checked={editPlusOne} onChange={e => setEditPlusOne(e.target.checked)} />Plus one</label>
                   <input className="guest-input underline grow" value={editDietary} onChange={e => setEditDietary(e.target.value)} aria-label="Edit dietary" placeholder="Dietary (optional)" />
-                  {potluck ? <DishChecklist courses={courses} guests={guests} selected={selectedEditDishes} onChange={setEditDishes} editingId={editingId} /> : null}
-                  <button className="guest-btn primary" type="button" disabled={!editName.trim() || (potluck && !selectedEditDishes.length)} onClick={saveEdit}>Save</button>
+                  {potluck ? <>
+                    <DishChecklist courses={courses} guests={guests} selected={selectedEditDishes} onChange={setEditDishes} editingId={editingId} />
+                    <CustomDishFields dishes={editCustomDishes} onChange={setEditCustomDishes} />
+                  </> : null}
+                  <button className="guest-btn primary" type="button" disabled={!editName.trim() || (potluck && !validSelection(selectedEditDishes, editCustomDishes))} onClick={saveEdit}>Save</button>
                   <button className="guest-btn ghost" type="button" onClick={() => { setEditingId(null); setConfirmRemoval(false); }}>Cancel</button>
                   {confirmRemoval ? (
                     <div style={{ flexBasis: "100%" }}>
-                      <p>Remove {g.name}{g.plusOne ? " and their plus one" : ""} from the guest list?{g.dishes?.length ? " Their dishes will become available again." : ""}</p>
+                      <p>Remove {g.name}{g.plusOne ? " and their plus one" : ""} from the guest list?{g.dishes?.length || g.customDishes?.length ? " Their dishes will be removed from the menu and any menu choices will become available again." : ""}</p>
                       <button className="guest-btn ghost" type="button" onClick={removeGuest} aria-label={`Confirm removal of ${g.name}`}>Confirm removal</button>
                       <button className="guest-btn ghost" type="button" onClick={() => setConfirmRemoval(false)}>Keep guest</button>
                     </div>
@@ -167,7 +177,7 @@ export default function GuestListModal({ slug, limit, seedGuests = EMPTY_GUESTS,
                 <div>
                   <strong>{g.name}</strong>{g.plusOne ? " +1" : ""}{g.dietary ? ` — ${g.dietary}` : ""}
                   <button className="guest-btn ghost" disabled={saving || !ready} type="button" onClick={() => startEdit(g)} aria-label={`Edit ${g.name}`}>Edit</button>
-                  {g.dishes?.length ? <p className="guest-dishes">Bringing: {g.dishes.join(", ")}</p> : null}
+                  <GuestDishes guest={g} />
                 </div>
               )}
             </li>
@@ -178,8 +188,11 @@ export default function GuestListModal({ slug, limit, seedGuests = EMPTY_GUESTS,
             <input aria-label="Your name" placeholder="Your name" value={name} onChange={e => setName(e.target.value)} className="guest-input underline" required />
             <label className="guest-inline"><input className="guest-checkbox" type="checkbox" checked={plusOne} onChange={e => setPlusOne(e.target.checked)} />Bringing a plus one</label>
             <input aria-label="Dietary restrictions or allergies" placeholder="Dietary restrictions/allergies (optional)" value={dietary} onChange={e => setDietary(e.target.value)} className="guest-input underline grow" />
-            {potluck ? <DishChecklist courses={courses} guests={guests} selected={selectedDishes} onChange={setDishes} /> : null}
-            <button type="submit" className="guest-btn primary" disabled={!name.trim() || (potluck && !selectedDishes.length) || 1 + (plusOne ? 1 : 0) > remaining}>{saving ? "Saving…" : "Join"}</button>
+            {potluck ? <>
+              <DishChecklist courses={courses} guests={guests} selected={selectedDishes} onChange={setDishes} />
+              <CustomDishFields dishes={customDishes} onChange={setCustomDishes} />
+            </> : null}
+            <button type="submit" className="guest-btn primary" disabled={!name.trim() || (potluck && !validSelection(selectedDishes, customDishes)) || 1 + (plusOne ? 1 : 0) > remaining}>{saving ? "Saving…" : potluck ? "Sign up for a dish" : "Join"}</button>
           </fieldset>
           {remaining <= 0 ? <p className="guest-feedback error">Guest list is full. Existing signups can still be edited.</p> :
             plusOne && remaining < 2 ? <p className="guest-feedback error">Only one spot remains; there isn&apos;t room for a plus one.</p> : null}

@@ -1,7 +1,7 @@
 import { put, BlobPreconditionFailedError } from "@vercel/blob";
 import { NextRequest, NextResponse } from "next/server";
 import { getGuestLimit, getMenu } from "@/data/menus";
-import { GuestListError, updateGuestList } from "@/lib/guest-list";
+import { GuestListError, saveGuestList } from "@/lib/guest-list";
 import { guestKey, readGuestList } from "@/lib/guest-storage";
 
 const headers = { "Cache-Control": "no-store, no-cache, must-revalidate" };
@@ -32,24 +32,24 @@ export async function POST(req: NextRequest, ctx: Context) {
     }
     const adminToken = req.headers.get("x-admin-token") || req.headers.get("x-api-key");
     const canDelete = !!process.env.ADMIN_TOKEN && adminToken === process.env.ADMIN_TOKEN;
-    // Re-read and validate after a competing write so dish claims and capacity remain exclusive.
-    for (let attempt = 0; attempt < 3; attempt++) {
-      const { guests, etag } = await readGuestList(menu, token);
-      const updated = updateGuestList(guests, menu, getGuestLimit(menu), body, canDelete);
-      try {
-        await put(guestKey(menu.slug), JSON.stringify(updated), {
-          access: "public", contentType: "application/json", addRandomSuffix: false,
-          allowOverwrite: !!etag, ...(etag ? { ifMatch: etag } : {}),
-          cacheControlMaxAge: 60, token,
-        });
-        return NextResponse.json({ ok: true, guests: updated }, { headers });
-      } catch (error) {
-        const creationConflict = !etag && error instanceof Error && /already exists/i.test(error.message);
-        if (error instanceof BlobPreconditionFailedError || creationConflict) continue;
-        throw error;
-      }
-    }
-    return NextResponse.json({ error: "The guest list just changed. Please try again." }, { status: 409, headers });
+    const guests = await saveGuestList({
+      read: () => readGuestList(menu, token),
+      write: async (updated, etag) => {
+        try {
+          await put(guestKey(menu.slug), JSON.stringify(updated), {
+            access: "public", contentType: "application/json", addRandomSuffix: false,
+            allowOverwrite: !!etag, ...(etag ? { ifMatch: etag } : {}),
+            cacheControlMaxAge: 60, token,
+          });
+          return true;
+        } catch (error) {
+          const creationConflict = !etag && error instanceof Error && /already exists/i.test(error.message);
+          if (error instanceof BlobPreconditionFailedError || creationConflict) return false;
+          throw error;
+        }
+      },
+    }, menu, getGuestLimit(menu), body, canDelete);
+    return NextResponse.json({ ok: true, guests }, { headers });
   } catch (error) {
     if (error instanceof GuestListError) {
       return NextResponse.json({ error: error.message }, { status: error.status, headers });

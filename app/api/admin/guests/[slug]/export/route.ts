@@ -11,6 +11,7 @@ function toTsGuestArray(guests: Guest[]) {
     if (g.plusOne) parts.push("plusOne: true");
     if (g.dietary) parts.push(`dietary: ${JSON.stringify(g.dietary)}`);
     if (g.dishes?.length) parts.push(`dishes: ${JSON.stringify(g.dishes)}`);
+    if (g.customDishes?.length) parts.push(`customDishes: ${JSON.stringify(g.customDishes)}`);
     lines.push("  { " + parts.join(", ") + " },");
   }
   lines.push("]");
@@ -18,12 +19,13 @@ function toTsGuestArray(guests: Guest[]) {
 }
 
 function toCsv(guests: Guest[]) {
-  const header = ["Name", "Plus One", "Dietary Notes", "Dishes"];
+  const header = ["Name", "Plus One", "Dietary Notes", "Dishes", "Custom dishes"];
   const rows = guests.map(g => [
     g.name,
     g.plusOne ? "Yes" : "No",
     g.dietary ? g.dietary : "",
     (g.dishes || []).join("; "),
+    (g.customDishes || []).map(d => `${d.name} (${d.course}): ${d.description}`).join("; "),
   ]);
   const encode = (value: string) => {
     const needsQuotes = /[",\n]/.test(value);

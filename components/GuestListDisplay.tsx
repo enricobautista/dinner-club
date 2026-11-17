@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import GuestDishes from "./GuestDishes";
 import type { Guest } from "@/data/menus";
 export type { Guest } from "@/data/menus";
 const EMPTY_GUESTS: Guest[] = [];
@@ -55,7 +56,7 @@ export default function GuestListDisplay({ slug, limit, seedGuests = EMPTY_GUEST
             <span style={{ fontWeight: 600 }}>{g.name}</span>
             {g.plusOne ? <span style={{ opacity:.8 }}> +1</span> : null}
             {g.dietary ? <span style={{ opacity:.8 }}> — {g.dietary}</span> : null}
-            {g.dishes?.length ? <p className="guest-dishes">Bringing: {g.dishes.join(", ")}</p> : null}
+            <GuestDishes guest={g} />
           </li>
         ))}
       </ul>

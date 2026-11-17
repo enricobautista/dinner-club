@@ -164,3 +164,8 @@ header .rule-spaced{ margin: .5rem 0 .35rem; }
   .guest-modal-card{ padding:.75rem; }
   .guest-edit > .guest-input{ flex-basis:100%; min-width:0; width:100%; }
 }
+
+.custom-dish-fields{ flex-basis:100%; width:100%; min-width:0; }
+.custom-dish-fields label{ display:grid; gap:.25rem; margin-bottom:.75rem; }
+.custom-dish-fields input, .custom-dish-fields textarea, .custom-dish-fields select{ width:100%; min-width:0; box-sizing:border-box; }
+.custom-dish-fields textarea{ resize:vertical; }

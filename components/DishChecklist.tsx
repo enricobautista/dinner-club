@@ -1,4 +1,5 @@
 import type { Course, Guest } from "@/data/menus";
+import { englishCourse } from "@/lib/potluck";
 
 type Props = {
   courses: Course[];
@@ -9,15 +10,17 @@ type Props = {
 };
 
 export default function DishChecklist({ courses, guests, selected, onChange, editingId }: Props) {
-  const claims = new Map(guests.filter(g => !editingId || g.id !== editingId)
+  const otherGuests = guests.filter(g => !editingId || g.id !== editingId);
+  const customClaims = otherGuests.flatMap(g => (g.customDishes || []).map(d => ({ ...d, owner: g.name })));
+  const claims = new Map(otherGuests
     .flatMap(g => (g.dishes || []).map(dish => [dish, g.name] as const)));
   return (
     <fieldset className="dish-checklist">
-      <legend className="smallcaps">Choose your dishes (required)</legend>
-      <p className="dish-help">Select at least one. Checked, locked dishes are already claimed.</p>
+      <legend className="smallcaps">Choose your dishes</legend>
+      <p className="dish-help">Select at least one dish here or add your own below. Checked, locked dishes are already claimed.</p>
       {courses.map(course => (
         <div key={course.heading} className="dish-course">
-          <h3 className="smallcaps">{course.heading}</h3>
+          <h3 className="smallcaps">{englishCourse(course.heading)}</h3>
           {course.items.map(item => {
             const owner = claims.get(item.name);
             return (
@@ -31,6 +34,13 @@ export default function DishChecklist({ courses, guests, selected, onChange, edi
           })}
         </div>
       ))}
+      {customClaims.length ? <div className="dish-course">
+        <h3 className="smallcaps">Guests’ own dishes</h3>
+        {customClaims.map((dish, i) => <label className="dish-option is-claimed" key={i}>
+          <input type="checkbox" className="guest-checkbox" checked disabled />
+          <span>{dish.name}<span className="dish-owner"> — Locked · {dish.owner} · {englishCourse(dish.course)}</span><br />{dish.description}</span>
+        </label>)}
+      </div> : null}
     </fieldset>
   );
 }

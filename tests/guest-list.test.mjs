@@ -82,3 +82,52 @@ test('public removal requires an exact existing guest ID', () => {
   const standard = add([], {}, { potluck: false });
   assert.deepEqual(updateGuestList(standard, { ...menu, potluck: false }, 10, { action: 'remove', id: standard[0].id }, false), []);
 });
+
+const custom = { name: 'Mango Salad', description: 'Mango, lime, and herbs.', course: 'Appetizer' };
+
+test('a complete custom dish satisfies signup and can be edited and removed', () => {
+  const guests = add([], { customDishes: [custom] });
+  assert.deepEqual(guests[0].dishes, []);
+  assert.deepEqual(guests[0].customDishes, [custom]);
+  const edited = updateGuestList(guests, menu, 10, { action: 'edit', id: guests[0].id, customDishes: [{ ...custom, description: 'With mint.' }] }, false);
+  assert.equal(edited[0].customDishes[0].description, 'With mint.');
+  assert.ok(edited[0].history.some(h => h.field === 'customDishes'));
+  const changed = updateGuestList(edited, menu, 10, { action: 'edit', id: guests[0].id, customDishes: [], dishes: ['Rice'] }, false);
+  assert.deepEqual(changed[0].customDishes, []);
+  assert.deepEqual(updateGuestList(guests, menu, 10, { action: 'remove', id: guests[0].id }, false), []);
+});
+
+test('custom dishes require complete fields and a valid English course', () => {
+  for (const dish of [{ ...custom, name: ' ' }, { ...custom, description: '' }, { ...custom, course: 'Bogus' }, { ...custom, name: 'x'.repeat(151) }, null]) {
+    rejects(() => add([], { customDishes: [dish] }), 400);
+  }
+  rejects(() => add([], { customDishes: 'Mango Salad' }), 400);
+  rejects(() => add([], { dishes: ['Rice'], customDishes: [{ ...custom, description: '' }] }), 400);
+});
+
+test('custom dishes cannot duplicate menu choices or another guest custom dish', () => {
+  rejects(() => add([], { customDishes: [{ ...custom, name: ' rice ' }] }), 400);
+  const guests = add([], { customDishes: [custom] });
+  rejects(() => add(guests, { name: 'Another guest', customDishes: [{ ...custom, name: 'MANGO SALAD' }] }), 409);
+  rejects(() => add([], { customDishes: [custom, custom] }), 400);
+});
+
+test('concurrent saves retry automatically, retain different guests and prevent duplicate claims', async () => {
+  const { saveGuestList } = await import('../lib/guest-list.ts');
+  let guests = [], version = 0, conflicts = 0;
+  const store = {
+    read: async () => ({ guests: structuredClone(guests), etag: String(version) }),
+    write: async (next, etag) => {
+      if (etag !== String(version)) { conflicts++; return false; }
+      guests = next; version++; return true;
+    },
+  };
+  const save = (name, dish) => saveGuestList(store, menu, 10, { action: 'add', name, dishes: [dish] }, false);
+  await Promise.all([save('Alex', 'Rice'), save('Sam', 'Beans')]);
+  assert.equal(guests.length, 2);
+  assert.ok(conflicts > 0);
+  const competing = await Promise.allSettled([save('Jamie', 'Cake'), save('Casey', 'Cake')]);
+  assert.equal(competing.filter(r => r.status === 'fulfilled').length, 1);
+  assert.equal(competing.find(r => r.status === 'rejected').reason.status, 409);
+  assert.equal(guests.length, 3);
+});

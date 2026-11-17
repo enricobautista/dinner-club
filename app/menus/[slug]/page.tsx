@@ -40,10 +40,13 @@ export default function MenuPage() {
         hosts={menu.hosts}
         note={menu.note}
         courses={menu.courses}
+        potluck={menu.potluck}
+        slug={menu.slug}
+        seedGuests={menu.guests}
       />
       <div className="menu" style={{ marginTop: 12 }}>
         <div style={{ display:"flex", gap:12, alignItems:"center", justifyContent:"center", flexWrap:"wrap" }}>
-          {!isPast ? <button className="guest-btn primary" onClick={() => setModalOpen(true)}>Join the guest list</button> : null}
+          {!isPast ? <button className="guest-btn primary" onClick={() => setModalOpen(true)}>{menu.potluck ? "Sign up for a dish" : "Join the guest list"}</button> : null}
           <button className="guest-btn ghost" onClick={() => setShowList(s => !s)} aria-expanded={showList} aria-controls="guest-list">
             {showList ? "Hide guest list" : "Guest list"}
           </button>

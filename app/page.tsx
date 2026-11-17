@@ -30,11 +30,14 @@ export default function Home() {
             hosts={next.hosts}
             note={next.note}
             courses={next.courses}
+            potluck={next.potluck}
+            slug={next.slug}
+            seedGuests={next.guests}
           />
           <div className="menu" style={{ marginTop: 12 }}>
             <div style={{ display:"flex", gap:12, alignItems:"center", justifyContent:"center", flexWrap:"wrap" }}>
               <button className="guest-btn primary" onClick={() => setModalOpen(true)}>
-                Join the guest list
+                {next.potluck ? "Sign up for a dish" : "Join the guest list"}
               </button>
               <button className="guest-btn ghost" onClick={() => setShowList(s => !s)} aria-expanded={showList} aria-controls="guest-list">
                 {showList ? "Hide guest list" : "Guest list"}

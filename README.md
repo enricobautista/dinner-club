@@ -76,7 +76,7 @@ Notes:
 ## Potluck menus
 
 Set `potluck: true` on a menu in `data/menus.ts` to require each signup to choose
-one or more dishes from that menu's courses. The DICE Latin American / Caribbean
+one or more dishes from that menu's courses or add a custom dish. The DICE Latin American / Caribbean
 menu uses this mode. Omit it or set `potluck: false` to keep standard signup.
 
 Each menu item name is a unique claimable dish; keep names unique and stable after
@@ -92,8 +92,21 @@ then **Remove guest** and confirm. This frees their spot, their plus one's spot,
 and all their dish choices. Removal is available for standard menus as well.
 
 Signups use the existing `BLOB_READ_WRITE_TOKEN`; no new service is needed.
-Uncached reads and conditional Blob writes prevent simultaneous saves from
-claiming the same dish or overwriting another signup. Failed saves keep the form
+Fresh Blob metadata, versioned content URLs, and conditional writes prevent
+stale-cache retry loops and simultaneous saves from claiming the same dish or
+overwriting another signup. Competing writes are retried automatically. Failed saves keep the form
 values and display an error without adding an unsaved guest to the list.
 
 Run `npm test` with Node 22.6+ to check signup rules and standard-menu compatibility.
+
+
+Custom dishes require a name, description, and an English course (Drinks,
+Appetizer, First course, Main course, Side dish, or Dessert). Guests can bring
+menu dishes, custom dishes, or both, and edit them later. Custom dishes appear
+in the guest list, printed menu, host dashboard, CSV, and archive export.
+
+At midnight Eastern time on the day before a potluck, the visible menu begins
+showing only claimed menu dishes and guests' custom dishes. This continues on
+and after the event date. The signup sheet always retains every original menu
+option. Late signups add their dishes back to the visible menu, and removing a
+guest removes their contributions. Standard menus keep their existing behavior.

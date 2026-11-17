@@ -2,13 +2,15 @@ import type { Recipe } from "./recipes";
 
 type Item = { name: string; recipeSlug?: string; blurb?: string };
 export type Course = { heading: string; items: Item[] };
-export type GuestEdit = { ts: number; field: "name"|"dietary"|"plusOne"|"dishes"; from: string | boolean | string[]; to: string | boolean | string[] };
+export type CustomDish = { name: string; description: string; course: string };
+export type GuestEdit = { ts: number; field: "name"|"dietary"|"plusOne"|"dishes"|"customDishes"; from: string | boolean | string[] | CustomDish[]; to: string | boolean | string[] | CustomDish[] };
 export type Guest = {
   id?: string;
   name: string;
   plusOne?: boolean;
   dietary?: string;
   dishes?: string[];
+  customDishes?: CustomDish[];
   history?: GuestEdit[];
 };
 
