@@ -14,7 +14,8 @@ export async function GET(_: NextRequest, ctx: Context) {
   try {
     const { guests } = await readGuestList(menu, process.env.BLOB_READ_WRITE_TOKEN);
     return NextResponse.json({ guests, limit: getGuestLimit(menu) }, { headers });
-  } catch {
+  } catch (error) {
+    console.error("Guest list read failed", { slug: menu.slug, message: error instanceof Error ? error.message : "Unknown storage error" });
     return NextResponse.json({ error: "Failed to load guest list" }, { status: 500, headers });
   }
 }

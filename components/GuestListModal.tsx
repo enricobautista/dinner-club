@@ -32,30 +32,50 @@ export default function GuestListModal({ slug, limit, seedGuests = EMPTY_GUESTS,
   const [editCustomDishes, setEditCustomDishes] = useState<CustomDish[]>([]);
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [loadError, setLoadError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [loadAttempt, setLoadAttempt] = useState(0);
   const [ready, setReady] = useState(false);
   const [saving, setSaving] = useState(false);
+  const snapshotSlug = useRef<string | null>(null);
+  const requestVersion = useRef(0);
+  const savingRef = useRef(false);
   const card = useRef<HTMLDivElement>(null);
   const closeButton = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (!open) return;
     let active = true;
-    setReady(false);
+    setReady(snapshotSlug.current === slug);
+    setLoading(snapshotSlug.current !== slug);
+    setLoadError(null);
+    setError(null);
     async function refresh() {
+      if (savingRef.current) return;
+      const version = ++requestVersion.current;
       try {
         const res = await fetch(`/api/guests/${encodeURIComponent(slug)}`, { cache: "no-store" });
-        if (!res.ok) throw new Error("Unable to load the guest list. Please reopen it to try again.");
+        if (!res.ok) throw new Error("Couldn't load the guest list yet. Please try loading it again.");
         const data = await res.json();
-        if (active) { setGuests(data.guests); setReady(true); }
-      } catch (err) {
-        if (active) { setError(err instanceof Error ? err.message : "Unable to load guest list."); setReady(false); }
+        if (!Array.isArray(data.guests)) throw new Error("Invalid guest list response");
+        if (active && version === requestVersion.current) {
+          snapshotSlug.current = slug;
+          setGuests(data.guests); setReady(true); setLoadError(null);
+        }
+      } catch {
+        // A background refresh must not undo a loaded list or a confirmed signup.
+        if (active && version === requestVersion.current && snapshotSlug.current !== slug) {
+          setLoadError("Couldn't load the guest list yet. Please try loading it again.");
+        }
+      } finally {
+        if (active && version === requestVersion.current) setLoading(false);
       }
     }
     refresh();
     const interval = window.setInterval(refresh, 15000);
     window.addEventListener("focus", refresh);
     return () => { active = false; clearInterval(interval); window.removeEventListener("focus", refresh); };
-  }, [open, slug]);
+  }, [open, slug, loadAttempt]);
 
   useEffect(() => {
     if (!open) return;
@@ -74,6 +94,8 @@ export default function GuestListModal({ slug, limit, seedGuests = EMPTY_GUESTS,
   const validSelection = (selected: string[], custom: CustomDish[]) => (selected.length > 0 || custom.length > 0) && custom.every(customDishIsComplete);
 
   async function save(body: Record<string, unknown>) {
+    savingRef.current = true;
+    ++requestVersion.current;
     setSaving(true); setError(null); setMessage(null);
     try {
       const res = await fetch(`/api/guests/${encodeURIComponent(slug)}`, {
@@ -82,19 +104,26 @@ export default function GuestListModal({ slug, limit, seedGuests = EMPTY_GUESTS,
       const data = await res.json();
       if (!res.ok) {
         if (res.status === 409) {
-          const latest = await fetch(`/api/guests/${encodeURIComponent(slug)}`, { cache: "no-store" });
-          if (latest.ok) setGuests((await latest.json()).guests);
+          try {
+            const latest = await fetch(`/api/guests/${encodeURIComponent(slug)}`, { cache: "no-store" });
+            if (latest.ok) {
+              const refreshed = await latest.json();
+              if (Array.isArray(refreshed.guests)) { setGuests(refreshed.guests); setLoadError(null); }
+            }
+          } catch { /* Keep the specific signup error if refreshing also fails. */ }
         }
         throw new Error(data.error || "Could not save guest.");
       }
-      setGuests(data.guests);
+      ++requestVersion.current;
+      snapshotSlug.current = slug;
+      setGuests(data.guests); setReady(true); setLoading(false); setLoadError(null);
       window.dispatchEvent(new CustomEvent("guestlist:updated", { detail: { slug } }));
       setMessage(body.action === "add" ? "Saved! You're on the list." : body.action === "remove" ? "Guest removed." : "Guest updated.");
       return true;
     } catch (err) {
       setError(err instanceof Error ? err.message : "Could not save guest. Please try again.");
       return false;
-    } finally { setSaving(false); }
+    } finally { savingRef.current = false; setSaving(false); }
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -147,7 +176,11 @@ export default function GuestListModal({ slug, limit, seedGuests = EMPTY_GUESTS,
         {potluck ? <p className="centered" style={{ marginTop: 8 }}>Bring something to the table. Choose a menu dish or add your own, and edit your signup anytime.</p> : null}
         {message ? <p role="status" className="guest-feedback">{message}</p> : null}
         {error ? <p role="alert" className="guest-feedback error">{error}</p> : null}
-        {!ready ? <p role="status">Loading the guest list…</p> : null}
+        {!ready && loadError ? <div>
+          <p role="alert" className="guest-feedback error">{loadError}</p>
+          <button type="button" className="guest-btn ghost" onClick={() => setLoadAttempt(value => value + 1)}>Retry loading guest list</button>
+        </div> : null}
+        {!ready && loading ? <p role="status">Loading the guest list…</p> : null}
         <ul className="guest-entries">
           {!guests.length && ready ? <li>No one yet. Be the first to join!</li> : null}
           {guests.map(g => (
@@ -158,8 +191,8 @@ export default function GuestListModal({ slug, limit, seedGuests = EMPTY_GUESTS,
                   <label className="guest-inline"><input className="guest-checkbox" type="checkbox" checked={editPlusOne} onChange={e => setEditPlusOne(e.target.checked)} />Plus one</label>
                   <input className="guest-input underline grow" value={editDietary} onChange={e => setEditDietary(e.target.value)} aria-label="Edit dietary" placeholder="Dietary (optional)" />
                   {potluck ? <>
-                    <DishChecklist courses={courses} guests={guests} selected={selectedEditDishes} onChange={setEditDishes} editingId={editingId} />
                     <CustomDishFields dishes={editCustomDishes} onChange={setEditCustomDishes} />
+                    <DishChecklist courses={courses} guests={guests} selected={selectedEditDishes} onChange={setEditDishes} editingId={editingId} />
                   </> : null}
                   <button className="guest-btn primary" type="button" disabled={!editName.trim() || (potluck && !validSelection(selectedEditDishes, editCustomDishes))} onClick={saveEdit}>Save</button>
                   <button className="guest-btn ghost" type="button" onClick={() => { setEditingId(null); setConfirmRemoval(false); }}>Cancel</button>
@@ -189,8 +222,8 @@ export default function GuestListModal({ slug, limit, seedGuests = EMPTY_GUESTS,
             <label className="guest-inline"><input className="guest-checkbox" type="checkbox" checked={plusOne} onChange={e => setPlusOne(e.target.checked)} />Bringing a plus one</label>
             <input aria-label="Dietary restrictions or allergies" placeholder="Dietary restrictions/allergies (optional)" value={dietary} onChange={e => setDietary(e.target.value)} className="guest-input underline grow" />
             {potluck ? <>
-              <DishChecklist courses={courses} guests={guests} selected={selectedDishes} onChange={setDishes} />
               <CustomDishFields dishes={customDishes} onChange={setCustomDishes} />
+              <DishChecklist courses={courses} guests={guests} selected={selectedDishes} onChange={setDishes} />
             </> : null}
             <button type="submit" className="guest-btn primary" disabled={!name.trim() || (potluck && !validSelection(selectedDishes, customDishes)) || 1 + (plusOne ? 1 : 0) > remaining}>{saving ? "Saving…" : potluck ? "Sign up for a dish" : "Join"}</button>
           </fieldset>

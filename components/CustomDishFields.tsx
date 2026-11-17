@@ -8,6 +8,7 @@ export default function CustomDishFields({ dishes, onChange }: Props) {
   }
   return (
     <div className="custom-dish-fields">
+      <button className="guest-btn ghost" type="button" disabled={dishes.length >= 20} onClick={() => onChange([...dishes, { name: "", description: "", course: "" }])}>Add a dish not on the menu</button>
       {dishes.map((dish, index) => (
         <fieldset className="dish-checklist" key={index}>
           <legend className="smallcaps">Your own dish {index + 1}</legend>
@@ -21,7 +22,6 @@ export default function CustomDishFields({ dishes, onChange }: Props) {
           <button className="guest-btn ghost" type="button" onClick={() => onChange(dishes.filter((_, i) => i !== index))}>Remove this dish</button>
         </fieldset>
       ))}
-      <button className="guest-btn ghost" type="button" disabled={dishes.length >= 20} onClick={() => onChange([...dishes, { name: "", description: "", course: "" }])}>Add a dish not on the menu</button>
     </div>
   );
 }
