@@ -17,7 +17,7 @@ export default function DishChecklist({ courses, guests, selected, onChange, edi
   return (
     <fieldset className="dish-checklist">
       <legend className="smallcaps">Choose your dishes</legend>
-      <p className="dish-help">Select at least one dish here or add your own below. Checked, locked dishes are already claimed.</p>
+      <p className="dish-help">Select a menu dish here or add your own using the button above. Checked, locked dishes are already claimed.</p>
       {courses.map(course => (
         <div key={course.heading} className="dish-course">
           <h3 className="smallcaps">{englishCourse(course.heading)}</h3>

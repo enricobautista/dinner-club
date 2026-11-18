@@ -8,14 +8,14 @@ export default function CustomDishFields({ dishes, onChange }: Props) {
   }
   return (
     <div className="custom-dish-fields">
-      <button className="guest-btn ghost" type="button" disabled={dishes.length >= 20} onClick={() => onChange([...dishes, { name: "", description: "", course: "" }])}>Add a dish not on the menu</button>
+      <button className="guest-btn primary custom-dish-add" type="button" disabled={dishes.length >= 20} onClick={() => onChange([...dishes, { name: "", description: "", course: "" }])}>Add a dish not on the menu</button>
       {dishes.map((dish, index) => (
         <fieldset className="dish-checklist" key={index}>
           <legend className="smallcaps">Your own dish {index + 1}</legend>
           <p className="dish-help">All three fields are required.</p>
           <label>Dish name<input className="guest-input underline" value={dish.name} maxLength={150} onChange={e => update(index, "name", e.target.value)} required /></label>
-          <label>Description<textarea className="guest-input underline" value={dish.description} maxLength={1000} onChange={e => update(index, "description", e.target.value)} required rows={2} /></label>
-          <label>Course<select className="guest-input underline" value={dish.course} onChange={e => update(index, "course", e.target.value)} required>
+          <label>Description<textarea className="guest-input underline custom-dish-description" value={dish.description} maxLength={1000} onChange={e => update(index, "description", e.target.value)} required rows={1} /></label>
+          <label>Course<select className="guest-input course-select" value={dish.course} onChange={e => update(index, "course", e.target.value)} required>
             <option value="">Choose a course</option>
             {DISH_COURSES.map(course => <option key={course}>{course}</option>)}
           </select></label>

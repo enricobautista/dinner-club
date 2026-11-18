@@ -168,7 +168,7 @@ export default function GuestListModal({ slug, limit, seedGuests = EMPTY_GUESTS,
       }}>
       <div className="guest-modal-card menu" ref={card}>
         <button ref={closeButton} onClick={onClose} disabled={saving} aria-label="Close guest list" className="guest-btn ghost">✕</button>
-        <h2 id="guest-modal-title" className="smallcaps centered">{potluck ? "Potluck guest list" : "Guest list"}</h2>
+        <h2 id="guest-modal-title" className="smallcaps centered">{potluck ? "Sign up for a dish" : "Join the guest list"}</h2>
         <p className="smallcaps centered" style={{ marginTop: 6 }}>
           {typeof cost === "number" ? <>PREZZO FISSO <strong>${cost}</strong> · </> : null}
           <strong className="guest-fraction">{usedSpots}/{limit}</strong>
@@ -181,6 +181,25 @@ export default function GuestListModal({ slug, limit, seedGuests = EMPTY_GUESTS,
           <button type="button" className="guest-btn ghost" onClick={() => setLoadAttempt(value => value + 1)}>Retry loading guest list</button>
         </div> : null}
         {!ready && loading ? <p role="status">Loading the guest list…</p> : null}
+
+        <form onSubmit={handleSubmit} style={{ marginTop: 12 }}>
+          <fieldset className="guest-edit" disabled={!ready || saving || remaining <= 0}>
+            <input aria-label="Your name" placeholder="Your name" value={name} onChange={e => setName(e.target.value)} className="guest-input underline" required />
+            <label className="guest-inline"><input className="guest-checkbox" type="checkbox" checked={plusOne} onChange={e => setPlusOne(e.target.checked)} />Bringing a plus one</label>
+            <input aria-label="Dietary restrictions or allergies" placeholder="Dietary restrictions/allergies (optional)" value={dietary} onChange={e => setDietary(e.target.value)} className="guest-input underline grow" />
+            {potluck ? <>
+              <CustomDishFields dishes={customDishes} onChange={setCustomDishes} />
+              <DishChecklist courses={courses} guests={guests} selected={selectedDishes} onChange={setDishes} />
+            </> : null}
+            <button type="submit" className="guest-btn primary" disabled={!name.trim() || (potluck && !validSelection(selectedDishes, customDishes)) || 1 + (plusOne ? 1 : 0) > remaining}>{saving ? "Saving…" : potluck ? "Sign up for a dish" : "Join"}</button>
+          </fieldset>
+          {remaining <= 0 ? <p className="guest-feedback error">Guest list is full. Existing signups can still be edited.</p> :
+            plusOne && remaining < 2 ? <p className="guest-feedback error">Only one spot remains; there isn&apos;t room for a plus one.</p> : null}
+        </form>
+        <p className="dish-help" style={{ marginTop: 12 }}>
+          {potluck ? "Use Edit beside a guest below to update names, plus ones, or dishes. Changing a dish makes it available for someone else." : "Kindly note: the cover charge will be collected after the meal. Grazie!"}
+        </p>
+        <h3 className="smallcaps guest-section-heading">Guest list &amp; edits</h3>
         <ul className="guest-entries">
           {!guests.length && ready ? <li>No one yet. Be the first to join!</li> : null}
           {guests.map(g => (
@@ -216,23 +235,6 @@ export default function GuestListModal({ slug, limit, seedGuests = EMPTY_GUESTS,
             </li>
           ))}
         </ul>
-        <form onSubmit={handleSubmit} style={{ marginTop: 12 }}>
-          <fieldset className="guest-edit" disabled={!ready || saving || remaining <= 0}>
-            <input aria-label="Your name" placeholder="Your name" value={name} onChange={e => setName(e.target.value)} className="guest-input underline" required />
-            <label className="guest-inline"><input className="guest-checkbox" type="checkbox" checked={plusOne} onChange={e => setPlusOne(e.target.checked)} />Bringing a plus one</label>
-            <input aria-label="Dietary restrictions or allergies" placeholder="Dietary restrictions/allergies (optional)" value={dietary} onChange={e => setDietary(e.target.value)} className="guest-input underline grow" />
-            {potluck ? <>
-              <CustomDishFields dishes={customDishes} onChange={setCustomDishes} />
-              <DishChecklist courses={courses} guests={guests} selected={selectedDishes} onChange={setDishes} />
-            </> : null}
-            <button type="submit" className="guest-btn primary" disabled={!name.trim() || (potluck && !validSelection(selectedDishes, customDishes)) || 1 + (plusOne ? 1 : 0) > remaining}>{saving ? "Saving…" : potluck ? "Sign up for a dish" : "Join"}</button>
-          </fieldset>
-          {remaining <= 0 ? <p className="guest-feedback error">Guest list is full. Existing signups can still be edited.</p> :
-            plusOne && remaining < 2 ? <p className="guest-feedback error">Only one spot remains; there isn&apos;t room for a plus one.</p> : null}
-        </form>
-        <p className="dish-help" style={{ marginTop: 12 }}>
-          {potluck ? "You can edit any signup above to update names, plus ones, or dishes. Changing a dish makes it available for someone else." : "Kindly note: the cover charge will be collected after the meal. Grazie!"}
-        </p>
       </div>
     </div>
   );
